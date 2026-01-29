@@ -1,24 +1,21 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-import Hero from '~/components/widgets/Hero.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import Button from '~/components/ui/Button.astro';
+import Image from '~/components/common/Image.astro';
+
+import heroImage from '~/assets/images/hero-image.png';
 
 const metadata = {
-  title: 'Extra Brain - AI Development Consulting for Engineering Teams',
+  title: 'Roman Parashchak - AI Development Consulting',
   description:
-    'AI development consulting for engineering teams. Learn battle-tested workflows for code generation, automated testing, and AI-powered reviews.',
+    'CTO at Agewise building AI-powered products. Consultant helping engineering teams adopt AI-assisted workflows.',
   ignoreTitleTemplate: true,
   openGraph: {
     type: 'website',
     url: 'https://extrabrain.dev/',
-    title: 'Extra Brain - AI Development Consulting for Engineering Teams',
+    title: 'Roman Parashchak - AI Development Consulting',
     description:
-      'AI development consulting for engineering teams. Learn battle-tested workflows for code generation, automated testing, and AI-powered reviews. CTO-to-CTO guidance, no hype.',
+      'CTO at Agewise building AI-powered products. Consultant helping engineering teams adopt AI-assisted workflows.',
     images: [
       {
         url: '~/assets/images/og-image.png',
@@ -26,367 +23,155 @@ const metadata = {
     ],
   },
 };
+
+const advisoryItems = [
+  {
+    title: 'AI-Assisted Dev Strategy',
+    description: 'Help your team ship faster with modern AI tooling',
+    icon: 'tabler:brain',
+  },
+  {
+    title: 'Process Optimization',
+    description: 'Streamline your workflow for faster, predictable releases',
+    icon: 'tabler:arrows-shuffle',
+  },
+  {
+    title: 'AI Product Integration',
+    description: "Understand what AI can (and can't) do for your product",
+    icon: 'tabler:puzzle',
+  },
+];
+
+const handsOnItems = [
+  {
+    title: 'Technical Audit',
+    description: 'Get a clear picture of your codebase with actionable next steps',
+    icon: 'tabler:file-search',
+  },
+  {
+    title: 'End-to-End Development',
+    description: 'I take it from idea to production',
+    icon: 'tabler:code',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <!-- Hero Section -->
+  <section class="relative md:-mt-[76px] not-prose">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pt-0 md:pt-[76px]"></div>
+      <div class="py-12 md:py-16 lg:flex lg:items-center lg:gap-12">
+        <!-- Text Content -->
+        <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-0">
+          <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tighter mb-4 font-heading dark:text-gray-200">
+            Hey, I'm <span class="text-accent">Roman</span>
+          </h1>
+          <p class="text-xl text-muted mb-8 dark:text-slate-300">
+            I've spent 15 years building software, leading teams, and helping companies ship better products. Right now, I'm all-in on AI-assisted development — practicing it daily at Agewise and experimenting on side projects.
+          </p>
 
-  <Hero>
-    <Fragment slot="title">
-      Ship Better Code Faster — Without the <span class="text-accent">Speed vs. Quality</span> Tradeoff
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      I teach development teams <span class="text-accent">battle-tested</span> AI workflows that generate <span
-        class="text-accent">production-ready</span
-      > code, generate <span class="text-accent">automated tests</span>, and review for <span class="text-accent"
-        >bugs, performance, and security</span
-      > issues. Get the competitive edge your competitors already have—<span class="text-accent">without the hype</span
-      >.
-    </Fragment>
-
-    <Fragment slot="actions">
-      <div class="flex w-full sm:w-auto">
-        <Button
-          variant="primary"
-          text="Book a Discovery Call"
-          href="https://calendly.com/roman-parashchak/45min"
-          target="_blank"
-          class="w-full sm:mb-0"
-        />
-      </div>
-      <div class="flex w-full sm:w-auto">
-        <Button
-          variant="secondary"
-          text="See How It Works"
-          href="#how-it-works"
-          class="whitespace-nowrap w-full sm:mb-0"
-        />
-      </div>
-    </Fragment>
-  </Hero>
-
-  <!--
-  <Features
-    id="problems"
-    tagline=""
-    title="The Development Bottlenecks Killing Your Velocity"
-    subtitle="These pain points are costing your team precious development time and competitive advantage."
-    items={[
-      {
-        title: 'Slow Feature Delivery',
-        description: 'Your competitors ship new features weekly while your team struggles to deliver monthly. Manual processes, missing tests, and fear of breaking things create a slow, cautious development cycle that kills momentum.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Senior Developer Time Wasted',
-        description: 'Your most expensive talent spends hours on code reviews, writing boilerplate, and answering the same onboarding questions. Instead of architecting solutions and mentoring, they\'re stuck in repetitive tasks.',
-        icon: 'tabler:user-exclamation',
-      },
-      {
-        title: 'Quality vs. Speed Tradeoff',
-        description: 'Under pressure, your team cuts corners—skipping tests, rushing code reviews, postponing refactoring. You ship faster but accumulate technical debt. Or you maintain quality but miss market windows. You shouldn\'t have to choose.',
-        icon: 'tabler:scale',
-      },
-      {
-        title: 'Scaling Challenges',
-        description: 'Adding developers doesn\'t proportionally increase output. New hires take weeks to contribute. Code reviews become bottlenecks. Communication overhead grows. Your team size increases but velocity plateaus.',
-        icon: 'tabler:trending-down',
-      },
-      {
-        title: 'Production Surprises',
-        description: 'Issues that should have been caught in development appear in production—performance problems, security vulnerabilities, edge cases. Emergency fixes disrupt planned work and erode customer trust.',
-        icon: 'tabler:alert-triangle',
-      },
-      {
-        title: 'Technical Debt Spiral',
-        description: 'Shortcuts taken under pressure compound. Each release gets harder. Velocity decreases over time. Refactoring becomes too scary to attempt.',
-        icon: 'tabler:spiral',
-      },
-    ]}
-  />
-  -->
-
-  <!-- AI Solutions Widget ************ -->
-
-  <Features
-    id="solutions"
-    tagline=""
-    title="AI-Powered Development That Actually Works in Production"
-    subtitle="The proven framework that eliminates bottlenecks and transforms how your team builds software"
-    items={[
-      {
-        title: 'Accelerate Feature Delivery',
-        description:
-          'Outsource AI-capable work to AI. Generate production-ready code, create data models, and build API endpoints in minutes instead of hours. Your engineers spend time on business logic and what matters to customers—not repetitive coding tasks.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Automate Test Coverage',
-        description:
-          "Generate comprehensive test suites in minutes, not hours. Achieve 80%+ coverage consistently without the time investment. Tests don't get skipped under roadmap pressure when they're this fast to create.",
-        icon: 'tabler:checklist',
-      },
-      {
-        title: 'Get Instant, In-Depth Code Reviews',
-        description:
-          'AI reviews analyze your code in seconds—checking guidelines, performance issues, security vulnerabilities, and potential bugs. Get feedback in minutes instead of waiting days. Quality gates happen instantly, not when reviewers have time.',
-        icon: 'tabler:eye-check',
-      },
-      {
-        title: 'Scale Your Team Efficiently',
-        description:
-          'New engineers deliver their first feature in days, not weeks. AI agents answer questions instantly—senior developers stay focused on their work. Code reviews happen instantly without bottlenecking senior developers. Adding team members increases velocity instead of creating coordination overhead.',
-        icon: 'tabler:trending-up',
-      },
-    ]}
-  >
-    <Fragment slot="content">
-      <p class="text-lg text-center mt-8 text-muted">
-        <strong>What I implement for you:</strong> Complete AI development workflow with ongoing support
-      </p>
-    </Fragment>
-  </Features>
-
-  <!-- What Can Your Team Achieve Widget *** -->
-
-  <Features2
-    title="What Can Your Team Achieve with AI?"
-    subtitle="From generating production-ready code to comprehensive test suites and in-depth reviews—here's what becomes possible when you integrate AI into your development workflow."
-    columns={3}
-    classes={{
-      items: {
-        icon: 'text-white bg-primary rounded-full w-12 h-12 p-3 mb-6',
-      },
-    }}
-    items={[
-      {
-        title: 'Code Generation',
-        description: `
-          <p>Build API endpoints, implement business logic, create jobs and event handlers—AI handles the structure and boilerplate while your team focuses on the unique business requirements. Almost any repetitive coding task can be automated.</p>
-        `,
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Test Automation',
-        description: `
-          <p>Generate unit tests, API tests, and end-to-end tests in minutes instead of hours. Achieve 85-95% coverage consistently without the time investment that usually makes thorough testing impractical under deadline pressure.</p>
-        `,
-        icon: 'tabler:checklist',
-      },
-      {
-        title: 'Intelligent Code Review',
-        description: `
-          <p>AI reviews validate acceptance criteria from your bug tracking system, identify security vulnerabilities, flag performance issues, enforce coding guidelines, and spot potential bugs—all in seconds, not days.</p>
-        `,
-        icon: 'tabler:shield-check',
-      },
-    ]}
-  />
-
-  <!-- How It Works Widget ************ -->
-
-  <Steps
-    id="how-it-works"
-    title="How It Works: Your 8-12 Week AI Transformation"
-    subtitle="The exact timeline depends on your team's availability and sprint schedule. Here's how we transform your development process, step by step."
-    image={`
-      <div class="sticky top-24 bg-white dark:bg-slate-900 p-8 rounded-lg shadow-xl border border-gray-200 dark:border-slate-800">
-        <h3 class="text-2xl font-bold mb-6 text-primary dark:text-gray-200">Program Overview</h3>
-        <div class="space-y-4">
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="font-semibold text-default">Timeline</div>
-              <div class="text-muted">8-12 weeks</div>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="font-semibold text-default">Format</div>
-              <div class="text-muted">Weekly workshops + ongoing support</div>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="font-semibold text-default">Your team does</div>
-              <div class="text-muted">Implementation</div>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-3">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="font-semibold text-default">I provide</div>
-              <div class="text-muted">Training, framework, guidance, reviews</div>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="flex-shrink-0 w-8 h-8 bg-accent rounded-full flex items-center justify-center mr-3">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <div>
-              <div class="font-semibold text-default">End result</div>
-              <div class="text-muted">Self-sufficient team with proven AI workflows</div>
+          <!-- What I Currently Do -->
+          <div class="text-left">
+            <p class="text-sm font-semibold text-secondary uppercase tracking-wide mb-4">What I currently do</p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <span class="relative flex h-2 w-2 mt-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <div>
+                  <p class="font-semibold">CTO at Agewise</p>
+                  <p class="text-muted">Building an AI-powered product for Senior Living. Practicing AI-assisted development daily.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="relative flex h-2 w-2 mt-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <div>
+                  <p class="font-semibold">Consultant & Coach</p>
+                  <p class="text-muted">Helping engineering teams strategically adopt AI-assisted workflows.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    `}
-    items={[
-      {
-        title: '#1 Discovery & Foundation',
-        description: `
-          Understand your unique challenges and identify the highest-impact bottleneck to tackle first. Train your team on AI fundamentals through workshops and demonstrations. Align on the attack plan and equip your team with the foundation to start solving it.
-          <br/><br/>
-          <strong>Key Milestone:</strong> High-impact target identified + team ready to tackle it.
-        `,
-        icon: 'tabler:map',
-      },
-      {
-        title: '#2 Solve Your Biggest Bottleneck',
-        description: `
-          Intensive training on your priority target through workshops, live demos, and practical examples. Your team implements the workflow on real features while I answer questions and help navigate challenges that arise.
-          <br/><br/>
-          <strong>Key Milestone:</strong> Team independently uses AI for the priority target with a proven, repeatable process.
-        `,
-        icon: 'tabler:target',
-      },
-      {
-        title: '#3 Scale to Second Target',
-        description: `
-          Train your team on the second target using the proven framework. Your team applies AI across both new and legacy code. We document processes and best practices together.
-          <br/><br/>
-          <strong>Key Milestone:</strong> Team operates confidently with AI across multiple use cases in daily development.
-        `,
-        icon: 'tabler:chart-line',
-      },
-      {
-        title: '#4 Optimize & Hand Off',
-        description: `
-          Review real usage patterns and conduct final retrospective. Deliver comprehensive documentation and create a roadmap for continued improvement—including strategies for tackling legacy code and expanding coverage.
-          <br/><br/>
-          <strong>Key Milestone:</strong> Self-sufficient team with clear roadmap for independent improvement.
-        `,
-        icon: 'tabler:circle-check',
-      },
-    ]}
-  />
 
-  <!-- About Me Section ************ -->
-
-  <div class="max-w-7xl mx-auto px-4 md:px-8 py-16 md:py-20">
-    <div class="text-center mb-12">
-      <h2 class="text-4xl md:text-5xl font-bold tracking-tighter mb-4 font-heading">About Me</h2>
-      <p class="max-w-3xl mx-auto text-xl text-muted">
-        While other consultants sell theory, I'm implementing these AI development practices in my company every day.
-      </p>
-    </div>
-    <div class="md:flex md:gap-16">
-      <div class="md:basis-1/2 mb-12 md:mb-0">
-        <div class="space-y-6">
-          <div class="flex items-start gap-4">
-            <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
-            <div>
-              <h3 class="text-lg font-medium leading-6 text-default mb-1">AI Implementation</h3>
-              <p class="text-muted">Helping multiple companies establish AI workflows that work in production</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
-            <div>
-              <h3 class="text-lg font-medium leading-6 text-default mb-1">Delivery Excellence</h3>
-              <p class="text-muted">
-                Advising teams on Continuous Delivery adoption to improve software delivery processes
-              </p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
-            <div>
-              <h3 class="text-lg font-medium leading-6 text-default mb-1">Battle-Tested Approach</h3>
-              <p class="text-muted">Every workflow I teach is one I use daily in my own company</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-4">
-            <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
-            <div>
-              <h3 class="text-lg font-medium leading-6 text-default mb-1">No-Hype Methodology</h3>
-              <p class="text-muted">
-                Skeptical of trends until proven. I diagnose real bottlenecks before recommending solutions—blind AI
-                adoption makes things worse.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="md:basis-1/2">
-        <div class="flex flex-col">
-          <div class="mb-8">
-            <p class="text-lg text-default leading-relaxed">
-              I'm a software engineer who's spent 15 years in various leadership positions, currently serving as CTO at
-              Agewise. I've built teams, scaled organizations, and helped multiple companies adopt better development
-              practices. The AI workflows I teach? I've implemented them in real production environments and seen them
-              work at scale.
-            </p>
-          </div>
-          <div class="grid grid-cols-3 gap-4">
-            <div class="text-center py-6 border-r border-gray-200 dark:border-gray-700">
-              <div class="text-4xl font-bold text-accent mb-2">15+</div>
-              <div class="text-sm text-muted uppercase tracking-wide">Years Experience</div>
-            </div>
-            <div class="text-center py-6 border-r border-gray-200 dark:border-gray-700">
-              <div class="text-4xl font-bold text-accent mb-2">10+</div>
-              <div class="text-sm text-muted uppercase tracking-wide">Companies Advised</div>
-            </div>
-            <div class="text-center py-6">
-              <div class="text-4xl font-bold text-accent mb-2">Zero</div>
-              <div class="text-sm text-muted uppercase tracking-wide">Hype Approach</div>
-            </div>
+        <!-- Image -->
+        <div class="basis-1/2">
+          <div class="relative m-auto max-w-md lg:max-w-none">
+            <Image
+              class="mx-auto rounded-md w-full"
+              widths={[400, 768]}
+              sizes="(max-width: 767px) 400px, 768px"
+              loading="eager"
+              width={500}
+              height={500}
+              src={heroImage}
+              alt="Roman Parashchak"
+            />
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- CallToAction Widget *********** -->
+  <!-- Services Section -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <p class="text-sm font-semibold text-secondary uppercase tracking-wide mb-8 text-center">How I can help</p>
 
-  <CallToAction>
-    <Fragment slot="title"> Ready to Transform Your Development Process? </Fragment>
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <!-- Advisory -->
+        <div>
+          <h3 class="text-2xl font-bold mb-6">Advisory</h3>
+          <div class="space-y-5">
+            {advisoryItems.map((item) => (
+              <div class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-1">{item.title}</h4>
+                  <p class="text-muted">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-    <Fragment slot="subtitle">
-      Let's discuss your team's biggest bottlenecks and create a plan to solve them with battle-tested AI workflows.
-    </Fragment>
-
-    <Fragment slot="actions">
-      <div class="flex w-full sm:w-auto">
-        <Button
-          variant="primary"
-          text="Book a Discovery Call"
-          href="https://calendly.com/roman-parashchak/45min"
-          target="_blank"
-          class="w-full sm:mb-0"
-        />
+        <!-- Hands-On -->
+        <div>
+          <h3 class="text-2xl font-bold mb-6">Hands-On</h3>
+          <div class="space-y-5">
+            {handsOnItems.map((item) => (
+              <div class="flex items-start gap-4">
+                <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
+                <div>
+                  <h4 class="text-lg font-semibold mb-1">{item.title}</h4>
+                  <p class="text-muted">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </Fragment>
-  </CallToAction>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-4xl font-bold tracking-tighter mb-4 font-heading">Book a Free Call</h2>
+      <p class="text-xl text-muted mb-6">
+        I don't hold back — you'll leave with real answers, not a sales pitch.
+      </p>
+      <Button
+        variant="primary"
+        text="Schedule a Call"
+        href="https://calendly.com/roman-parashchak/45min"
+        target="_blank"
+      />
+    </div>
+  </section>
 </Layout>
