@@ -16,7 +16,7 @@ import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 ## Why Coding Agents produce inconsistent quality?
 
 Coding Agents are based on LLMs. LLMs are non-deterministic.
-Asking an LLM reviewing the same code twice, and you might get "looks good" one time and "this has a critical bug" the next.
+Ask an LLM to review the same code twice, and you might get "looks good" one time and "this has a critical bug" the next.
 A compiler is deterministic. Feeding it the same code today and tomorrow yields the same result. 
 
 Since Coding Agents are non-deterministic, the output varies from prompt to prompt, from session to session.
@@ -25,10 +25,10 @@ That's why we need guardrails to reduce the impact of non-determinism when using
 ## What is an eval?
 
 An eval is a test for your AI. It checks whether the output is correct, consistent, or high quality.
-Evals might be deterministic and non-deterministic. Asking AI to review AI generated code is non-deterministic, but still it makes a lot of sense.
+Evals might be deterministic and non-deterministic. Asking AI to review AI-generated code is non-deterministic, but it still makes a lot of sense.
 
 From my experience, introducing evals brought the strongest effect on AI-generated code.
-I'll cover each of these in deeper details in the next posts. For now, let's walk through the big picture.
+I'll cover each of these in more detail in the next posts. For now, let's walk through the big picture.
 
 ## Static checks
 
