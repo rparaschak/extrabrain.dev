@@ -3,9 +3,8 @@ publishDate: 2026-02-17T00:00:00Z
 title: 'Evals - Improving AI Code Quality and Consistency'
 excerpt: "Your coding agent does not know if the output is good. By implementing a feedback loop you are able to dramatically improve the quality."
 image: ~/assets/images/blog/bubble_or_future.png
-category: insights
+category: Agentic Engineering
 tags:
-  - AI
   - Software Development
   - Agentic Engineering
 draft: false
@@ -14,27 +13,42 @@ draft: false
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 
-From my experience, introducing evals brought the strongest effect on AI generated code.
-I will do a deep dive into each of them in the next topics. Here I will briefly run through them to give you the overall idea.
+## Why Coding Agents produce inconsistent quality?
+
+Coding Agents are based on LLMs. LLMs are non-deterministic.
+Asking an LLM reviewing the same code twice, and you might get "looks good" one time and "this has a critical bug" the next.
+A compiler is deterministic. Feeding it the same code today and tomorrow yields the same result. 
+
+Since Coding Agents are non-deterministic, the output varies from prompt to prompt, from session to session.
+That's why we need guardrails to reduce the impact of non-determinism when using AI for coding.
+
+## What is an eval?
+
+An eval is a test for your AI. It checks whether the output is correct, consistent, or high quality.
+Evals might be deterministic and non-deterministic. Asking AI to review AI generated code is non-deterministic, but still it makes a lot of sense.
+
+From my experience, introducing evals brought the strongest effect on AI-generated code.
+I'll cover each of these in deeper details in the next posts. For now, let's walk through the big picture.
 
 ## Static checks
 
 If something can be verified by a deterministic tool, do not rely on a non-deterministic LLM. Run the tool, give the result back to AI.
 
-- Can agent know if code compiles? - No
-- Can agent run a build command and see if it compiles? - Yes.
+- Can an agent know if code compiles? - No
+- Can an agent run a build command and see if it compiles? - Yes.
 
 ### Build
 
 The easiest way to implement that would be adding this line to your guidelines file:
 ```
-After any code changes YOU MUST ensure that project builds with no errors
+After any code changes YOU MUST ensure that the project builds with no errors
 ```
 Simple and straightforward.
 
 ### Linters
 
-There are linters for any language and many engineers underestimate their value when working with AI.
+A linter is a tool that automatically checks your code for style, errors, and complexity issues.
+There are linters for any language, and many engineers underestimate their value when working with AI.
 For example, my favorite one is cognitive complexity check. It checks how difficult code is to understand.
 After code is generated, agent runs linter and if cognitive complexity is above the threshold then it goes back to refactor and simplify the code.
 Again, enabling it is simple. 
@@ -43,12 +57,12 @@ After any code changes YOU MUST:
 - [] Run linter and fix errors
 - [] Run build to ensure it compiles without errors
 ```
-And that is only a tip of the iceberg.
+And that is only the tip of the iceberg.
 
 ## Code Review Agents
 
 Imagine you are developing a feature without AI for 10 hours straight. Now you have to do a code review of your code. How effective is it?
-It is better to ask your colleague to review with a fresh pair of eyes.
+Better to ask a colleague to review it with fresh eyes.
 
 Same thing with AI agents. One agent implements the feature, another one is invoked to review the code.
 An agent with fresh context will do a much better review than the agent that did actual coding.
@@ -58,7 +72,7 @@ Simple to enable:
 After any code changes YOU MUST:
 - [] Run linter and fix errors
 - [] Run build to ensure it compiles without errors
-- [] Run agent to review the code you just implemented. Fix errors reviewer found.
+- [] Run agent to review the code you just implemented. Agent should check for potential bugs and code complexity. Fix errors reviewer found.
 ```
 
 As you can see, you can start simple. No hooks, no skills, no specialized agents. Even those 5 lines in your guidelines file will make a difference.
@@ -70,18 +84,18 @@ Tests are deterministic. They tell if your system works as expected. Strong team
 If we give this tool to AI then it can be sure that nothing is broken and system behaves as expected.
 Or, agent gets instant feedback about something being broken, so instead of shipping broken code to you, it analyzes the reason and fixes it.
 
-Of course it depends a lot on quality of the test suite. But now you have more reasons to invest in the test suite.
+Of course, it depends a lot on the quality of the test suite. But now you have more reasons to invest in the test suite.
 In the era of agentic engineering, automated tests are gold.
 Honestly, I do not imagine me developing a project without tests. And now they became even cheaper - you can generate them with AI together with features.
 
-I cannot cover tests or features development with AI in this topic because it will become too long.
+I cannot cover test writing or feature development with AI in this post because it will become too long.
 But if you have a test suite you know what to do:
 
 ```
 After any code changes YOU MUST:
 - [] Run linter and fix errors
 - [] Run build to ensure it compiles without errors
-- [] Run agent to review the code you just implemented. Fix errors reviewer found
+- [] Run agent to review the code you just implemented. Agent should check for potential bugs and code complexity. Fix errors reviewer found.
 - [] Run tests to make sure system works as expected. Do not change tests without my explicit approval
 ```
 
