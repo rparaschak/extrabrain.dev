@@ -21,12 +21,15 @@ I will do a deep dive into each of them in the next topics. Here I will briefly 
 
 If something can be verified by a deterministic tool, do not rely on a non-deterministic LLM. Run the tool, give the result back to AI.
 
-- Can Agent know if code compiles? - No
-- Can it run a build command and see if it compiles? - Yes.
+- Can agent know if code compiles? - No
+- Can agent run a build command and see if it compiles? - Yes.
 
 ### Build
 
-The easiest way to implement that would be adding this line to your guidelines file: `After any code changes YOU MUST ensure that project builds with no errors`
+The easiest way to implement that would be adding this line to your guidelines file:
+```
+After any code changes YOU MUST ensure that project builds with no errors
+```
 Simple and straightforward.
 
 ### Linters
@@ -34,7 +37,12 @@ Simple and straightforward.
 There are linters for any language and many engineers underestimate their value when working with AI.
 For example, my favorite one is cognitive complexity check. It checks how difficult code is to understand.
 After code is generated, agent runs linter and if cognitive complexity is above the threshold then it goes back to refactor and simplify the code.
-Again, enabling it is simple. `After any code changes YOU MUST use linter and build the project with no errors`.
+Again, enabling it is simple. 
+```
+After any code changes YOU MUST:
+- [] Run linter and fix errors
+- [] Run build to ensure it compiles without errors
+```
 And that is only a tip of the iceberg.
 
 ## Code Review Agents
@@ -48,9 +56,9 @@ Simple to enable:
 
 ```
 After any code changes YOU MUST:
-1) Run linter and fix errors
-2) Run build to ensure it compiles without errors
-3) Run agent to review the code you just implemented anf fix errors found
+- [] Run linter and fix errors
+- [] Run build to ensure it compiles without errors
+- [] Run agent to review the code you just implemented. Fix errors reviewer found.
 ```
 
 As you can see, you can start simple. No hooks, no skills, no specialized agents. Even those 5 lines in your guidelines file will make a difference.
@@ -71,10 +79,10 @@ But if you have a test suite you know what to do:
 
 ```
 After any code changes YOU MUST:
-1) Run linter and fix errors
-2) Run build to ensure it compiles without errors
-3) Run agent to review the code you just implemented anf fix errors found
-4) Run tests to make sure system works as expected (Do not fix tests without my explicit approval)
+- [] Run linter and fix errors
+- [] Run build to ensure it compiles without errors
+- [] Run agent to review the code you just implemented. Fix errors reviewer found
+- [] Run tests to make sure system works as expected. Do not change tests without my explicit approval
 ```
 
 ## Summary
