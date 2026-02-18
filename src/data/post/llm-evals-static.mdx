@@ -14,10 +14,76 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 
 ## Intro
+In previous post(link to evals-overview post) we spoke about the importance of evals for improving AI output quality.
+Static check tools are amazing and extremely cheap way to give your coding agent a feedback on newly written code.
+As you know, agent sees the code as a text, but nothing stops it from running tools like linters or compilers.
 
 ## Build
+That is the easiest one as every language has built-in build command. As a responsible engineer, I always compile the code before I push it.
+Now I ask my agent to compile the code before considering task to be done. If the code does not compile, agents gets instant feedback about issues in the code, so it can take another round and fix errors.
+In my daily work, build fails very often and agent takes additional 1-2 turns to make it compile.
 
-## Linters
+- With Go you can use `go build`
+- With Typescript you can use `tsc --noEmit`
+
+Easy way to integrate is adding the following lines to your `CLAUDE.md`:
+```
+After any code changes YOU MUST:
+- [] Run 'go build ./...' and make sure code compiles
+```
+
+## Linters and Checks
+Linters are tools that perform static analysis of your code and check it against predefined set of rules.
+Linters and other static checkers are very interesting and often underestimated tools. In era of coding agents I can not live without them. Too much value to ignore them.
+
+### Installing linter on existing project
+If you never used linter on your project, it might be painful integrating one on existing project as it will take some time to clean it up.
+If have no other way than fixing warnings, because your agent will drawn in hundreds of warnings which makes this integration ineffective.
+Alternatively, you might want to start slow:
+1. Start with no rules
+2. Pick one important rule for you  
+3. Take time to fix this single type of warning across entire project base (Or just use army of haiku subagents to do the job for you :D )
+4. Go to step 2
+
+Having a clean project with no linter warning makes a huge difference for me, so I would always recommend taking it as a priority. 
+
+### Go build-in tooling
+
+Go has amazing build-in tools that my agent use after every code changes:
+- `go vet` - 36 built-in analyzers. Checks for structured logging, concurrency issues and many more.
+- `go fix` - technically not a checker, but automatically improves your code, often by taking advantage of new go features. (https://go.dev/blog/gofix)
+
+Even if agent writes something like this:
+```
+x := f()
+if x < 0 {
+    x = 0
+}
+if x > 100 {
+    x = 100
+}
+```
+`go fix` transforms it into:
+```
+x := min(max(f(), 0), 100)
+```
+
+### My favorite linters
+`Cognitive complexity` - Calculates cognitive complexity of the code. How readable and easy to understand your code is. It is amazing tool to pair with agent.
+When agent is done coding, he gets instant feedback that the function is to complex to understand, so it gets a feedback that the code should be broken down and refactored.
+
+### Custom lint rules
+
+## Integration
+
+Wrap with `npm run check` or `make check`
+
+### Instruction
+We can ask agent to run checks in the instruction
+
+### Hooks
+More reliable way would be using hook
+
 
 ## Summary
 ---
