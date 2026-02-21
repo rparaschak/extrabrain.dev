@@ -1,0 +1,146 @@
+---
+publishDate: 2026-02-21T00:00:00Z
+title: "AI Coding Agents: It's Not About the AI"
+excerpt: "I delegate 80% of my coding to AI. The secret isn't the model — it's everything I built before AI existed."
+image: ~/assets/images/blog/ai-coding-bubble-cover.svg
+category: insights
+tags:
+  - AI
+  - Software Development
+  - Agentic Engineering
+draft: true
+---
+
+import BlogExampleSection from '~/components/widgets/BlogExampleSection.astro';
+import BlogQuote from '~/components/widgets/BlogQuote.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+import AiProductivityChart from '~/components/ui/AiProductivityChart.astro';
+
+I have been coding with AI agents almost every day for a year. Today, delegate 90%+ of my coding work to AI without compromising quality. From brainstorming and feature development to testing.
+
+2025 changed how I feel about my job. I love it more. And no, I don't feel like AI is replacing me. I feel empowered.
+
+My journey started with Copilot. I was not impressed, but I had a good use case for it, back then I was playing with computer vision, and it actually helped me autocompleting some framework specific functions. 
+Then I tried Junie. That was my first real success — I showed it a pattern, and it replicated it. I finally got help with boilerplate and simple logic. Then came Claude Code. It opened a new world for me. I use it for almost every task now.
+
+It took me a while to build ground rules, good examples, references and make it more reliable. But it pays off very quickly.
+
+## It's Software Engineering All the Way Down
+
+Every time I try to write about agentic engineering, I end up writing about software engineering. And I think that is the entire point.
+
+When I speak about evals, I end up explaining automated testing and static checks. 
+When I write about feature development with AI, I end up explaining cognitive complexity, single responsibility, and clean structure. 
+
+Those fundamentals existed long before LLMs. And they are the primary enabler of agentic engineering.
+
+With a strong codebase, you get great results from AI almost for free. Solid architecture, good test coverage, clear boundaries between modules — the agent just works. Without those things, you fight the agent constantly.
+
+I had my first successful experience with Sonnet 3.5 — and that model is so far from today's Opus 4.6. Of course, now I can delegate much bigger and more complex chunks of work to an agent. 
+But the fact that I was getting impressive results with a much weaker model tells me something important: <b>model intelligence is one of many variables in that equation</b>. 
+Your codebase, your guardrails, your engineering discipline — they matter just as much, maybe more.
+
+
+## What the Reports Actually Say
+
+<BlogQuote quote="When developers are allowed to use AI tools, they take 19% longer to complete issues — a significant slowdown." />
+
+*— [METR, 2025 — Randomized controlled trial with experienced open-source developers](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)*
+
+<BlogQuote quote="Any correlation between AI adoption and key performance metrics evaporates at the company level." />
+
+*— [Faros AI — Telemetry from 10,000+ developers across 1,255 teams](https://www.faros.ai/blog/ai-software-engineering)*
+
+The data is real. I don't disagree with it. But I think it is often misinterpreted.
+
+I think some developers are getting less than 1x from AI — it's actually slowing them down. They're fighting generated code, debugging AI mistakes, losing time. Other developers are getting 2x, 5x or even more — shipping features in hours that used to take days. Average those two groups together and you probably get something close to 1x. Marginal improvement. The headline writes itself.
+
+But that average is meaningless. It hides two completely different realities.
+
+I speak to friends from different software companies. Some companies bought Copilot, Cursor, or even Claude Code — but never invested in education or changing how they work. Most people stopped at AI autocomplete, maybe function generation.
+
+On the other hand, I speak to individuals who multiplied their performance 2x-5x. They can't live without AI coding agents. I'm one of them. But we are a minority.
+
+Maybe these studies measured that majority? I'm speculating, but that's what I think is happening.
+
+<AiProductivityChart />
+
+<div style="text-align: center; font-size: 0.85rem; font-style: italic; opacity: 0.6; margin-top: -0.5rem; margin-bottom: 1.5rem;">
+Even assuming only 10% of engineers multiplied their performance by more than 2x, the average still looks like marginal improvement. That's the problem with averages.
+</div>
+
+The DORA Report — the largest annual study on software delivery performance — shows the same pattern. The gap between high-performing and struggling teams isn't staying the same — AI is actively widening it.
+
+## Why Some Teams Get 5x and Others Get 0.5x
+
+I'm coaching several teams on adopting AI-assisted coding in existing codebases. Every project and team is different, but I see the clear pattern.
+
+When I coach these teams, the majority of our time is spent on software engineering — linters, automated testing, project structure. AI feels like a secondary topic. 
+Teams with strong fundamentals pick up agentic engineering practices really fast. The rest need to build fundamentals before gaining visible value.
+
+It is much easier to start with agentic engineering on a clean project — consistent code, linters, automated tests, solid architecture. 
+Teams that already have that get a significant boost right from the beginning. When you hand a task to an AI agent, and the agent has something solid to work with, it just works.
+
+Sometimes I hear "our project is too complex for AI." I think it is too messy for AI. 
+No offense — it might happen for many reasons. Legacy code, business pressure, changing teams. But now there is a good reason for changing it. A solid codebase leads to better results with AI agents.
+
+LLMs are simple: garbage in, garbage out. An inconsistent codebase will lead to inconsistent output.
+
+## The Threshold Effect
+
+Here's what nobody talks about. The improvement from AI isn't linear.
+
+There's a threshold. Below it, AI is a net negative — it generates code that doesn't fit, breaks things, creates more work than it saves. Around it, AI is marginally useful — helps with boilerplate, sometimes gets things right. Above it, something clicks. The agent starts producing code that fits your patterns, passes your checks, respects your architecture. And from that point, every additional improvement to your codebase makes AI dramatically more effective.
+
+I saw this firsthand. For a long time, our agent output was inconsistent. Sometimes great, sometimes terrible. Then we reached a point — enough tests, enough linter rules, enough clear patterns — and the quality jumped. Not gradually. It jumped.
+
+That's the catch. Most teams give up before they reach the threshold. They try AI, get inconsistent results, and decide it's not ready. Meanwhile, teams that pushed through are operating at a completely different speed.
+
+The gap is widening. And it's accelerating.
+
+## The Fears That Don't Hold Up
+
+People are speculating about the AI bubble bursting. But what does that even mean? The models will get dumber? Slower? Stop existing?
+
+**"What if AI gets too expensive?"**
+
+Today you can download an open-source model and run it on your laptop or in your data center. You're not locked into any vendor. You're not dependent on API pricing. The models already exist and you can own them outright. And honestly — when used correctly, a $100 subscription pays off in the first hours. The ROI isn't even close.
+
+**"What if everything changes with new models?"**
+
+The fundamentals that worked two years ago remain the same. Tools just became more powerful and smarter. What you learn now about prompting, about breaking down tasks, about validation — that carries forward.
+
+**"What if the bubble bursts?"**
+
+Say LLM development stops tomorrow. No new models from now on. We still don't use existing models to their fullest potential. The gap isn't between what models can do and what we need — it's between what models can do and what we're actually doing with them.
+
+Every new generation brings more capability, faster inference, lower costs. They're not going anywhere.
+
+## What Are You Going to Do?
+
+I see two patterns in the market. Companies refusing to adopt — they tried AI once, it didn't work, so they decided it's all hype. And companies adopting badly — they bought the shiniest tools, gave everyone access, and wondered why nothing improved.
+
+Both approaches lose.
+
+The only path that works: adopt strategically. Invest in your engineering foundations — not because of AI, but because they always mattered. Clean code, good tests, clear architecture. Then add AI on top of that foundation. Do the groundwork first. Prove value. Scale what works.
+
+AI-assisted coding is here to stay. It is not a silver bullet or a replacement for all engineers. But it is something that cannot be ignored anymore.
+
+I have seen the results firsthand, in my own work and in teams I coach. Every project is different, but with a strategic approach, it works. The results are real.
+
+Start small. Start today. Start with one workflow that matters.
+
+---
+
+<CallToAction>
+  <Fragment slot="title">Ready to Adopt AI Strategically?</Fragment>
+
+  <Fragment slot="subtitle">
+    Let's talk about how to prepare your team for AI adoption. No sales pitch. Just practical advice from someone who's done it.
+  </Fragment>
+
+  <Fragment slot="actions">
+    <FreeConsultationCTA />
+  </Fragment>
+</CallToAction>
