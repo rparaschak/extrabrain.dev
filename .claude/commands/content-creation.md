@@ -6,7 +6,8 @@ argument-hint: [ file or post name ]
 
 # Workflow
 - See other posts to understand my tone and language
-- Review and fix grammar
+- Check for grammar
+- When you asked to fix grammar, use haiku subagent and wait until it is done to avoid conflict
 
 ## My Voice & Style
 

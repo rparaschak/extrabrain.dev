@@ -85,6 +85,53 @@
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
 }
 
+/* Mermaid edge label background - light mode */
+pre.mermaid svg .edgeLabel .background {
+  fill: #f8fafc !important;
+}
+
+/* Mermaid dark mode overrides */
+.dark pre.mermaid svg {
+  background: transparent !important;
+}
+
+.dark pre.mermaid svg .node rect,
+.dark pre.mermaid svg .node circle,
+.dark pre.mermaid svg .node ellipse,
+.dark pre.mermaid svg .node polygon,
+.dark pre.mermaid svg .node path {
+  fill: #1e293b !important;
+  stroke: #334155 !important;
+}
+
+.dark pre.mermaid svg text {
+  fill: #e2e8f0 !important;
+}
+
+.dark pre.mermaid svg .edgePath .path,
+.dark pre.mermaid svg .flowchart-link {
+  stroke: #94a3b8 !important;
+}
+
+.dark pre.mermaid svg marker path {
+  fill: #94a3b8 !important;
+  stroke: #94a3b8 !important;
+}
+
+.dark pre.mermaid svg .edgeLabel .background {
+  fill: rgb(3 6 32) !important;
+}
+
+.dark pre.mermaid svg .edgeLabel text,
+.dark pre.mermaid svg .edgeLabel tspan {
+  fill: #94a3b8 !important;
+}
+
+.dark pre.mermaid svg .cluster rect {
+  fill: #0f172a !important;
+  stroke: #334155 !important;
+}
+
 /* To deprecated */
 
 .dd *:first-child {

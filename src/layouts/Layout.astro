@@ -32,6 +32,22 @@ const { language, textDirection } = I18N;
     <Favicons />
     <CustomStyles />
     <ApplyColorMode />
+    <script is:inline>
+      // Sync Tailwind's `dark` class → `data-theme` attribute so astro-mermaid autoTheme works
+      (function () {
+        function syncTheme() {
+          document.documentElement.setAttribute(
+            'data-theme',
+            document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+          );
+        }
+        syncTheme();
+        new MutationObserver(syncTheme).observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ['class'],
+        });
+      })();
+    </script>
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />

@@ -1,0 +1,148 @@
+<svg viewBox="0 0 900 506" width="900" height="506" xmlns="http://www.w3.org/2000/svg" font-family="'SF Mono', 'Fira Code', 'Consolas', monospace">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <filter id="glowPurple" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/>
+    </marker>
+    <marker id="arrowAmber" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f59e0b"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f85149"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="506" fill="url(#bg)"/>
+
+  <!-- Grid overlay -->
+  <g opacity="0.04" stroke="#c9d1d9" stroke-width="1">
+    <line x1="0" y1="60" x2="900" y2="60"/>
+    <line x1="0" y1="120" x2="900" y2="120"/>
+    <line x1="0" y1="180" x2="900" y2="180"/>
+    <line x1="0" y1="240" x2="900" y2="240"/>
+    <line x1="0" y1="300" x2="900" y2="300"/>
+    <line x1="0" y1="360" x2="900" y2="360"/>
+    <line x1="0" y1="420" x2="900" y2="420"/>
+    <line x1="0" y1="480" x2="900" y2="480"/>
+    <line x1="60" y1="0" x2="60" y2="506"/>
+    <line x1="120" y1="0" x2="120" y2="506"/>
+    <line x1="180" y1="0" x2="180" y2="506"/>
+    <line x1="240" y1="0" x2="240" y2="506"/>
+    <line x1="300" y1="0" x2="300" y2="506"/>
+    <line x1="360" y1="0" x2="360" y2="506"/>
+    <line x1="420" y1="0" x2="420" y2="506"/>
+    <line x1="480" y1="0" x2="480" y2="506"/>
+    <line x1="540" y1="0" x2="540" y2="506"/>
+    <line x1="600" y1="0" x2="600" y2="506"/>
+    <line x1="660" y1="0" x2="660" y2="506"/>
+    <line x1="720" y1="0" x2="720" y2="506"/>
+    <line x1="780" y1="0" x2="780" y2="506"/>
+    <line x1="840" y1="0" x2="840" y2="506"/>
+  </g>
+
+  <!-- Corner brackets -->
+  <g stroke="#30363d" stroke-width="1.5" fill="none" opacity="0.3">
+    <polyline points="30,55 30,30 55,30"/>
+    <polyline points="870,55 870,30 845,30"/>
+    <polyline points="30,451 30,476 55,476"/>
+    <polyline points="870,451 870,476 845,476"/>
+  </g>
+
+  <!-- Title -->
+  <text x="450" y="50" text-anchor="middle" font-size="11" letter-spacing="3" fill="#8b949e">AI ADOPTION</text>
+  <line x1="400" y1="58" x2="500" y2="58" stroke="#7c3aed" stroke-width="1.5"/>
+
+  <!-- === LEFT: Entry path node === -->
+  <!-- Glow -->
+  <circle cx="150" cy="235" r="60" fill="#7c3aed" opacity="0.08" filter="url(#softGlow)"/>
+  <!-- Rounded rect -->
+  <rect x="100" y="200" width="100" height="70" rx="10" fill="#7c3aed" fill-opacity="0.08" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Orbit ring -->
+  <circle cx="150" cy="235" r="55" fill="none" stroke="#c4b5fd" stroke-width="1" stroke-dasharray="5 5" opacity="0.25"/>
+  <!-- Icon: team/people -->
+  <circle cx="140" cy="222" r="7" fill="none" stroke="#c4b5fd" stroke-width="1.5"/>
+  <circle cx="160" cy="222" r="7" fill="none" stroke="#c4b5fd" stroke-width="1.5"/>
+  <path d="M128,245 C128,237 135,232 140,232" stroke="#c4b5fd" stroke-width="1.5" fill="none"/>
+  <path d="M172,245 C172,237 165,232 160,232" stroke="#c4b5fd" stroke-width="1.5" fill="none"/>
+  <!-- Label -->
+  <text x="150" y="290" text-anchor="middle" font-size="13" font-weight="600" fill="#c4b5fd">YOUR TEAM</text>
+  <text x="150" y="305" text-anchor="middle" font-size="10" fill="#8b949e">+ AI adoption</text>
+
+  <!-- === CENTER: Fork diamond node === -->
+  <!-- Glow -->
+  <circle cx="400" cy="235" r="55" fill="#7c3aed" opacity="0.06" filter="url(#softGlow)"/>
+  <!-- Diamond shape -->
+  <polygon points="400,185 450,235 400,285 350,235" fill="#7c3aed" fill-opacity="0.08" stroke="#7c3aed" stroke-width="2"/>
+  <!-- Icon: fork/split arrows -->
+  <line x1="400" y1="215" x2="400" y2="245" stroke="#c4b5fd" stroke-width="2"/>
+  <polyline points="388,222 400,215 412,222" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="388,248 400,255 412,248" stroke="#c4b5fd" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <text x="400" y="308" text-anchor="middle" font-size="12" font-weight="600" fill="#c4b5fd">STRATEGY?</text>
+
+  <!-- === Connection: Entry → Fork === -->
+  <path d="M202,235 C260,235 300,235 347,235" stroke="#7c3aed" stroke-width="2" fill="none" marker-end="url(#arrowPurple)"/>
+
+  <!-- === UPPER PATH: Strategic adoption (green) === -->
+  <!-- Curved path upward from fork to outcome -->
+  <path d="M435,210 C500,160 580,130 660,130" stroke="#22c55e" stroke-width="2" fill="none" marker-end="url(#arrowGreen)"/>
+  <!-- Path label -->
+  <text x="540" y="148" text-anchor="middle" font-size="11" fill="#86efac" transform="rotate(-12,540,148)">with strategy</text>
+
+  <!-- Upper outcome node -->
+  <circle cx="730" cy="130" r="50" fill="#22c55e" opacity="0.06" filter="url(#softGlow)"/>
+  <rect x="672" y="98" width="116" height="64" rx="8" fill="#22c55e" fill-opacity="0.08" stroke="#22c55e" stroke-width="2"/>
+  <!-- Icon: upward trend -->
+  <polyline points="692,142 710,128 725,135 748,112" stroke="#86efac" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="738,112 748,112 748,122" stroke="#86efac" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <text x="730" y="185" text-anchor="middle" font-size="13" font-weight="600" fill="#86efac">5x OUTPUT</text>
+  <text x="730" y="200" text-anchor="middle" font-size="10" fill="#8b949e">compounds</text>
+
+  <!-- Checkmarks along upper path -->
+  <g fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5">
+    <polyline points="486,178 490,183 498,175"/>
+    <polyline points="556,155 560,160 568,152"/>
+    <polyline points="620,138 624,143 632,135"/>
+  </g>
+
+  <!-- === LOWER PATH: No strategy (amber/red) === -->
+  <!-- Curved path downward from fork to outcome -->
+  <path d="M435,260 C500,310 580,340 660,340" stroke="#f59e0b" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#arrowAmber)"/>
+  <!-- Path label -->
+  <text x="540" y="332" text-anchor="middle" font-size="11" fill="#fbbf24" transform="rotate(12,540,332)">without strategy</text>
+
+  <!-- Lower outcome node -->
+  <circle cx="730" cy="340" r="50" fill="#f59e0b" opacity="0.06" filter="url(#softGlow)"/>
+  <rect x="672" y="308" width="116" height="64" rx="8" fill="#f59e0b" fill-opacity="0.08" stroke="#f59e0b" stroke-width="2"/>
+  <!-- Icon: downward trend -->
+  <polyline points="692,322 710,336 725,329 748,352" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="738,352 748,352 748,342" stroke="#fbbf24" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <text x="730" y="395" text-anchor="middle" font-size="13" font-weight="600" fill="#fbbf24">MORE CHAOS</text>
+  <text x="730" y="410" text-anchor="middle" font-size="10" fill="#8b949e">multiplied</text>
+
+  <!-- Warning triangles along lower path -->
+  <g fill="none" stroke="#f59e0b" stroke-width="1.2" opacity="0.5">
+    <polygon points="490,292 494,285 498,292"/>
+    <polygon points="560,312 564,305 568,312"/>
+    <polygon points="624,330 628,323 632,330"/>
+  </g>
+
+  <!-- Footer -->
+  <text x="450" y="500" text-anchor="middle" font-size="10" letter-spacing="2" fill="#30363d">EXTRABRAIN.DEV</text>
+</svg>

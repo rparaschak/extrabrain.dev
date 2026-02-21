@@ -1,32 +1,41 @@
 ---
 publishDate: 2026-02-17T00:00:00Z
-title: 'Evals - Using static tools to improve AI Code Quality and Consistency'
-excerpt: "Your coding agent does not know if the output is good. By implementing a feedback loop you are able to dramatically improve the quality."
-image: ~/assets/images/blog/bubble_or_future.png
+title: "Evals - Compilers and Linters Don't Lie"
+excerpt: "My agent ships code that compiles, passes the linter, and respects architecture boundaries — every time. Here's how."
+image: ~/assets/images/blog/evals-static-cover.svg
 category: Agentic Engineering
 tags:
   - Software Development
   - Agentic Engineering
-draft: true
+draft: false
 ---
 
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+import CodeComparison from '~/components/ui/CodeComparison.astro';
+import EvalFlowDiagram from '~/components/ui/EvalFlowDiagram.astro';
 
-## Intro
-In previous post(link to evals-overview post) we spoke about the importance of evals for improving AI output quality.
-Static check tools are amazing and extremely cheap way to give your coding agent a feedback on newly written code.
-As you know, agent sees the code as a text, but nothing stops it from running tools like linters or compilers.
+By introducing static checks, my code reviews are much shorter, and often with no corrections.
+Static check tools are amazing and an extremely cheap way to give your coding agent feedback on newly written code.
+And the beauty is that check trigger is deterministic - it does not rely on AI and check itself is deterministic.
+
+<EvalFlowDiagram />
+
+Imagine this - I hire a new engineer to your project. I describe our code style in Confluence or in repository docs.
+What is the chance that this engineer will violate some rules? It is a question of "When?", not "If?".
+Same with AI Agent, no matter how hard you try, it will violate rules.
+Therefore, my strategy is implementing static checks wherever I can.
+
 
 ## Build
 That is the easiest one as every language has built-in build command. As a responsible engineer, I always compile the code before I push it.
-Now I ask my agent to compile the code before considering task to be done. If the code does not compile, agents gets instant feedback about issues in the code, so it can take another round and fix errors.
-In my daily work, build fails very often and agent takes additional 1-2 turns to make it compile.
+Now I ask my agent to compile the code before considering task to be done. If the code does not compile, the agent gets instant feedback about issues in the code, so it can take another round and fix errors.
+In my daily work, builds fail very often and agent takes additional 1-2 turns to make it compile.
 
 - With Go you can use `go build`
 - With Typescript you can use `tsc --noEmit`
 
-Easy way to integrate is adding the following lines to your `CLAUDE.md`:
+An easy way to integrate is adding the following lines to your `CLAUDE.md`:
 ```
 After any code changes YOU MUST:
 - [] Run 'go build ./...' and make sure code compiles
@@ -34,58 +43,257 @@ After any code changes YOU MUST:
 
 ## Linters and Checks
 Linters are tools that perform static analysis of your code and check it against predefined set of rules.
-Linters and other static checkers are very interesting and often underestimated tools. In era of coding agents I can not live without them. Too much value to ignore them.
+Linters and other static checkers are very interesting and often underestimated tools. In the era of coding agents I can not live without them. Too much value to ignore them.
 
 ### Installing linter on existing project
-If you never used linter on your project, it might be painful integrating one on existing project as it will take some time to clean it up.
-If have no other way than fixing warnings, because your agent will drawn in hundreds of warnings which makes this integration ineffective.
+If you never used linter on your project, it might be painful integrating one on an existing project as it will take some time to clean it up.
+There's no shortcut here — you have to fix the warnings first, otherwise your agent will drown in hundreds of them and the integration becomes ineffective.
 Alternatively, you might want to start slow:
 1. Start with no rules
-2. Pick one important rule for you  
+2. Pick one important rule for you
 3. Take time to fix this single type of warning across entire project base (Or just use army of haiku subagents to do the job for you :D )
 4. Go to step 2
 
-Having a clean project with no linter warning makes a huge difference for me, so I would always recommend taking it as a priority. 
+Having a clean project with no linter warning makes a huge difference for me, so I would always recommend taking it as a priority.
 
-### Go build-in tooling
+### Go built-in tooling
 
-Go has amazing build-in tools that my agent use after every code changes:
-- `go vet` - 36 built-in analyzers. Checks for structured logging, concurrency issues and many more.
+Go has amazing built-in tools that my agent uses after every code change:
+- `go vet` - 35 built-in analyzers. Checks for structured logging, concurrency issues and many more.
 - `go fix` - technically not a checker, but automatically improves your code, often by taking advantage of new go features. (https://go.dev/blog/gofix)
 
-Even if agent writes something like this:
-```
-x := f()
+Even if agent writes something like this, `go fix` transforms it:
+
+<CodeComparison
+  before={`x := f()
 if x < 0 {
     x = 0
 }
 if x > 100 {
     x = 100
-}
-```
-`go fix` transforms it into:
-```
-x := min(max(f(), 0), 100)
-```
+}`}
+  after={`// After 'go fix'
+x := min(max(f(), 0), 100)`}
+/>
 
 ### My favorite linters
-`Cognitive complexity` - Calculates cognitive complexity of the code. How readable and easy to understand your code is. It is amazing tool to pair with agent.
-When agent is done coding, he gets instant feedback that the function is to complex to understand, so it gets a feedback that the code should be broken down and refactored.
+I use many lint rules and will only mention 10% of them here. These are my favorite groups that keep my agents on the rails
+
+#### Cognitive Complexity and Cyclomatic Complexity
+Calculates complexity of the code. How readable and easy to understand your code is. It is an amazing tool to pair with an agent. I was surprised how good they are in combination with AI agents.
+When agent is done coding, it gets instant feedback that the function is too complex to understand, so it gets feedback that the code should be broken down and refactored.
+I, as an engineer, sometimes produce hard to read code, then I look at it and start refactoring.
+Same with agent, it might produce hard to read code and cognitive complexity checker gives instant feedback that the code should be improved.
+
+<CodeComparison
+  before={`func canBook(r Restaurant) bool {
+    if r.IsOpen {
+        if r.AvailableSlots > 0 {
+            reviews, err := fetchReviews(r)
+            if err == nil {
+              if len(reviews) >= 5 {
+                if r.AverageRating > 4 {
+                  return true
+                }
+              } else {
+                return false
+              }
+            } else {
+              return false
+            }
+        } else {
+            return false
+        }
+    } else {
+        return false
+    }
+}`}
+  after={`func canBook(r Restaurant) bool {
+    if !r.IsOpen || r.AvailableSlots == 0 {
+        return false
+    }
+    reviews, err := fetchReviews(r)
+    if err != nil {
+      return false
+    }
+    if r.AverageRating <= 4 {
+      return false
+    }
+    if len(reviews) < 5 {
+      return false
+    }
+    return true
+}
+`}
+/>
+
+#### Dependencies Control
+I like keeping my project structure neat with explicit dependencies. For that reason I use dependency checker to make sure I do not violate the rules.
+Sometimes, I forget to add important details when prompting the task and sometimes my agent breaks the boundaries. For this reason I use `depguard` linter that does the work for me.
+In my project, I have the following dependencies:
+
+```
+Search Module → can import from Communities, Reviews and Core
+Reviews → can import from Core only
+Core → cannot import from anyone
+```
+
+To enforce one of those rules, I add this to my config file: 
+
+```
+core-no-internal-deps:
+  files:
+    - "**/modules/core/**"
+  deny:
+    - pkg: "github.com/org/app/modules/**"
+      desc: "core must not depend on any internal module - it is a shared foundation"
+  allow:
+    - pkg: "github.com/org/app/modules/core/**"
+```
+
+#### Control Flow
+`Early Return`, `Error Flow`, `Superfluous Else`, `Max Control Nesting` - reduces code nesting and spots code that can be simplified which improves readability.
+
+<CodeComparison
+  before={`if profile.Exists {
+    // Business logic here
+} else {
+    return nil
+}`}
+  after={`if !profile.Exists {
+    return nil
+}
+// Business logic`}
+/>
+
+#### Functions/Methods
+`Function Length`, `Argument Limit` - keeps functions short and clean.
+
+That is only a tip of the iceberg. Find a list of available rules for your language and pick what rules you want to follow. Your agent will comply with those rules.
 
 ### Custom lint rules
+One underestimated thing is custom lint rules. You are able to write your custom ones. Here is a description of one of them from our repo:
+
+```
+/**
+ * ESLint rule: prefer-set-over-includes
+ *
+ * Warns when using nested .some()/.filter() with .includes() pattern.
+ * Suggests using Set for O(1) lookups instead of O(n) includes calls.
+ *
+ * @example
+ * // Bad: O(n*m) nested iteration
+ * items.some(item => selectedIds.includes(item.id));
+ * items.filter(item => !values.includes(item.value));
+ *
+ * // Good: O(n) with Set
+ * const selectedSet = new Set(selectedIds);
+ * items.some(item => selectedSet.has(item.id));
+ */
+```
+
+Surprisingly, it was generated by an agent.
+You do not need to learn all details about writing linter rules using your language and spend hours or days to write your own rule.
+
+Actually, agents are pretty good at setting up linters.
+Our backend structure is this:
+```
+MCP|REST|Jobs|Events -> Usecase (Business Logic) -(ORM)-> DB
+```
+I never want to have DB calls outside my business logic layer. So I either set up this rule manually or:
+```
+Hola Claude, make a new linter rule to make sure we do not use orm anywhere but in usecases.
+```
+
+What <b>won't work</b> consistently is adding this to your guidelines:
+```
+NEVER use orm anywhere but in usecases.
+```
+This is a non-deterministic rule and probably in most cases(depending on your codebase) agent will follow this rule, but there is no guarantee.
+
+The setup is easy and I am very interested in having those rules because it saves me tons of time. 
+My reviews after agentic sessions are much shorter because those rules are never broken, they are enforced, statically.
 
 ## Integration
+These checks are only useful if your agent actually runs them. Here's how I make that reliable.
 
-Wrap with `npm run check` or `make check`
+Personally, when I use multiple tools I always make one command to run them all. e.g. `make check` or `npm run check`
 
-### Instruction
-We can ask agent to run checks in the instruction
+### Integration through `CLAUDE.md`
+For a long time I had this in my CLAUDE.md:
+```
+After any code changes YOU MUST:
+...
+- [] Run 'make check' and fix errors
+...
+```
+It works fine, but again, non-determinism. When you take several turns with an agent it starts ignoring this rule and you have to either remind it or run check manually.
 
 ### Hooks
-More reliable way would be using hook
+A more reliable way is to use hooks. It is a deterministic way of performing an action after some events.
+My setup is based on `Stop` event. Whenever agent stops responding, the tool automatically calls the script and feeds the output to agent.
+My hook looks like this:
+```
+"hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/check-backend.sh\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+```
+
+`check-backend.sh` calls `git diff` to check if there are changed files in my backend directory. 
+- If there are no changes it responds with `exit 0` which does not trigger the agent
+- Otherwise, it runs `make check`. If no warning or errors then return again `exit 0`. Otherwise we return `make check` output which wakes agent up and it can start fixing the code.
+
+#### How to set it up?
+Just ask Claude. Or write manually if you want. But if you are reading this you probably want to start delegating your work to a coding agent. 
+```
+Hey Claude, I want to create a hook that checks if there are any code changes, and run 'make check'.
+Make a script that checks for changed, staged and untracked files. If no changes or 'make check' pass script exists with 0 status.
+In case of failure script returns the output.
+Hook is triggered on 'Stop'.
+```
+
+## What do I have at the end?
+After coding session with AI agent:
+- build compiles successfully
+- no linter violations
+- architecture boundaries aren't broken
+
+This setup dramatically improved the output quality. Also, I am confident that AI will produce the code according to my standards.
+As you can see, I combined non-deterministic agent nature with deterministic check tools. That is a very strong combination that creates a feedback loop.
+
+Here's what it looks like when it all works:
+```
+⏺ Bash(cd /Users/xxx/workspace/yyy/zzz/bakckend && make check 2>&1)
+  ⎿  go vet cmd/server/main.go
+     go run github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest run --fix ./...
+     0 issues.
+  ⎿  (timeout 2m)
+
+⏺ Bash(make test 2>&1)
+  ⎿  ./scripts/run-tests.sh --short
+     Starting server on port 3002 (env: autotest)...
+     Server started (PID: 34901)
+     … +92 lines (ctrl+o to expand)
+  ⎿  (timeout 5m)
+
+⏺ All 939 tests pass, 0 issues from linter.
+```
+
+Honestly, I was already getting impressive results when I was using Sonnet 3.5.
+Intelligence of the model matters a lot, but the quality of your codebase and your guardrails matter just as much.
 
 
-## Summary
+
 ---
 
 <CallToAction>
