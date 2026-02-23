@@ -5,6 +5,7 @@ AstroWind is a production-ready template built with **Astro 5.0** and **Tailwind
 > **📖 Component Reference**: For detailed documentation on all available widgets and components, see [`.guidelines/components.md`](.guidelines/components.md)
 
 ## Key rules you MUST follow
+
 - Prefer creating reusable components instead of inline implementation
 
 ## Key Directories
@@ -30,4 +31,3 @@ IMPORTANT: After each task run `npm run fix && npm run check && npm run build` t
 - `npm run build` - Build production site
 - `npm run check` - Run type checking and linting
 - `npm run fix` - Auto-fix ESLint and Prettier issues
-

@@ -45,7 +45,8 @@ const metadata = {
   <section>
     <h2>Without Tests, You're Stuck</h2>
     <div
-      style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr auto; gap: 0 2rem; margin-top: 2rem;">
+      style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr auto; gap: 0 2rem; margin-top: 2rem;"
+    >
       <div>
         <h3 style="color: #0ea5c1; margin-bottom: 1rem;">Refactoring Becomes Impossible</h3>
       </div>
@@ -150,7 +151,8 @@ const metadata = {
   <section>
     <h2>The Goal</h2>
     <div
-      style="display: grid; grid-template-columns: auto auto auto; gap: 1rem 2rem; margin: 2rem auto 0; font-size: 1.2rem; align-items: center; max-width: 650px; justify-items: start;">
+      style="display: grid; grid-template-columns: auto auto auto; gap: 1rem 2rem; margin: 2rem auto 0; font-size: 1.2rem; align-items: center; max-width: 650px; justify-items: start;"
+    >
       <div style="text-align: left;">
         <span style="color: #4ade80; font-size: 1.5rem;">✅</span>
         <strong style="color: #e2e8f0;">Tests are easy to write</strong>
@@ -243,44 +245,44 @@ const metadata = {
     <h2>Understanding Each Test Type</h2>
     <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.8rem;">
       <thead>
-      <tr style="border-bottom: 2px solid #0ea5c1;">
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);"></th>
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Unit</th>
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Integration</th>
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">E2E</th>
-      </tr>
+        <tr style="border-bottom: 2px solid #0ea5c1;">
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);"></th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Unit</th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Integration</th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">E2E</th>
+        </tr>
       </thead>
       <tbody>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">What question?</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Does this function work in isolation?</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Do these pieces work together?</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Does the user flow work end-to-end?</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Speed</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">⚡ Milliseconds</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">🏃 Seconds</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">🐌 Minutes</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Confidence</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">🤷 Low - doesn't test real interactions</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">✅ High - tests actual behavior</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">✅✅ Highest - tests everything</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Maintenance</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">✅ Easy</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">✅ Moderate</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">✅ Moderate</td>
-      </tr>
-      <tr>
-        <td style="padding: 0.75rem; font-weight: 600;">When to use</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Complex logic, edge cases</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Most of your tests</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Critical user paths only</td>
-      </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">What question?</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Does this function work in isolation?</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Do these pieces work together?</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Does the user flow work end-to-end?</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Speed</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">⚡ Milliseconds</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">🏃 Seconds</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">🐌 Minutes</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Confidence</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">🤷 Low - doesn't test real interactions</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">✅ High - tests actual behavior</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">✅✅ Highest - tests everything</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Maintenance</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">✅ Easy</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">✅ Moderate</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">✅ Moderate</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.75rem; font-weight: 600;">When to use</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Complex logic, edge cases</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Most of your tests</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Critical user paths only</td>
+        </tr>
       </tbody>
     </table>
   </section>
@@ -383,8 +385,7 @@ const metadata = {
         </div>
       </div>
       <p style="margin-top: 2rem; color: #a0aec0; text-align: center; font-size: 1.1rem;">
-        <strong style="color: #e2e8f0;">The shift:</strong> Focus on integration tests - they test how things work
-        together.
+        <strong style="color: #e2e8f0;">The shift:</strong> Focus on integration tests - they test how things work together.
       </p>
     </div>
   </section>
@@ -576,40 +577,40 @@ const metadata = {
     <h2>Unit Testing Era vs Integration Testing Era</h2>
     <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.85rem;">
       <thead>
-      <tr style="border-bottom: 2px solid #0ea5c1;">
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);"></th>
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Old: Unit Tests</th>
-        <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">
-          New: Integration Tests
-        </th>
-      </tr>
+        <tr style="border-bottom: 2px solid #0ea5c1;">
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);"></th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Old: Unit Tests</th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">
+            New: Integration Tests
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Mocking strategy</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Mock everything (Mock hell)</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Mock only API calls</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Test scope</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Small component in isolation</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Entire page/feature</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Test code style</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Tests technical details (component state)</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Tests user behavior (like E2E)</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.75rem; font-weight: 600;">Testing boundary</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">UI component (mock API, Store, providers)</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">API call (real providers, real store)</td>
-      </tr>
-      <tr>
-        <td style="padding: 0.75rem; font-weight: 600;">Moving logic between components</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">Unit test fails</td>
-        <td style="padding: 0.75rem; color: #a0aec0;">RTL tests keep passing</td>
-      </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Mocking strategy</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Mock everything (Mock hell)</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Mock only API calls</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Test scope</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Small component in isolation</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Entire page/feature</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Test code style</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Tests technical details (component state)</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Tests user behavior (like E2E)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.75rem; font-weight: 600;">Testing boundary</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">UI component (mock API, Store, providers)</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">API call (real providers, real store)</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.75rem; font-weight: 600;">Moving logic between components</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">Unit test fails</td>
+          <td style="padding: 0.75rem; color: #a0aec0;">RTL tests keep passing</td>
+        </tr>
       </tbody>
     </table>
     <p style="margin-top: 2rem; color: #0ea5c1; text-align: center; font-size: 1.1rem; font-weight: 600;">
@@ -623,8 +624,7 @@ const metadata = {
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
       <div>
         <pre
-          style="font-size: 0.5rem; line-height: 1.3; background: #1e293b; padding: 1rem; border-radius: 8px; overflow-x: auto; max-height: 500px;"
-        ><code style="color: #e2e8f0;">// Imports
+          style="font-size: 0.5rem; line-height: 1.3; background: #1e293b; padding: 1rem; border-radius: 8px; overflow-x: auto; max-height: 500px;"><code style="color: #e2e8f0;">// Imports
 
 const server = setupServer(
   http.get('/api/tasks', () =&gt; &#123;
@@ -696,8 +696,9 @@ test('user creates new task', async () =&gt; &#123;
 
           <div style="margin-bottom: 1.5rem;">
             <h4 style="color: #0ea5c1; font-size: 0.9rem; margin-bottom: 0.5rem;">5. Assert</h4>
-            <p style="color: #a0aec0; font-size: 0.75rem;">Wait for API call, verify UI updated, check new item
-              appears</p>
+            <p style="color: #a0aec0; font-size: 0.75rem;">
+              Wait for API call, verify UI updated, check new item appears
+            </p>
           </div>
 
           <div
@@ -719,8 +720,7 @@ test('user creates new task', async () =&gt; &#123;
       <div>
         <h3 style="color: #4ade80; text-align: center; margin-bottom: 1rem;">Integration Test</h3>
         <pre
-          style="font-size: 0.45rem; line-height: 1.2; background: #1e293b; padding: 0.75rem; border-radius: 8px; overflow-x: auto; max-height: 550px;"
-        ><code style="color: #e2e8f0;">// Setup MSW
+          style="font-size: 0.45rem; line-height: 1.2; background: #1e293b; padding: 0.75rem; border-radius: 8px; overflow-x: auto; max-height: 550px;"><code style="color: #e2e8f0;">// Setup MSW
 const server = setupServer(
   http.get('/api/tasks', () =&gt; &#123;
     return HttpResponse.json([
@@ -769,8 +769,7 @@ test('user creates new task', async () =&gt; &#123;
       <div>
         <h3 style="color: #f0c36d; text-align: center; margin-bottom: 1rem;">E2E Test</h3>
         <pre
-          style="font-size: 0.45rem; line-height: 1.2; background: #1e293b; padding: 0.75rem; border-radius: 8px; overflow-x: auto; max-height: 550px;"
-        ><code style="color: #e2e8f0;">// No setup needed
+          style="font-size: 0.45rem; line-height: 1.2; background: #1e293b; padding: 0.75rem; border-radius: 8px; overflow-x: auto; max-height: 550px;"><code style="color: #e2e8f0;">// No setup needed
 
 
 
@@ -810,57 +809,57 @@ test('user creates new task', async (&#123; page &#125;) =&gt; &#123;
     <h2>Old Way vs New Way</h2>
     <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.7rem;">
       <thead>
-      <tr style="border-bottom: 2px solid #0ea5c1;">
-        <th style="text-align: left; padding: 0.6rem; background: rgba(14, 165, 193, 0.1);">What needs mocking</th>
-        <th style="text-align: left; padding: 0.6rem; background: rgba(14, 165, 193, 0.1);">
-          Traditional Unit Testing
-        </th>
-        <th style="text-align: left; padding: 0.6rem; background: rgba(14, 165, 193, 0.1);">
-          MSW + RTL Integration Testing
-        </th>
-      </tr>
+        <tr style="border-bottom: 2px solid #0ea5c1;">
+          <th style="text-align: left; padding: 0.6rem; background: rgba(14, 165, 193, 0.1);">What needs mocking</th>
+          <th style="text-align: left; padding: 0.6rem; background: rgba(14, 165, 193, 0.1);">
+            Traditional Unit Testing
+          </th>
+          <th style="text-align: left; padding: 0.6rem; background: rgba(14, 165, 193, 0.1);">
+            MSW + RTL Integration Testing
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">API calls</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock every fetch/axios call in every test</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock once at network level with MSW handlers</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">Routing</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock useNavigate, useParams, useLocation, etc.</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Wrap in MemoryRouter, works naturally</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">Custom hooks</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock each custom hook separately</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Use real hooks (they run naturally)</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">Context providers</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock context values manually</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Wrap in real providers with test data</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">localStorage/sessionStorage</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock storage APIs</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Works with real browser APIs in jsdom</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">State management</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock store, selectors, dispatch</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Use real store with test initial state</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">Third-party UI libs</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Often need to mock complex components</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Render real components (may need setup)</td>
-      </tr>
-      <tr style="border-bottom: 1px solid #374151;">
-        <td style="padding: 0.6rem; font-weight: 600;">Browser APIs</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Mock window, document, observers</td>
-        <td style="padding: 0.6rem; color: #a0aec0;">Most work in jsdom, mock only when needed</td>
-      </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">API calls</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock every fetch/axios call in every test</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock once at network level with MSW handlers</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Routing</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock useNavigate, useParams, useLocation, etc.</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Wrap in MemoryRouter, works naturally</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Custom hooks</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock each custom hook separately</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Use real hooks (they run naturally)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Context providers</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock context values manually</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Wrap in real providers with test data</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">localStorage/sessionStorage</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock storage APIs</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Works with real browser APIs in jsdom</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">State management</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock store, selectors, dispatch</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Use real store with test initial state</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Third-party UI libs</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Often need to mock complex components</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Render real components (may need setup)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Browser APIs</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Mock window, document, observers</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Most work in jsdom, mock only when needed</td>
+        </tr>
       </tbody>
     </table>
   </section>

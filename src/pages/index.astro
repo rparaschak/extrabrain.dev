@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Button from '~/components/ui/Button.astro';
 import Image from '~/components/common/Image.astro';
+import BlogCarousel from '~/components/widgets/BlogCarousel.astro';
 
 import heroImage from '~/assets/images/hero-image.png';
 
@@ -59,12 +60,14 @@ const handsOnItems = [
       <div class="py-12 md:py-16 lg:flex lg:items-center lg:gap-12">
         <!-- Text Content -->
         <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-0">
-          <h1 class="text-4xl md:text-5xl font-bold leading-tight tracking-tighter mb-4 font-heading dark:text-gray-200">
+          <h1
+            class="text-4xl md:text-5xl font-bold leading-tight tracking-tighter mb-4 font-heading dark:text-gray-200"
+          >
             Hey, I'm <span class="text-accent">Roman</span>
           </h1>
           <p class="text-xl text-muted mb-8 dark:text-slate-300">
-            I've spent 15 years building software, leading teams, and helping companies ship better products. 
-            Right now, I'm all-in on Agentic Engineering — practicing it daily at Agewise and with teams I coach.
+            I've spent 15 years building software, leading teams, and helping companies ship better products. Right now,
+            I'm all-in on Agentic Engineering — practicing it daily at Agewise and with teams I coach.
           </p>
 
           <!-- What I Currently Do -->
@@ -73,22 +76,28 @@ const handsOnItems = [
             <div class="space-y-4">
               <div class="flex items-start gap-3">
                 <span class="relative flex h-2 w-2 mt-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                  ></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <div>
                   <p class="font-semibold">CTO at Agewise</p>
-                  <p class="text-muted">Building an AI-powered product for Senior Living. Practicing AI-Assisted development daily.</p>
+                  <p class="text-muted">
+                    Building an AI-powered product for Senior Living. Practicing AI-Assisted development daily.
+                  </p>
                 </div>
               </div>
               <div class="flex items-start gap-3">
                 <span class="relative flex h-2 w-2 mt-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"
+                  ></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <div>
                   <p class="font-semibold">Consultant & Coach</p>
-                  <p class="text-muted">Helping engineering teams strategically adopt AI in their development workflows.</p>
+                  <p class="text-muted">
+                    Helping engineering teams strategically adopt AI in their development workflows.
+                  </p>
                 </div>
               </div>
             </div>
@@ -124,15 +133,17 @@ const handsOnItems = [
         <div>
           <h3 class="text-2xl font-bold mb-6">Advisory</h3>
           <div class="space-y-5">
-            {advisoryItems.map((item) => (
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
-                <div>
-                  <h4 class="text-lg font-semibold mb-1">{item.title}</h4>
-                  <p class="text-muted">{item.description}</p>
+            {
+              advisoryItems.map((item) => (
+                <div class="flex items-start gap-4">
+                  <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2" />
+                  <div>
+                    <h4 class="text-lg font-semibold mb-1">{item.title}</h4>
+                    <p class="text-muted">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
         </div>
 
@@ -140,15 +151,17 @@ const handsOnItems = [
         <div>
           <h3 class="text-2xl font-bold mb-6">Hands-On</h3>
           <div class="space-y-5">
-            {handsOnItems.map((item) => (
-              <div class="flex items-start gap-4">
-                <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2"></div>
-                <div>
-                  <h4 class="text-lg font-semibold mb-1">{item.title}</h4>
-                  <p class="text-muted">{item.description}</p>
+            {
+              handsOnItems.map((item) => (
+                <div class="flex items-start gap-4">
+                  <div class="w-2 h-2 bg-accent rounded-full flex-shrink-0 mt-2" />
+                  <div>
+                    <h4 class="text-lg font-semibold mb-1">{item.title}</h4>
+                    <p class="text-muted">{item.description}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
         </div>
       </div>
@@ -159,9 +172,7 @@ const handsOnItems = [
   <section class="py-12 md:py-16">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
       <h2 class="text-4xl font-bold tracking-tighter mb-4 font-heading">Book a Free Call</h2>
-      <p class="text-xl text-muted mb-6">
-        I don't hold back — you'll leave with real answers, not a sales pitch.
-      </p>
+      <p class="text-xl text-muted mb-6">I don't hold back — you'll leave with real answers, not a sales pitch.</p>
       <Button
         variant="primary"
         text="Schedule a Call"
@@ -170,4 +181,7 @@ const handsOnItems = [
       />
     </div>
   </section>
+
+  <!-- Blog Posts Carousel -->
+  <BlogCarousel title="From the Blog" count={5} />
 </Layout>

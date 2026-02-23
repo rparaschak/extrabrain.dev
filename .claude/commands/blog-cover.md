@@ -1,7 +1,7 @@
 ---
 allowed-tools: Read, Write, Edit, Glob
-description: "Create a blog post cover SVG. Read the post first, then generate a consistent cover image."
-argument-hint: [ post file name or topic ]
+description: 'Create a blog post cover SVG. Read the post first, then generate a consistent cover image.'
+argument-hint: [post file name or topic]
 ---
 
 # Blog Cover Creation Workflow
@@ -33,22 +33,22 @@ All covers share a consistent dark, developer-centric aesthetic. The content cha
 
 ### Color Palette
 
-| Role | Color | Usage |
-|------|-------|-------|
-| Background primary | `#0d1117` | Main background |
-| Background secondary | `#161b22` | Gradient end, card fills |
-| Border / muted | `#30363d` | Borders, dividers, subtle lines |
-| Text primary | `#c9d1d9` | Main text on dark background |
-| Text muted | `#8b949e` | Labels, secondary text |
-| Accent purple | `#7c3aed` | Primary accent — nodes, highlights |
-| Accent purple light | `#c4b5fd` | Purple text, icon strokes |
-| Accent green | `#22c55e` | Success, checks, positive outcomes |
-| Accent green light | `#86efac` | Green text, icon strokes |
-| Accent amber | `#f59e0b` | Warnings, feedback, attention |
-| Accent amber light | `#fbbf24` | Amber text |
-| Terminal red | `#f85149` | Window dot (close) |
-| Terminal yellow | `#f0c746` | Window dot (minimize) |
-| Terminal green | `#3fb950` | Window dot (maximize), terminal success text |
+| Role                 | Color     | Usage                                        |
+| -------------------- | --------- | -------------------------------------------- |
+| Background primary   | `#0d1117` | Main background                              |
+| Background secondary | `#161b22` | Gradient end, card fills                     |
+| Border / muted       | `#30363d` | Borders, dividers, subtle lines              |
+| Text primary         | `#c9d1d9` | Main text on dark background                 |
+| Text muted           | `#8b949e` | Labels, secondary text                       |
+| Accent purple        | `#7c3aed` | Primary accent — nodes, highlights           |
+| Accent purple light  | `#c4b5fd` | Purple text, icon strokes                    |
+| Accent green         | `#22c55e` | Success, checks, positive outcomes           |
+| Accent green light   | `#86efac` | Green text, icon strokes                     |
+| Accent amber         | `#f59e0b` | Warnings, feedback, attention                |
+| Accent amber light   | `#fbbf24` | Amber text                                   |
+| Terminal red         | `#f85149` | Window dot (close)                           |
+| Terminal yellow      | `#f0c746` | Window dot (minimize)                        |
+| Terminal green       | `#3fb950` | Window dot (maximize), terminal success text |
 
 ### Typography
 
@@ -61,6 +61,7 @@ All covers share a consistent dark, developer-centric aesthetic. The content cha
 ### Visual Elements
 
 **Nodes** — The main conceptual elements of the diagram. Each gets:
+
 - A geometric container shape (hexagon, shield, rounded rect, circle — vary per post)
 - Thin stroke in the accent color (`stroke-width="2"`)
 - Very subtle fill of the same color at `opacity="0.08-0.1"`
@@ -69,6 +70,7 @@ All covers share a consistent dark, developer-centric aesthetic. The content cha
 - A dashed orbit or accent ring around it at `opacity="0.3"` using `stroke-dasharray`
 
 **Connections** — Arrows/flows between nodes:
+
 - Curved paths (`C` bezier curves) connecting nodes
 - `stroke-width="2"`, with arrow markers
 - Use `stroke-dasharray="6 4"` for secondary/output flows
@@ -76,6 +78,7 @@ All covers share a consistent dark, developer-centric aesthetic. The content cha
 - Labels along the flow in matching accent color
 
 **Terminal snippet** (optional but encouraged) — grounds the abstract diagram:
+
 - Rounded rect (`rx="8"`) with `#0d1117` fill and `#30363d` border
 - Title bar with three colored dots (red/yellow/green)
 - Monospace text showing a realistic command + success output

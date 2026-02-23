@@ -1,10 +1,11 @@
 ---
 allowed-tools: Read
-description: "ALWAYS use it when writing or reviewing content. Review the content. Give feedback according to my writing guidelines."
-argument-hint: [ file or post name ]
+description: 'ALWAYS use it when writing or reviewing content. Review the content. Give feedback according to my writing guidelines.'
+argument-hint: [file or post name]
 ---
 
 # Workflow
+
 - See other posts to understand my tone and language
 - Check for grammar
 - When you asked to fix grammar, use haiku subagent and wait until it is done to avoid conflict

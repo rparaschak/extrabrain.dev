@@ -23,17 +23,20 @@ on automated testing.
 - Testing
 
 ## Abstraction
+
 You won't find heavy abstractions in this topic. I am not a fan of abstractions, clean architecture, etc. Although I use some elements of it.
-I am a fan of strong structure, testability and simplicity. 
+I am a fan of strong structure, testability and simplicity.
 I value a low cognitive load, where I can read the code from the top to bottom, go to function definition by clicking a single button and use debugger to find a bug in minutes.
-You always want to pick a level of abstraction that doesn't create friction. 
+You always want to pick a level of abstraction that doesn't create friction.
 
 For example, my modules use internal APIs directly, not through interface, and that is a deliberate decision.
 Will I change that in the future? Probably not. Why?
+
 - If I have to extract the module into a separate ~~micro~~service, I simply create an interface + client implementation. It will take hours. But why would I do that now?
 - Testability. I cover that in the next section, but we heavily rely on integration testing. We minimize work with mocks and stubs. Therefore, we don't need abstraction for testing.
 
 ## Modular monolith
+
 My default choice when speaking of backend architecture is Modular Monolith. I do not even consider anything else than
 modular monolith for new projects. I do not see a reason why the team of 5–15 engineers need microservices.
 Many think that monolith is bad and microservices are the way to go. But my experience shows otherwise.
@@ -86,7 +89,7 @@ In modular monolith you communicate either through interface or directly. But th
 to it.
 E.g. `Users.UserCreated`. That way producer does not know anything about consumers and it decouples our modules.
 
-```//TODO: Modules communication diagram``` 
+`//TODO: Modules communication diagram`
 
 ### Modules Dependency
 
@@ -101,7 +104,7 @@ SeekerProfile -> Communities
 
 That way `CommunitiesSearch` can access APIs of `Reviews`, `Communities` and `SeekerProfile` modules.
 
-```//TODO: Modules dependencies diagram```
+`//TODO: Modules dependencies diagram`
 
 ### Package
 
@@ -119,12 +122,10 @@ pkg/
 ├── ...
 ```
 
-```//TODO: Modules on top of pgk diagram```
+`//TODO: Modules on top of pgk diagram`
 
 ## Business Logic
 
 ### Usecases - our first-class citizens
+
 We keep our business logic in units called usecases. Usecase represents business capability. E.g. `SearchCommunities` or ``
-
-
- 

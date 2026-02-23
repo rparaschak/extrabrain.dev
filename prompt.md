@@ -5,6 +5,7 @@
 Hey, I am Roman. I am building software for 15+ years and love my job.
 
 What I currently do:
+
 - CTO at Agewise — Building an AI-powered product for Senior Living. Practicing AI-assisted development daily.
 - Consultant & Coach — Helping engineering teams strategically adopt AI-assisted workflows.
 

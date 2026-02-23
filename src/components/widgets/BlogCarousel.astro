@@ -1,0 +1,183 @@
+---
+import { APP_BLOG } from 'astrowind:config';
+import { Icon } from 'astro-icon/components';
+
+import GridItem from '~/components/blog/GridItem.astro';
+import Button from '~/components/ui/Button.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+
+import { findLatestPosts } from '~/utils/blog';
+import { getBlogPermalink } from '~/utils/permalinks';
+import type { Widget } from '~/types';
+
+export interface Props extends Widget {
+  title?: string;
+  linkText?: string;
+  linkUrl?: string | URL;
+  count?: number;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  linkText = 'View all posts',
+  linkUrl = getBlogPermalink(),
+  count = 5,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+
+const posts = APP_BLOG.isEnabled ? await findLatestPosts({ count }) : [];
+---
+
+{
+  APP_BLOG.isEnabled && posts.length > 0 ? (
+    <WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
+      <div class="flex flex-col lg:justify-between lg:flex-row mb-8">
+        {title && (
+          <div class="md:max-w-sm">
+            <h2
+              class="text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none group font-heading mb-2"
+              set:html={title}
+            />
+            {APP_BLOG.list.isEnabled && linkText && linkUrl && (
+              <Button variant="link" href={linkUrl}>
+                {' '}
+                {linkText} &raquo;
+              </Button>
+            )}
+          </div>
+        )}
+      </div>
+
+      <div class="relative">
+        {/* Prev arrow */}
+        <button
+          data-carousel-prev
+          aria-label="Previous posts"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10
+                 hidden md:flex items-center justify-center
+                 w-10 h-10 rounded-full bg-white dark:bg-slate-800
+                 shadow-md border border-slate-200 dark:border-slate-600
+                 hover:bg-slate-50 dark:hover:bg-slate-700 transition
+                 disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <Icon name="tabler:chevron-left" class="w-5 h-5" />
+        </button>
+
+        {/* Scrollable track */}
+        <div
+          data-carousel-track
+          class="carousel-track flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 -mx-2 px-2"
+        >
+          {posts.map((post) => (
+            <div class="flex-none w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-start">
+              <GridItem post={post} />
+            </div>
+          ))}
+        </div>
+
+        {/* Next arrow */}
+        <button
+          data-carousel-next
+          aria-label="Next posts"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10
+                 hidden md:flex items-center justify-center
+                 w-10 h-10 rounded-full bg-white dark:bg-slate-800
+                 shadow-md border border-slate-200 dark:border-slate-600
+                 hover:bg-slate-50 dark:hover:bg-slate-700 transition
+                 disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          <Icon name="tabler:chevron-right" class="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Dot indicators */}
+      <div data-carousel-dots class="flex justify-center gap-2 mt-4" />
+    </WidgetWrapper>
+  ) : (
+    <Fragment />
+  )
+}
+
+<style>
+  .carousel-track {
+    scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function initCarousel() {
+    const wrapper =
+      document.querySelector('[data-carousel-track]')?.closest('[data-carousel-dots]')?.parentElement ||
+      document.querySelector('[data-carousel-track]')?.parentElement?.parentElement;
+    if (!wrapper) return;
+
+    const track = wrapper.querySelector('[data-carousel-track]') as HTMLElement | null;
+    const prevBtn = wrapper.querySelector('[data-carousel-prev]') as HTMLButtonElement | null;
+    const nextBtn = wrapper.querySelector('[data-carousel-next]') as HTMLButtonElement | null;
+    const dotsContainer = wrapper.querySelector('[data-carousel-dots]') as HTMLElement | null;
+
+    if (!track || !prevBtn || !nextBtn || !dotsContainer) return;
+
+    const GAP = 24; // gap-6 = 1.5rem = 24px
+
+    function getCardWidth() {
+      const firstCard = track!.firstElementChild as HTMLElement | null;
+      return firstCard ? firstCard.getBoundingClientRect().width + GAP : 0;
+    }
+
+    function buildDots(count: number) {
+      dotsContainer!.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600 transition-colors';
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.addEventListener('click', () => {
+          track!.scrollTo({ left: i * getCardWidth(), behavior: 'smooth' });
+        });
+        dotsContainer!.appendChild(dot);
+      }
+    }
+
+    function updateState() {
+      const scrollLeft = track!.scrollLeft;
+      const cardW = getCardWidth();
+      const currentIndex = Math.round(scrollLeft / cardW);
+      const maxScroll = track!.scrollWidth - track!.clientWidth;
+
+      prevBtn!.disabled = scrollLeft <= 0;
+      nextBtn!.disabled = scrollLeft >= maxScroll - 1;
+
+      dotsContainer!.querySelectorAll('button').forEach((dot, i) => {
+        if (i === currentIndex) {
+          dot.className = 'w-2 h-2 rounded-full bg-primary transition-colors';
+        } else {
+          dot.className = 'w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600 transition-colors';
+        }
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      track!.scrollBy({ left: -getCardWidth(), behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track!.scrollBy({ left: getCardWidth(), behavior: 'smooth' });
+    });
+
+    track.addEventListener('scroll', updateState, { passive: true });
+
+    const totalCards = track.children.length;
+    buildDots(totalCards);
+    updateState();
+  }
+
+  initCarousel();
+  document.addEventListener('astro:after-swap', initCarousel);
+</script>

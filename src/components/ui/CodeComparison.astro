@@ -11,7 +11,9 @@ interface Props {
 const { before, after, lang = 'go' } = Astro.props;
 ---
 
-<div class="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 my-4 ml-4 [&>pre]:m-0 [&>pre]:h-full [&>pre]:p-4 [&>pre]:rounded-md">
+<div
+  class="not-prose grid grid-cols-1 sm:grid-cols-2 gap-2 my-4 ml-4 [&>pre]:m-0 [&>pre]:h-full [&>pre]:p-4 [&>pre]:rounded-md"
+>
   <Code code={before} lang={lang} />
   <Code code={after} lang={lang} />
 </div>

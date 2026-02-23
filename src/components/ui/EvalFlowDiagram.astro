@@ -1,115 +1,297 @@
 ---
+
 ---
 
 <div class="not-prose my-6 flex justify-center">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 520" class="w-full max-w-2xl rounded-lg">
     <defs>
       <linearGradient id="efBg" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#0d1117"/>
-        <stop offset="100%" stop-color="#161b22"/>
+        <stop offset="0%" stop-color="#0d1117"></stop>
+        <stop offset="100%" stop-color="#161b22"></stop>
       </linearGradient>
       <filter id="efGlowPurple" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="4" result="blur"/>
-        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
       </filter>
       <filter id="efGlowGreen" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="4" result="blur"/>
-        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
       </filter>
       <filter id="efGlowAmber" x="-50%" y="-50%" width="200%" height="200%">
-        <feGaussianBlur stdDeviation="4" result="blur"/>
-        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        <feGaussianBlur stdDeviation="4" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
       </filter>
-      <marker id="efArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"/>
+      <marker
+        id="efArrow"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="6"
+        markerHeight="6"
+        orient="auto-start-reverse"
+      >
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#8b949e"></path>
       </marker>
-      <marker id="efArrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"/>
+      <marker
+        id="efArrowAmber"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="6"
+        markerHeight="6"
+        orient="auto-start-reverse"
+      >
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#fbbf24"></path>
       </marker>
-      <marker id="efArrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-        <path d="M 0 0 L 10 5 L 0 10 z" fill="#86efac"/>
+      <marker
+        id="efArrowGreen"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="6"
+        markerHeight="6"
+        orient="auto-start-reverse"
+      >
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#86efac"></path>
       </marker>
     </defs>
 
     <!-- Background -->
-    <rect width="700" height="520" rx="8" fill="url(#efBg)"/>
+    <rect width="700" height="520" rx="8" fill="url(#efBg)"></rect>
 
     <!-- Subtle grid -->
     <g opacity="0.04" stroke="#c9d1d9" stroke-width="0.5">
-      <line x1="0" y1="0" x2="0" y2="520"/><line x1="60" y1="0" x2="60" y2="520"/>
-      <line x1="120" y1="0" x2="120" y2="520"/><line x1="180" y1="0" x2="180" y2="520"/>
-      <line x1="240" y1="0" x2="240" y2="520"/><line x1="300" y1="0" x2="300" y2="520"/>
-      <line x1="360" y1="0" x2="360" y2="520"/><line x1="420" y1="0" x2="420" y2="520"/>
-      <line x1="480" y1="0" x2="480" y2="520"/><line x1="540" y1="0" x2="540" y2="520"/>
-      <line x1="600" y1="0" x2="600" y2="520"/><line x1="660" y1="0" x2="660" y2="520"/>
-      <line x1="700" y1="0" x2="700" y2="520"/>
-      <line x1="0" y1="0" x2="700" y2="0"/><line x1="0" y1="60" x2="700" y2="60"/>
-      <line x1="0" y1="120" x2="700" y2="120"/><line x1="0" y1="180" x2="700" y2="180"/>
-      <line x1="0" y1="240" x2="700" y2="240"/><line x1="0" y1="300" x2="700" y2="300"/>
-      <line x1="0" y1="360" x2="700" y2="360"/><line x1="0" y1="420" x2="700" y2="420"/>
-      <line x1="0" y1="480" x2="700" y2="480"/><line x1="0" y1="520" x2="700" y2="520"/>
+      <line x1="0" y1="0" x2="0" y2="520"></line><line x1="60" y1="0" x2="60" y2="520"></line>
+      <line x1="120" y1="0" x2="120" y2="520"></line><line x1="180" y1="0" x2="180" y2="520"></line>
+      <line x1="240" y1="0" x2="240" y2="520"></line><line x1="300" y1="0" x2="300" y2="520"></line>
+      <line x1="360" y1="0" x2="360" y2="520"></line><line x1="420" y1="0" x2="420" y2="520"></line>
+      <line x1="480" y1="0" x2="480" y2="520"></line><line x1="540" y1="0" x2="540" y2="520"></line>
+      <line x1="600" y1="0" x2="600" y2="520"></line><line x1="660" y1="0" x2="660" y2="520"></line>
+      <line x1="700" y1="0" x2="700" y2="520"></line>
+      <line x1="0" y1="0" x2="700" y2="0"></line><line x1="0" y1="60" x2="700" y2="60"></line>
+      <line x1="0" y1="120" x2="700" y2="120"></line><line x1="0" y1="180" x2="700" y2="180"></line>
+      <line x1="0" y1="240" x2="700" y2="240"></line><line x1="0" y1="300" x2="700" y2="300"></line>
+      <line x1="0" y1="360" x2="700" y2="360"></line><line x1="0" y1="420" x2="700" y2="420"></line>
+      <line x1="0" y1="480" x2="700" y2="480"></line><line x1="0" y1="520" x2="700" y2="520"></line>
     </g>
 
     <!-- Decorative corners -->
     <g stroke="#30363d" stroke-width="1" fill="none" opacity="0.3">
-      <polyline points="15,35 15,15 35,15"/>
-      <polyline points="665,15 685,15 685,35"/>
-      <polyline points="685,485 685,505 665,505"/>
-      <polyline points="35,505 15,505 15,485"/>
+      <polyline points="15,35 15,15 35,15"></polyline>
+      <polyline points="665,15 685,15 685,35"></polyline>
+      <polyline points="685,485 685,505 665,505"></polyline>
+      <polyline points="35,505 15,505 15,485"></polyline>
     </g>
 
     <!-- ===== NODE 1: Give prompt (stadium/rounded) ===== -->
-    <rect x="260" y="30" width="200" height="42" rx="21" fill="#7c3aed" opacity="0.12" stroke="#7c3aed" stroke-width="1.5" filter="url(#efGlowPurple)"/>
-    <text x="360" y="56" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="13" font-weight="600" fill="#c4b5fd">Me: Give prompt</text>
+    <rect
+      x="260"
+      y="30"
+      width="200"
+      height="42"
+      rx="21"
+      fill="#7c3aed"
+      opacity="0.12"
+      stroke="#7c3aed"
+      stroke-width="1.5"
+      filter="url(#efGlowPurple)"></rect>
+    <text
+      x="360"
+      y="56"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="13"
+      font-weight="600"
+      fill="#c4b5fd">Me: Give prompt</text
+    >
 
     <!-- Arrow A→B -->
-    <line x1="360" y1="72" x2="360" y2="98" stroke="#8b949e" stroke-width="1.5" marker-end="url(#efArrow)"/>
+    <line x1="360" y1="72" x2="360" y2="98" stroke="#8b949e" stroke-width="1.5" marker-end="url(#efArrow)"></line>
 
     <!-- ===== NODE 2: Agent executes assignment ===== -->
-    <rect x="235" y="102" width="250" height="42" rx="6" fill="#7c3aed" opacity="0.1" stroke="#7c3aed" stroke-width="1.5" filter="url(#efGlowPurple)"/>
-    <text x="360" y="128" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="12" fill="#c4b5fd">Agent executes assignment</text>
+    <rect
+      x="235"
+      y="102"
+      width="250"
+      height="42"
+      rx="6"
+      fill="#7c3aed"
+      opacity="0.1"
+      stroke="#7c3aed"
+      stroke-width="1.5"
+      filter="url(#efGlowPurple)"></rect>
+    <text
+      x="360"
+      y="128"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      fill="#c4b5fd">Agent executes assignment</text
+    >
 
     <!-- Arrow B→C -->
-    <line x1="360" y1="144" x2="360" y2="170" stroke="#8b949e" stroke-width="1.5" marker-end="url(#efArrow)"/>
+    <line x1="360" y1="144" x2="360" y2="170" stroke="#8b949e" stroke-width="1.5" marker-end="url(#efArrow)"></line>
 
     <!-- ===== NODE 3: Static checks triggered ===== -->
-    <rect x="235" y="174" width="250" height="42" rx="6" fill="#22c55e" opacity="0.1" stroke="#22c55e" stroke-width="1.5" filter="url(#efGlowGreen)"/>
-    <text x="360" y="200" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="12" fill="#86efac">Static checks triggered</text>
+    <rect
+      x="235"
+      y="174"
+      width="250"
+      height="42"
+      rx="6"
+      fill="#22c55e"
+      opacity="0.1"
+      stroke="#22c55e"
+      stroke-width="1.5"
+      filter="url(#efGlowGreen)"></rect>
+    <text
+      x="360"
+      y="200"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      fill="#86efac">Static checks triggered</text
+    >
 
     <!-- Arrow C→D -->
-    <line x1="360" y1="216" x2="360" y2="252" stroke="#8b949e" stroke-width="1.5" marker-end="url(#efArrow)"/>
+    <line x1="360" y1="216" x2="360" y2="252" stroke="#8b949e" stroke-width="1.5" marker-end="url(#efArrow)"></line>
 
     <!-- ===== NODE 4: Decision diamond ===== -->
-    <polygon points="360,256 480,300 360,344 240,300" fill="#f59e0b" opacity="0.08" stroke="#f59e0b" stroke-width="1.5" filter="url(#efGlowAmber)"/>
-    <text x="360" y="296" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="11" fill="#fbbf24">Warnings or</text>
-    <text x="360" y="310" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="11" fill="#fbbf24">errors?</text>
+    <polygon
+      points="360,256 480,300 360,344 240,300"
+      fill="#f59e0b"
+      opacity="0.08"
+      stroke="#f59e0b"
+      stroke-width="1.5"
+      filter="url(#efGlowAmber)"></polygon>
+    <text
+      x="360"
+      y="296"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#fbbf24">Warnings or</text
+    >
+    <text
+      x="360"
+      y="310"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#fbbf24">errors?</text
+    >
 
     <!-- ===== YES branch (left) ===== -->
     <!-- Arrow D→E (left, going down) -->
-    <path d="M 240,300 L 170,300 L 170,360" fill="none" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#efArrowAmber)"/>
-    <text x="195" y="292" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="11" font-weight="600" fill="#fbbf24">Yes</text>
+    <path
+      d="M 240,300 L 170,300 L 170,360"
+      fill="none"
+      stroke="#fbbf24"
+      stroke-width="1.5"
+      marker-end="url(#efArrowAmber)"></path>
+    <text
+      x="195"
+      y="292"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      font-weight="600"
+      fill="#fbbf24">Yes</text
+    >
 
     <!-- NODE 5: Result fed back to agent -->
-    <rect x="55" y="364" width="230" height="42" rx="6" fill="#f59e0b" opacity="0.08" stroke="#f59e0b" stroke-width="1.5" filter="url(#efGlowAmber)"/>
-    <text x="170" y="390" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="12" fill="#fbbf24">Result fed back to agent</text>
+    <rect
+      x="55"
+      y="364"
+      width="230"
+      height="42"
+      rx="6"
+      fill="#f59e0b"
+      opacity="0.08"
+      stroke="#f59e0b"
+      stroke-width="1.5"
+      filter="url(#efGlowAmber)"></rect>
+    <text
+      x="170"
+      y="390"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      fill="#fbbf24">Result fed back to agent</text
+    >
 
     <!-- Arrow E→F -->
-    <line x1="170" y1="406" x2="170" y2="432" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#efArrowAmber)"/>
+    <line x1="170" y1="406" x2="170" y2="432" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#efArrowAmber)"
+    ></line>
 
     <!-- NODE 6: Agent executes fixes -->
-    <rect x="55" y="436" width="230" height="42" rx="6" fill="#7c3aed" opacity="0.1" stroke="#7c3aed" stroke-width="1.5" filter="url(#efGlowPurple)"/>
-    <text x="170" y="462" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="12" fill="#c4b5fd">Agent executes fixes</text>
+    <rect
+      x="55"
+      y="436"
+      width="230"
+      height="42"
+      rx="6"
+      fill="#7c3aed"
+      opacity="0.1"
+      stroke="#7c3aed"
+      stroke-width="1.5"
+      filter="url(#efGlowPurple)"></rect>
+    <text
+      x="170"
+      y="462"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      fill="#c4b5fd">Agent executes fixes</text
+    >
 
     <!-- Loop arrow: F back up to C -->
-    <path d="M 55,457 L 30,457 L 30,195 L 232,195" fill="none" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#efArrow)"/>
+    <path
+      d="M 55,457 L 30,457 L 30,195 L 232,195"
+      fill="none"
+      stroke="#c4b5fd"
+      stroke-width="1.5"
+      stroke-dasharray="6 4"
+      marker-end="url(#efArrow)"></path>
 
     <!-- ===== NO branch (right) ===== -->
     <!-- Arrow D→G (right, going down) -->
-    <path d="M 480,300 L 540,300 L 540,360" fill="none" stroke="#86efac" stroke-width="1.5" marker-end="url(#efArrowGreen)"/>
-    <text x="515" y="292" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="11" font-weight="600" fill="#86efac">No</text>
+    <path
+      d="M 480,300 L 540,300 L 540,360"
+      fill="none"
+      stroke="#86efac"
+      stroke-width="1.5"
+      marker-end="url(#efArrowGreen)"></path>
+    <text
+      x="515"
+      y="292"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      font-weight="600"
+      fill="#86efac">No</text
+    >
 
     <!-- NODE 7: Assignment done (stadium/rounded) -->
-    <rect x="440" y="364" width="210" height="42" rx="21" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="1.5" filter="url(#efGlowGreen)"/>
-    <text x="545" y="390" text-anchor="middle" font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="13" font-weight="600" fill="#86efac">Assignment done</text>
+    <rect
+      x="440"
+      y="364"
+      width="210"
+      height="42"
+      rx="21"
+      fill="#22c55e"
+      opacity="0.12"
+      stroke="#22c55e"
+      stroke-width="1.5"
+      filter="url(#efGlowGreen)"></rect>
+    <text
+      x="545"
+      y="390"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="13"
+      font-weight="600"
+      fill="#86efac">Assignment done</text
+    >
   </svg>
 </div>
