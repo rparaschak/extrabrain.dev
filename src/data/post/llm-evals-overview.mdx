@@ -1,7 +1,7 @@
 ---
-publishDate: 2026-02-17T00:00:00Z
-title: 'Evals - Improving AI Code Quality and Consistency'
-excerpt: "Your coding agent does not know if the output is good. By implementing a feedback loop you are able to dramatically improve the quality."
+publishDate: 2026-02-07T00:00:00Z
+title: 'Better AI Code: The Feedback Loop That Changes Everything'
+excerpt: "By implementing a feedback loop you are able to dramatically improve the quality of AI generated code."
 image: ~/assets/images/blog/llm-evals-overview-cover.svg
 category: Agentic Engineering
 tags:
@@ -14,17 +14,18 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 
 ## Why Coding Agents produce inconsistent quality?
+I've spent plenty of time improving my AI coding workflows. Something worked well, something not. But now I can share what always works for me.
 
 Coding Agents are based on LLMs. LLMs are non-deterministic.
 Ask an LLM to review the same code twice, and you might get "looks good" one time and "this has a critical bug" the next.
-A compiler is deterministic. Feeding it the same code today and tomorrow yields the same result. 
+A compiler is deterministic. Feed it the same code 10 times and you get the same result. 
 
 Since Coding Agents are non-deterministic, the output varies from prompt to prompt, from session to session.
 That's why we need guardrails to reduce the impact of non-determinism when using AI for coding.
 
 ## What is an eval?
 
-An eval is a test for your AI. It checks whether the output is correct, consistent, or high quality.
+An eval is a test for your AI. It checks whether the output is correct, consistent, and matches your standards.
 Evals might be deterministic and non-deterministic. Asking AI to review AI-generated code is non-deterministic, but it still makes a lot of sense.
 
 From my experience, introducing evals brought the strongest effect on AI-generated code.
@@ -50,7 +51,8 @@ Simple and straightforward.
 A linter is a tool that automatically checks your code for style, errors, and complexity issues.
 There are linters for any language, and many engineers underestimate their value when working with AI.
 For example, my favorite one is cognitive complexity check. It checks how difficult code is to understand.
-After code is generated, agent runs linter and if cognitive complexity is above the threshold then it goes back to refactor and simplify the code.
+Sometimes my agent is going nuts, feature works, but the code is far from ideal.
+But after code is generated, agent can run linter, and if cognitive complexity is above the threshold, then it goes back to refactor and simplify the code.
 Again, enabling it is simple. 
 ```
 After any code changes YOU MUST:
@@ -80,7 +82,7 @@ Later you can build on top of that and create agents or skills following specifi
 
 ## Automated tests
 
-Tests are deterministic. They tell if your system works as expected. Strong teams trust their tests.
+Tests are deterministic. They tell if your system works as expected.
 If we give this tool to AI then it can be sure that nothing is broken and system behaves as expected.
 Or, agent gets instant feedback about something being broken, so instead of shipping broken code to you, it analyzes the reason and fixes it.
 
@@ -101,7 +103,8 @@ After any code changes YOU MUST:
 
 ## Summary
 
-Start with five lines in your guidelines file. Add a build check, a linter, a review agent, and tests. You do not need hooks, skills, or custom tooling to begin. These fundamentals compound — each eval you add makes the next one more effective. As a bonus, this is your entry into Agentic Engineering.
+Start with several lines in your guidelines file. Add a build check, a linter, a review agent, and tests. You do not need hooks, skills, or custom tooling to begin. 
+These fundamentals compound — each eval you add makes the next one more effective. As a bonus, this is your entry into Agentic Engineering.
 
 | Eval Type          | What it catches                        | Deterministic | Effort to enable    |
 |--------------------|----------------------------------------|---------------|---------------------|

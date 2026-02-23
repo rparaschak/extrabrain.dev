@@ -1,7 +1,7 @@
 ---
-publishDate: 2026-02-17T00:00:00Z
-title: "Evals - Compilers and Linters Don't Lie"
-excerpt: "My agent ships code that compiles, passes the linter, and respects architecture boundaries — every time. Here's how."
+publishDate: 2026-02-13T00:00:00Z
+title: "Better AI Code: Let Tools Catch What AI Misses"
+excerpt: "Using deterministic tools to dramatically improve AI generated code quality"
 image: ~/assets/images/blog/evals-static-cover.svg
 category: Agentic Engineering
 tags:
@@ -21,15 +21,15 @@ And the beauty is that check trigger is deterministic - it does not rely on AI a
 
 <EvalFlowDiagram />
 
-Imagine this - I hire a new engineer to your project. I describe our code style in Confluence or in repository docs.
-What is the chance that this engineer will violate some rules? It is a question of "When?", not "If?".
+Imagine this - I hire a new engineer. I describe our code style in Confluence or in repository docs.
+What is the chance that this engineer will violate some rules? It is just a matter of time.
 Same with AI Agent, no matter how hard you try, it will violate rules.
 Therefore, my strategy is implementing static checks wherever I can.
 
 
 ## Build
 That is the easiest one as every language has built-in build command. As a responsible engineer, I always compile the code before I push it.
-Now I ask my agent to compile the code before considering task to be done. If the code does not compile, the agent gets instant feedback about issues in the code, so it can take another round and fix errors.
+Now I ask my agent to do the same, to compile the code before considering task to be done. If the code does not compile, the agent gets instant feedback about issues in the code, so it can take another round and fix errors.
 In my daily work, builds fail very often and agent takes additional 1-2 turns to make it compile.
 
 - With Go you can use `go build`
@@ -77,10 +77,10 @@ x := min(max(f(), 0), 100)`}
 />
 
 ### My favorite linters
-I use many lint rules and will only mention 10% of them here. These are my favorite groups that keep my agents on the rails
+I use many lint rules and will only mention a fraction of them here. These are my favorite groups that keep my agents on the rails
 
 #### Cognitive Complexity and Cyclomatic Complexity
-Calculates complexity of the code. How readable and easy to understand your code is. It is an amazing tool to pair with an agent. I was surprised how good they are in combination with AI agents.
+Calculates complexity of the code. How readable and easy to understand your code is. I was surprised how good they are in combination with AI agents.
 When agent is done coding, it gets instant feedback that the function is too complex to understand, so it gets feedback that the code should be broken down and refactored.
 I, as an engineer, sometimes produce hard to read code, then I look at it and start refactoring.
 Same with agent, it might produce hard to read code and cognitive complexity checker gives instant feedback that the code should be improved.
@@ -128,7 +128,7 @@ Same with agent, it might produce hard to read code and cognitive complexity che
 />
 
 #### Dependencies Control
-I like keeping my project structure neat with explicit dependencies. For that reason I use dependency checker to make sure I do not violate the rules.
+I like keeping my project structure neat with explicit dependencies. For that reason, I use dependency checker to make sure I do not violate the rules.
 Sometimes, I forget to add important details when prompting the task and sometimes my agent breaks the boundaries. For this reason I use `depguard` linter that does the work for me.
 In my project, I have the following dependencies:
 
@@ -211,7 +211,7 @@ NEVER use orm anywhere but in usecases.
 ```
 This is a non-deterministic rule and probably in most cases(depending on your codebase) agent will follow this rule, but there is no guarantee.
 
-The setup is easy and I am very interested in having those rules because it saves me tons of time. 
+The setup is easy, and it saves me tons of time. 
 My reviews after agentic sessions are much shorter because those rules are never broken, they are enforced, statically.
 
 ## Integration
@@ -227,10 +227,10 @@ After any code changes YOU MUST:
 - [] Run 'make check' and fix errors
 ...
 ```
-It works fine, but again, non-determinism. When you take several turns with an agent it starts ignoring this rule and you have to either remind it or run check manually.
+It works fine, but again, non-determinism comes into play. When you take several turns with an agent it starts ignoring this rule and you have to either remind it or run check manually.
 
 ### Hooks
-A more reliable way is to use hooks. It is a deterministic way of performing an action after some events.
+A more reliable way is to use hooks. It is a deterministic way of performing an action after specific events.
 My setup is based on `Stop` event. Whenever agent stops responding, the tool automatically calls the script and feeds the output to agent.
 My hook looks like this:
 ```
@@ -268,7 +268,7 @@ After coding session with AI agent:
 - no linter violations
 - architecture boundaries aren't broken
 
-This setup dramatically improved the output quality. Also, I am confident that AI will produce the code according to my standards.
+This setup dramatically improved the output quality. I am confident that AI will produce the code according to my standards.
 As you can see, I combined non-deterministic agent nature with deterministic check tools. That is a very strong combination that creates a feedback loop.
 
 Here's what it looks like when it all works:
@@ -289,10 +289,8 @@ Here's what it looks like when it all works:
 ⏺ All 939 tests pass, 0 issues from linter.
 ```
 
-Honestly, I was already getting impressive results when I was using Sonnet 3.5.
 Intelligence of the model matters a lot, but the quality of your codebase and your guardrails matter just as much.
-
-
+I was getting impressive results since Sonnet 3.5. And I believe that this feedback loop was one of the key factors.
 
 ---
 
