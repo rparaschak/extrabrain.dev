@@ -1,0 +1,206 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Agentic Coding Roadmap',
+  description: 'Practices you can use to improve your Agentic Coding workflow.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
+const practices = [
+  {
+    name: 'Code style linter',
+    difficulty: 'easy',
+    description: 'Agent generates code that looks like yours. Reviews stop being about formatting.',
+    link: '/blog/llm-evals-static',
+  },
+  {
+    name: 'Basic prompting techniques',
+    difficulty: 'easy',
+    description:
+      'Better first-attempt output. Less back-and-forth. Include file paths, constraints, architecture context.',
+  },
+  {
+    name: 'Plan-then-execute workflow',
+    difficulty: 'easy',
+    description:
+      'Start with plan mode. Review the plan, stay in planning until the plan is solid, then approve implementation. Catches misunderstandings before they become code.',
+  },
+  {
+    name: 'Small, focused tasks',
+    difficulty: 'easy',
+    description: 'Agent succeeds more often when each prompt has one clear responsibility.',
+  },
+  {
+    name: 'Strong typing / type annotations',
+    difficulty: 'easy',
+    description:
+      'Agents understand data shapes and constraints through types. Fewer implicit rules to guess at. Free leverage in strongly typed languages like TypeScript or Go.',
+  },
+  {
+    name: 'Code review agent',
+    difficulty: 'easy',
+    description:
+      'Automated first pass catches style violations, missing tests, and common mistakes before you look at it. Invoked by coding agent for immediate feedback loop.',
+  },
+  {
+    name: 'Simplified project structure',
+    difficulty: 'medium',
+    description:
+      'Flat beats deep nesting. Agents get lost in complex directory hierarchies with many micro-packages, just like new team members do.',
+  },
+  {
+    name: 'Context management (CLAUDE.md / AGENTS.md)',
+    difficulty: 'medium',
+    description:
+      'Agent knows your codebase persistently — architecture, patterns, conventions. No more explaining from scratch. Keep it minimal: onboarding doc, not encyclopedia.',
+  },
+  {
+    name: 'Advanced linters (complexity)',
+    difficulty: 'medium',
+    description: 'Enforcing cognitive/cyclomatic complexity keeps generated code reviewable and maintainable.',
+    link: '/blog/llm-evals-static',
+  },
+  {
+    name: 'Implementation plans / strategy docs',
+    difficulty: 'medium',
+    description:
+      'Write a markdown plan with goals, constraints, edge cases, and step breakdown before prompting. Acts as a contract between you and the agent — better plans produce better code.',
+  },
+  {
+    name: 'Specialized review agents',
+    difficulty: 'medium',
+    description: 'Security, performance, accessibility — different concerns need dedicated reviewers at scale.',
+  },
+  {
+    name: 'Integration / API testing',
+    difficulty: 'hard',
+    description: 'Agent gets a possibility to get instant feedback about written code. Reduces a chance of regression.',
+  },
+  {
+    name: 'E2E testing',
+    difficulty: 'hard',
+    description: 'Trust that a generated feature works as a whole, not just in parts.',
+  },
+  {
+    name: 'Architecture linters and scripts',
+    difficulty: 'hard',
+    description:
+      "Enforce boundaries programmatically — dependency rules, layer violations, import restrictions. The agent can't break what's mechanically enforced.",
+  },
+  {
+    name: 'Specification documents',
+    difficulty: 'hard',
+    description:
+      'Specs docs with acceptance criteria, edge cases, and constraints. Better specs produce better first-attempt code.',
+  },
+  {
+    name: 'Hooks and pre-commit automation',
+    difficulty: 'hard',
+    description:
+      'Automated safeguards at three levels: review during generation, pre-commit check on staged files, full branch check before PR. Creates a refactoring loop on any quality regression.',
+  },
+  {
+    name: 'Sub-agents orchestration',
+    difficulty: 'hard',
+    description:
+      'Delegate research and different components to different agents. Each agent is focused on one feature slice improving efficiency.',
+  },
+];
+
+const difficultyConfig: Record<string, { label: string; color: string; bg: string }> = {
+  easy: {
+    label: 'Level 1',
+    color: 'text-emerald-700 dark:text-emerald-400',
+    bg: 'bg-emerald-100 dark:bg-emerald-900/30',
+  },
+  medium: {
+    label: 'Level 2',
+    color: 'text-amber-700 dark:text-amber-400',
+    bg: 'bg-amber-100 dark:bg-amber-900/30',
+  },
+  hard: { label: 'Level 3', color: 'text-orange-700 dark:text-orange-400', bg: 'bg-orange-100 dark:bg-orange-900/30' },
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <section class="relative md:-mt-[76px] not-prose">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pt-0 md:pt-[76px]"></div>
+      <div class="py-12 md:py-20">
+        <div class="max-w-3xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl font-bold leading-tight tracking-tighter mb-4 font-heading dark:text-gray-200"
+          >
+            Agentic Coding Roadmap
+          </h1>
+          <p class="text-xl text-muted dark:text-slate-300">
+            Practices you can use to improve your Agentic Coding workflow.
+          </p>
+          <p class="text-sm text-muted dark:text-slate-400 mt-4">
+            This page is under heavy development and will change. More detailed information will be added.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practices -->
+  <section class="py-4 md:py-4 not-prose">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+      </div>
+
+      <!-- Difficulty filter legend -->
+      <div class="flex flex-wrap justify-center gap-3 mb-8">
+        {
+          Object.entries(difficultyConfig).map(([, config]) => (
+            <span
+              class={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${config.color} ${config.bg}`}
+            >
+              {config.label}
+            </span>
+          ))
+        }
+      </div>
+
+      <div class="space-y-3">
+        {
+          practices.map((practice) => {
+            const config = difficultyConfig[practice.difficulty];
+            return (
+              <div class="bg-white dark:bg-slate-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 md:p-5 flex flex-col sm:flex-row sm:items-start gap-3">
+                <div class="flex items-center gap-3 sm:flex-shrink-0 sm:w-48">
+                  <span
+                    class={`inline-flex items-center whitespace-nowrap px-2.5 py-0.5 rounded-full text-xs font-medium ${config.color} ${config.bg}`}
+                  >
+                    {config.label}
+                  </span>
+                  <span class="font-semibold text-sm dark:text-gray-200">{practice.name}</span>
+                </div>
+                <div class="flex-1">
+                  <p class="text-sm text-muted">{practice.description}</p>
+                  {practice.link && (
+                    <a href={practice.link} class="text-xs text-accent hover:underline mt-1 inline-block">Read more &rarr;</a>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <div class="mt-12 text-center max-w-2xl mx-auto">
+        <p class="text-lg font-semibold dark:text-gray-200 mb-2">Is there a Level 4?</p>
+        <p class="text-muted">
+          Yes, some people do magic with agents orchestration. But I will be focusing on the first 3 levels as they can
+          make your team multiply their performance.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>

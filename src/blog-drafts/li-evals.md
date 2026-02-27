@@ -2,11 +2,11 @@
 
 ## Hook (pick one)
 
-- My AI code reviews used to take 30+ minutes. Now they often have zero corrections. Here's the one thing I changed.
-- Your AI coding agent has no idea if its code is good. And neither do you — until it's too late.
-- I stopped asking my AI agent to "write clean code." I started giving it tools to check itself.
+I’ve spent plenty of time improving my AI coding workflows. Feedback loop is one of the strongest factors that introduce positive change.
 
 ## Body
+
+Before AI, when shipping the code
 
 I delegate 90%+ of my coding to AI. The output quality used to be inconsistent — sometimes great, sometimes a mess.
 
@@ -37,12 +37,14 @@ The beauty of this approach — none of it relies on AI. You combine a non-deter
 ## CTA
 
 Link to both blog posts:
+
 - Overview: /llm-evals-overview
 - Static checks: /llm-evals-static
 
 ---
 
 ## Notes
+
 - Keep under 1300 characters for optimal LinkedIn reach (current draft body is ~1100 chars)
 - Consider adding a simple before/after code snippet as an image (the cognitive complexity example from the static checks post works well)
 - Hashtags: #AgenticEngineering #AICoding #SoftwareEngineering

@@ -3,6 +3,10 @@ import { getBlogPermalink } from './utils/permalinks';
 export const headerData = {
   links: [
     {
+      text: 'Agentic Engineering Roadmap',
+      href: '/roadmap',
+    },
+    {
       text: 'Blog',
       href: getBlogPermalink(),
     },
