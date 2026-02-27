@@ -1,0 +1,240 @@
+---
+// Animated terminal showing an agentic engineering workflow
+---
+
+<svg
+  viewBox="0 0 480 450"
+  xmlns="http://www.w3.org/2000/svg"
+  class="w-full h-auto"
+  role="img"
+  aria-label="Animated terminal showing AI agents collaborating on a development task"
+>
+  <defs>
+    <style>
+      .tf {
+        font-family: ui-monospace, 'Cascadia Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 13px;
+      }
+      .tf-title {
+        font-family: ui-monospace, 'Cascadia Mono', Menlo, Monaco, Consolas, monospace;
+        font-size: 11px;
+      }
+      .ct {
+        fill: #a9b1d6;
+      }
+      .cb {
+        fill: #c0caf5;
+      }
+      .cp {
+        fill: #7aa2f7;
+      }
+      .cg {
+        fill: #9ece6a;
+      }
+      .cr {
+        fill: #f7768e;
+      }
+      .cv {
+        fill: #bb9af7;
+      }
+      .cy {
+        fill: #e0af68;
+      }
+      .cm {
+        fill: #545c7e;
+      }
+
+      .cmd {
+        clip-path: inset(0 100% 0 0);
+        animation: typing 0.6s steps(28, end) 0.25s forwards;
+      }
+      @keyframes typing {
+        to {
+          clip-path: inset(0 0 0 0);
+        }
+      }
+
+      .ln {
+        opacity: 0;
+        animation: appear 0.15s ease forwards;
+      }
+      .d1 {
+        animation-delay: 1.25s;
+      }
+      .d2 {
+        animation-delay: 2s;
+      }
+      .d3 {
+        animation-delay: 2.75s;
+      }
+      .d4 {
+        animation-delay: 3.25s;
+      }
+      .d5 {
+        animation-delay: 4s;
+      }
+      .d6 {
+        animation-delay: 4.5s;
+      }
+      .d7 {
+        animation-delay: 5.25s;
+      }
+      .d8 {
+        animation-delay: 5.75s;
+      }
+      .d9 {
+        animation-delay: 6.5s;
+      }
+      .d10 {
+        animation-delay: 7s;
+      }
+      .d11 {
+        animation-delay: 7.75s;
+      }
+      .d12 {
+        animation-delay: 8.25s;
+      }
+      .d13 {
+        animation-delay: 9s;
+      }
+      .d14 {
+        animation-delay: 9.5s;
+      }
+      .d15 {
+        animation-delay: 10.25s;
+      }
+      .d16 {
+        animation-delay: 10.75s;
+      }
+      .d17 {
+        animation-delay: 11.5s;
+      }
+      .d18 {
+        animation-delay: 12s;
+      }
+      .d19 {
+        animation-delay: 13s;
+      }
+      .d20 {
+        animation-delay: 13.5s;
+      }
+
+      @keyframes appear {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .blink {
+        opacity: 0;
+        animation: curblink 1s step-end infinite 13.5s;
+      }
+      @keyframes curblink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+    </style>
+  </defs>
+
+  <!-- Terminal background -->
+  <rect width="480" height="450" rx="8" fill="#1a1b2e"></rect>
+  <!-- Title bar -->
+  <rect width="480" height="30" rx="8" fill="#1f2037"></rect>
+  <rect y="22" width="480" height="8" fill="#1f2037"></rect>
+  <!-- Border & divider -->
+  <rect width="480" height="450" rx="8" fill="none" stroke="#2f3146" stroke-width="1"></rect>
+  <line x1="0" y1="30" x2="480" y2="30" stroke="#2f3146" stroke-width="0.5"></line>
+
+  <!-- Window controls -->
+  <circle cx="16" cy="15" r="5" fill="#f7768e" opacity="0.85"></circle>
+  <circle cx="34" cy="15" r="5" fill="#e0af68" opacity="0.85"></circle>
+  <circle cx="52" cy="15" r="5" fill="#9ece6a" opacity="0.85"></circle>
+
+  <!-- Title -->
+  <text x="240" y="19" text-anchor="middle" class="tf-title cm">claude — agentic workflow</text>
+
+  <!-- Terminal content -->
+  <g class="tf">
+    <!-- Command (typing effect) -->
+    <g class="cmd">
+      <text x="14" y="52">
+        <tspan class="cp">$ </tspan><tspan class="cb">claude </tspan><tspan class="cy">"read specs/export-analytics.md and create plan"</tspan
+        >
+      </text>
+    </g>
+
+    <!-- Planning phase -->
+    <text x="14" y="84" class="ln d1">
+      <tspan class="cy">&#9679; </tspan><tspan class="ct">Reading specs/export-analytics.md...</tspan>
+    </text>
+    <text x="14" y="100" class="ln d2">
+      <tspan class="cg">&#10003; </tspan><tspan class="cb">Plan ready — 4 tasks identified</tspan>
+    </text>
+
+    <!-- Developer implements -->
+    <text x="14" y="132" class="ln d3"><tspan class="cv">&#9656; Developer</tspan></text>
+    <text x="28" y="148" class="ln d4">
+      <tspan class="cg">&#10003; </tspan><tspan class="ct">Export Analytics to CSV feature done</tspan>
+    </text>
+
+    <!-- Test Engineer creates tests -->
+    <text x="14" y="164" class="ln d5"><tspan class="cv">&#9656; Test Engineer</tspan></text>
+    <text x="28" y="180" class="ln d6">
+      <tspan class="cg">&#10003; </tspan><tspan class="ct">3 E2E tests created</tspan>
+    </text>
+
+    <!-- Reviewer finds bug -->
+    <text x="14" y="196" class="ln d7"><tspan class="cv">&#9656; Reviewer</tspan></text>
+    <text x="28" y="212" class="ln d8">
+      <tspan class="cr">&#10007; Bug: missing date validation</tspan>
+    </text>
+
+    <!-- Developer fixes bug -->
+    <text x="14" y="228" class="ln d9"><tspan class="cv">&#9656; Developer</tspan></text>
+    <text x="28" y="244" class="ln d10">
+      <tspan class="cg">&#10003; </tspan><tspan class="ct">Date validation added</tspan>
+    </text>
+
+    <!-- Test Engineer adds test -->
+    <text x="14" y="260" class="ln d11"><tspan class="cv">&#9656; Test Engineer</tspan></text>
+    <text x="28" y="276" class="ln d12">
+      <tspan class="cg">&#10003; </tspan><tspan class="ct">Additional test created</tspan>
+    </text>
+
+    <!-- Tests fail — regression -->
+    <text x="14" y="308" class="ln d13">
+      <tspan class="cy">&#9656; Running test suite...</tspan>
+    </text>
+    <text x="28" y="324" class="ln d14">
+      <tspan class="cr">&#10007; FAIL — regression detected</tspan>
+    </text>
+
+    <!-- Developer investigates & fixes -->
+    <text x="14" y="340" class="ln d15"><tspan class="cv">&#9656; Developer</tspan></text>
+    <text x="28" y="356" class="ln d16">
+      <tspan class="cg">&#10003; </tspan><tspan class="ct">Root cause found, timezone bug fixed</tspan>
+    </text>
+
+    <!-- Tests pass -->
+    <text x="14" y="372" class="ln d17">
+      <tspan class="cy">&#9656; Running test suite...</tspan>
+    </text>
+    <text x="28" y="388" class="ln d18">
+      <tspan class="cg">&#10003; All 4 tests passing</tspan>
+    </text>
+
+    <!-- Ready for human review -->
+    <text x="14" y="420" class="ln d19">
+      <tspan class="cg">&#9679; </tspan><tspan class="cb">Ready for human review</tspan>
+    </text>
+
+    <!-- New prompt + blinking cursor -->
+    <text x="14" y="436" class="ln d20"><tspan class="cp">$ </tspan></text>
+    <rect x="26" y="424" width="8" height="14" rx="1" fill="#c0caf5" class="blink"></rect>
+  </g>
+</svg>
