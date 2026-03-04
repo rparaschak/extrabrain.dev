@@ -8,7 +8,7 @@ I’ve spent plenty of time improving my AI coding workflows. Feedback loop is o
 
 Before AI, when shipping the code
 
-I delegate 90%+ of my coding to AI. The output quality used to be inconsistent — sometimes great, sometimes a mess.
+I delegate 99%+ of my coding to AI. The output quality used to be inconsistent — sometimes great, sometimes a mess.
 
 The fix wasn't a better model. It was evals.
 

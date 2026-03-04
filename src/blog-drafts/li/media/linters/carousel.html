@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: #2d3748;
+  }
+
+  .page {
+    width: 1080px;
+    height: 1080px;
+    padding: 60px;
+    page-break-after: always;
+    background: #2d3748;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== PAGE 1 ===== */
+  .page1-title {
+    font-size: 42px;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .page1-subtitle {
+    font-size: 22px;
+    color: #94a3b8;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .split {
+    display: flex;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .panel-header {
+    background: #374151;
+    border: 2px solid #4b5563;
+    border-bottom: none;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .panel-header-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #f87171; }
+  .dot-yellow { background: #fbbf24; }
+  .dot-green { background: #4ade80; }
+
+  .panel-header-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-left: 8px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  }
+
+  .panel-body {
+    border: 2px solid #4b5563;
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 28px 24px;
+    flex: 1;
+    background: #374151;
+  }
+
+  .panel-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  /* Arrow between panels */
+  .arrow-bridge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 60px;
+  }
+
+  .arrow-bridge svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* CLAUDE.md panel */
+  .guideline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .guideline-bullet {
+    width: 6px;
+    height: 6px;
+    min-width: 6px;
+    border-radius: 50%;
+    background: #94a3b8;
+    margin-top: 9px;
+  }
+
+  .guideline-text {
+    font-size: 20px;
+    line-height: 1.5;
+    color: #ffffff;
+  }
+
+  /* Linter panel */
+  .linter-code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 17px;
+    line-height: 1.9;
+    color: #ffffff;
+  }
+
+  .linter-key {
+    color: #2dd4bf;
+    font-weight: 600;
+  }
+
+  .linter-subkey {
+    color: #94a3b8;
+    padding-left: 24px;
+  }
+
+  .linter-value {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  /* Explanation section */
+  .explanation {
+    margin-top: 30px;
+    display: flex;
+    gap: 40px;
+  }
+
+  .explain-card {
+    flex: 1;
+    border-top: 3px solid #4b5563;
+    padding-top: 20px;
+  }
+
+  .explain-card-accent {
+    border-top-color: #2dd4bf;
+  }
+
+  .explain-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .explain-title-accent {
+    color: #2dd4bf;
+  }
+
+  .explain-text {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #94a3b8;
+  }
+
+  .page1-footer {
+    text-align: center;
+    margin-top: auto;
+    padding-top: 40px;
+  }
+
+  .page1-footer-text {
+    font-size: 20px;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
+  .page1-footer-text em {
+    color: #2dd4bf;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: Split layout -->
+<div class="page">
+  <div class="split">
+    <!-- Left: CLAUDE.md -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-dot dot-red"></div>
+        <div class="panel-header-dot dot-yellow"></div>
+        <div class="panel-header-dot dot-green"></div>
+        <span class="panel-header-title">CLAUDE.md</span>
+      </div>
+      <div class="panel-body">
+        <div class="panel-label">Non-deterministic</div>
+
+        <div class="guideline-item">
+          <div class="guideline-bullet"></div>
+          <div class="guideline-text">Write readable and simple code</div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-bullet"></div>
+          <div class="guideline-text">Function length under 80 lines</div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-bullet"></div>
+          <div class="guideline-text">Not more than 3 arguments</div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-bullet"></div>
+          <div class="guideline-text">No nested if statements</div>
+        </div>
+        <div class="guideline-item">
+          <div class="guideline-bullet"></div>
+          <div class="guideline-text">Early return</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrow between panels -->
+    <div class="arrow-bridge">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 20H32M32 20L24 12M32 20L24 28" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <!-- Right: Linter Rules -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-header-dot dot-red"></div>
+        <div class="panel-header-dot dot-yellow"></div>
+        <div class="panel-header-dot dot-green"></div>
+        <span class="panel-header-title">.golangci.yml</span>
+      </div>
+      <div class="panel-body">
+        <div class="panel-label">Deterministic</div>
+
+        <div class="linter-code">
+          <div><span class="linter-key">gocognit:</span></div>
+          <div class="linter-subkey">min-complexity: <span class="linter-value">20</span></div>
+          <div style="height: 12px;"></div>
+          <div><span class="linter-key">gocyclo:</span></div>
+          <div class="linter-subkey">min-complexity: <span class="linter-value">15</span></div>
+          <div style="height: 12px;"></div>
+          <div><span class="linter-key">funlen:</span></div>
+          <div class="linter-subkey">lines: <span class="linter-value">100</span></div>
+          <div class="linter-subkey">statements: <span class="linter-value">50</span></div>
+          <div style="height: 12px;"></div>
+          <div><span class="linter-key">nestif:</span></div>
+          <div class="linter-subkey">min-complexity: <span class="linter-value">3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Explanation of non-deterministic vs deterministic -->
+  <div class="explanation">
+    <div class="explain-card">
+      <div class="explain-title">Non-deterministic</div>
+      <div class="explain-text">Guidelines in CLAUDE.md are suggestions. The agent may interpret or ignore them inconsistently across runs.</div>
+    </div>
+    <div class="explain-card explain-card-accent">
+      <div class="explain-title explain-title-accent">Deterministic</div>
+      <div class="explain-text">Linter rules are enforced every time. Same code, same result. Violations are caught automatically — no interpretation needed.</div>
+    </div>
+  </div>
+
+  <div class="page1-footer">
+    <div class="page1-footer-text">Why rely on non-deterministic guidelines when you can use <em>deterministic static tools</em>?</div>
+  </div>
+</div>
+
+<!-- PAGE 2: Feedback Loop (embedded SVG) -->
+<div class="page" style="padding: 0;">
+  <img src="feedback-loop.svg" width="1080" height="1080" />
+</div>
+
+</body>
+</html>

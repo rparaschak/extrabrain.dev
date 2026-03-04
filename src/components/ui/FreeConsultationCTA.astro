@@ -1,7 +1,16 @@
 ---
 import Button from '~/components/ui/Button.astro';
-
-const { variant = 'primary', href = '#contact', class: className = '', ...rest } = Astro.props;
 ---
 
-<Button variant={variant} text="Book a Discovery Call" href={href} class={`whitespace-nowrap ${className}`} {...rest} />
+<div class="not-prose pb-2 md:pb-3">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+    <h2 class="text-4xl font-bold tracking-tighter mb-4 font-heading">Want to chat?</h2>
+    <p class="text-xl text-muted mb-6">I don't hold back — you'll leave with real answers, not a sales pitch.</p>
+    <Button
+      variant="primary"
+      text="Schedule a Call"
+      href="https://calendly.com/roman-parashchak/45min"
+      target="_blank"
+    />
+  </div>
+</div>
