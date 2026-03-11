@@ -1,0 +1,822 @@
+---
+import PresentationLayout from '~/layouts/PresentationLayout.astro';
+
+const metadata = {
+  title: 'Agentic Coding: Prompting & Context Management',
+  description: 'How to manage context windows, structure work into sessions, write prompt documents, and use permission modes effectively.',
+  ignoreTitleTemplate: false,
+};
+---
+
+<PresentationLayout metadata={metadata}>
+  <!-- Slide 1: Title -->
+  <section data-state="title" class="title-slide">
+    <h1>Agentic Coding</h1>
+    <h2>Prompting & Context Management</h2>
+  </section>
+
+  <!-- Slide 2: About Me -->
+  <section>
+    <h2>About Me</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; max-width: 80%; margin-left: auto; margin-right: auto;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🛠️</span>
+        <p style="margin: 0;">15 years of software engineering experience</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">❤️</span>
+        <p style="margin: 0;">I genuinely enjoy coding and building software</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🏗️</span>
+        <p style="margin: 0;">Currently building <strong>Agewise</strong> as CTO</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🤖</span>
+        <p style="margin: 0;">Me and my team delegate <strong>99% of coding</strong> to AI agents</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Agenda -->
+  <section>
+    <h2>Agenda</h2>
+    <ul>
+      <li>Context Window Management</li>
+      <li>Session Strategy</li>
+      <li>Prompting with Documents</li>
+      <li>Permission Modes as Workflow</li>
+      <li>Guidelines: Codebase Consistency vs. Rules</li>
+    </ul>
+  </section>
+
+  <!-- ==================== Section 1: Context Window Management ==================== -->
+
+  <!-- Slide 4: The Context Rot Problem -->
+  <section>
+    <h2>The Context Rot Problem</h2>
+    <p style="color: #a0aec0; margin-bottom: 1.5rem;">More context you have in a session, the worse it gets</p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem;">
+      <div class="content-box red">
+        <div class="content-box-content" style="text-align: center;">
+          <h3>Attention Degrades</h3>
+          <p style="color: #a0aec0;">Agent drifts from instructions, makes unexpected decisions</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <div class="content-box-content" style="text-align: center;">
+          <h3>Latency Rises</h3>
+          <p style="color: #a0aec0;">Each response takes longer as the model processes more tokens</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <div class="content-box-content" style="text-align: center;">
+          <h3>Cost Growth</h3>
+          <p style="color: #a0aec0;">You hit rate limits and token caps faster</p>
+        </div>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.25rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center;">
+        I am skeptical about 1M token models. I code everything within <strong>100–150K tokens</strong> per session.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 5: The 75% Rule -->
+  <section>
+    <h2>The 75% Rule</h2>
+    <div style="margin-top: 2rem; max-width: 85%; margin-left: auto; margin-right: auto;">
+      <!-- Context meter -->
+      <div style="display: flex; border-radius: 12px; overflow: hidden; height: 4rem; font-size: 0.95rem; font-weight: 600;">
+        <div style="flex: 50; background: rgba(74, 222, 128, 0.25); border: 2px solid #4ade80; display: flex; align-items: center; justify-content: center; border-right: none; border-radius: 12px 0 0 12px;">
+          0–50% — High accuracy
+        </div>
+        <div style="flex: 25; background: rgba(240, 195, 109, 0.25); border: 2px solid #f0c36d; display: flex; align-items: center; justify-content: center; border-right: none;">
+          50–75% — Wrap up
+        </div>
+        <div style="flex: 25; background: rgba(232, 180, 184, 0.25); border: 2px solid #e8b4b8; display: flex; align-items: center; justify-content: center; border-radius: 0 12px 12px 0;">
+          75%+ — Danger
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.85rem; color: #a0aec0;">
+        <span>0K</span>
+        <span>100K</span>
+        <span>150K</span>
+        <span>200K</span>
+      </div>
+    </div>
+    <div style="margin-top: 2rem;">
+      <p style="text-align: center; font-size: 1.1rem; color: #a0aec0;">
+        Closer to 75% — do not start new assignments unless they are very small and simple.
+      </p>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.25rem; background: rgba(14, 165, 193, 0.1); margin-top: 1rem;">
+      <p style="margin: 0; text-align: center;">
+        <strong>75% of 200K = 150K tokens.</strong> That's your ceiling, not 100%.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 6: Monitor Your Context -->
+  <section>
+    <h2>Monitor Your Context</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem;">
+      <div class="content-box">
+        <span class="content-box-icon">📊</span>
+        <div class="content-box-content">
+          <h3>Custom Status Line</h3>
+          <p style="color: #a0aec0;">Configure to always see your context %. Run <code style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;">/statusline</code> and ask it to show context window usage.</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔍</span>
+        <div class="content-box-content">
+          <h3><code style="font-size: 1.3rem;">/context</code> Command</h3>
+          <p style="color: #a0aec0;">Run after every few prompts. Know where you stand before sending the next instruction.</p>
+        </div>
+      </div>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1.25rem; background: rgba(240, 195, 109, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center;">
+        If you don't track it, you can't manage it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 7: Disable Auto-Compact -->
+  <section>
+    <h2>Disable Auto-Compact</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+      <div class="content-box red">
+        <span class="content-box-icon">⚠️</span>
+        <div class="content-box-content">
+          <h3>The Problem</h3>
+          <p style="color: #a0aec0;">Auto-compact removes information from your context without telling you what was lost. Your instructions, constraints, or decisions may silently disappear. You lose control.</p>
+        </div>
+      </div>
+      <div class="content-box green">
+        <span class="content-box-icon">✅</span>
+        <div class="content-box-content">
+          <h3>The Fix</h3>
+          <p style="color: #a0aec0;">
+            <code style="background: rgba(74, 222, 128, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 1rem;">"autoCompact": false</code>
+            <br />Manage your sessions manually. When context gets high — ask to summarize what was done, review it, and use it as the beginning of the next session.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: One Task Per Session -->
+  <section>
+    <h2>One Task Per Session</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
+      <div class="content-box red">
+        <div class="content-box-content">
+          <h3>One session for everything</h3>
+          <p style="color: #a0aec0;">
+            Table + filters + sorting + adjustments + bug fixes
+            <br /><br />
+            Context bloats. Agent drifts. Quality drops.
+          </p>
+        </div>
+      </div>
+      <div class="content-box green">
+        <div class="content-box-content">
+          <h3>One focused task per session</h3>
+          <p style="color: #a0aec0;">
+            Session 1: Table with filters
+            <br />Session 2: Sorting and Adjustments
+            <br />Session 3: Bug fixes from review
+          </p>
+        </div>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.25rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center;">
+        When you see the task growing bigger than expected — <strong>stop. Start a new session.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 2: Session Strategy ==================== -->
+
+  <!-- Slide 9: Section Title -->
+  <section>
+    <h2 style="font-size: 2.5rem;">Session Strategy</h2>
+    <p style="font-size: 1.5rem; color: #a0aec0; margin-top: 1rem;">Think in Sessions, Not in Prompts</p>
+  </section>
+
+  <!-- Slide 10: Two Types of Sessions -->
+  <section>
+    <h2>Two Types of Sessions</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.1);">
+        <h3 style="margin-bottom: 1rem;">Investigation Sessions</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.75rem;">🔍 Explore, analyze, ask questions</li>
+          <li style="margin-bottom: 0.75rem;">📖 Read-only mode</li>
+          <li style="margin-bottom: 0.75rem;">⚡ Can consume 50%+ context</li>
+          <li>📄 Output = understanding + written analysis</li>
+        </ul>
+      </div>
+      <div style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);">
+        <h3 style="margin-bottom: 1rem;">Execution Sessions</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.75rem;">🛠️ Execute part or entire plan</li>
+          <li style="margin-bottom: 0.75rem;">📋 Plan mode → accept edits</li>
+          <li style="margin-bottom: 0.75rem;">📉 Context stays low (narrow scope)</li>
+          <li>💻 Output = working code</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 11: Session Lifecycle -->
+  <section>
+    <h2>Session Lifecycle</h2>
+    <div style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2rem auto; max-width: 95%;">
+      <div style="background: rgba(14, 165, 193, 0.15); border: 2px solid #0ea5c1; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #0ea5c1; margin: 0 0 0.35rem 0;">Investigate</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Can we implement X? Does this API support Y? How does it affect tests?</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
+      <div style="background: rgba(240, 195, 109, 0.15); border: 2px solid #f0c36d; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #f0c36d; margin: 0 0 0.35rem 0;">Document</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Idea, behaviors, technical details</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
+      <div style="background: rgba(14, 165, 193, 0.15); border: 2px solid #0ea5c1; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #0ea5c1; margin: 0 0 0.35rem 0;">Plan</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Give doc to agent. Review plan.</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
+      <div style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;">
+        <p style="font-size: 0.85rem; font-weight: 700; color: #4ade80; margin: 0 0 0.35rem 0;">Execute</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Implement. One task at a time.</p>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1rem;">
+      <p style="margin: 0; text-align: center; font-size: 1rem;">
+        💡 You can also use Claude to help generate the document. Start in read-only, then ask it to write findings into your doc.
+      </p>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 0.75rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        If your feature or change is not big or complex — skip investigation and start with <strong>Plan mode</strong> directly.<br />
+        For bigger features, I start with Investigation and Document phases.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 12: Feature Document vs. Claude Code Plan -->
+  <section>
+    <h2>Your Document vs. Agent's Plan</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.1);">
+        <h3 style="margin-bottom: 1rem; color: #0ea5c1;">Your Feature Document</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.6rem;">📝 What you're building (idea)</li>
+          <li style="margin-bottom: 0.6rem;">🎯 How it should behave (test cases)</li>
+          <li style="margin-bottom: 0.6rem;">⚙️ Technical decisions (names, endpoints)</li>
+          <li style="margin-bottom: 0.6rem;">🧑 Written by you, at your pace</li>
+        </ul>
+        <p style="text-align: center; font-weight: 700; color: #0ea5c1; margin-top: 1rem; font-size: 1.1rem;">The WHAT and the HOW</p>
+      </div>
+      <div style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.1);">
+        <h3 style="margin-bottom: 1rem; color: #f0c36d;">Agent's Execution Plan</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.6rem;">📋 Execution steps from your document</li>
+          <li style="margin-bottom: 0.6rem;">📁 File-by-file changes</li>
+          <li style="margin-bottom: 0.6rem;">🔢 Order of implementation</li>
+          <li style="margin-bottom: 0.6rem;">🤖 Generated by agent in plan mode</li>
+        </ul>
+        <p style="text-align: center; font-weight: 700; color: #f0c36d; margin-top: 1rem; font-size: 1.1rem;">The execution sequence</p>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center;">
+        You define <strong>what</strong> and <strong>how</strong>. The agent figures out the execution details.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 13: Real Example: LLM Provider Migration -->
+  <section>
+    <h2>Real Example: LLM Provider Migration</h2>
+    <p style="color: #a0aec0; font-size: 1rem; margin-bottom: 1.25rem;">Migrate from direct LLM API calls to OpenRouter across 10 modules</p>
+    <div style="display: flex; flex-direction: column; gap: 0.6rem; max-width: 90%; margin: 0 auto;">
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <span style="background: #0ea5c1; color: #030620; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.85rem; flex-shrink: 0;">Session 1</span>
+        <p style="margin: 0; font-size: 0.95rem;">Investigated all 10 modules. Checked parameter compatibility. <span style="color: #f0c36d;">Consumed 60% of context.</span></p>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <span style="background: #f0c36d; color: #030620; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.85rem; flex-shrink: 0;">Document</span>
+        <p style="margin: 0; font-size: 0.95rem;">Offloaded all findings and analysis into a document. Not a plan yet — <span style="color: #f0c36d;">analysis that I need to verify every detail.</span></p>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <span style="background: #0ea5c1; color: #030620; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.85rem; flex-shrink: 0;">Session 2</span>
+        <p style="margin: 0; font-size: 0.95rem;">Implemented OpenRouter service based on verified analysis.</p>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <span style="background: #0ea5c1; color: #030620; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.85rem; flex-shrink: 0;">Session 3</span>
+        <p style="margin: 0; font-size: 0.95rem;">Migrated first module. Documented learnings.</p>
+      </div>
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <span style="background: #4ade80; color: #030620; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.85rem; flex-shrink: 0;">Session 4+</span>
+        <p style="margin: 0; font-size: 0.95rem;">Migrated remaining modules using subagents, using the learning from the first migration.</p>
+      </div>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 1rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        In many cases you don't want to start execution in the same session as investigation. Your context is already spent on understanding.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 3: Prompting with Documents ==================== -->
+
+  <!-- Slide 14: Section Title -->
+  <section>
+    <h2 style="font-size: 2.5rem;">Prompting with Documents</h2>
+    <p style="font-size: 1.5rem; color: #a0aec0; margin-top: 1rem;">Stop Typing in the Terminal</p>
+  </section>
+
+  <!-- Slide 15: The Drip-Feed Problem -->
+  <section>
+    <h2>The Drip-Feed Problem</h2>
+    <div style="border: 2px solid #e8b4b8; border-radius: 12px; padding: 1.25rem; background: rgba(232, 180, 184, 0.05); margin-bottom: 1rem;">
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.9rem;">
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #0ea5c1; font-weight: 700; flex-shrink: 0;">You:</span>
+          <span>"Create a chat feature. Chat component should open when clicking on chat button. Chat component displays the list of all messages"</span>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #4ade80; font-weight: 700; flex-shrink: 0;">Agent:</span>
+          <span style="color: #a0aec0; font-style: italic;">builds something</span>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #0ea5c1; font-weight: 700; flex-shrink: 0;">You:</span>
+          <span>"Add a spinner after sending a message"</span>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #4ade80; font-weight: 700; flex-shrink: 0;">Agent:</span>
+          <span style="color: #a0aec0; font-style: italic;">adds spinner</span>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #0ea5c1; font-weight: 700; flex-shrink: 0;">You:</span>
+          <span>"Wait, you should use a spinner from components library"</span>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #4ade80; font-weight: 700; flex-shrink: 0;">Agent:</span>
+          <span style="color: #a0aec0; font-style: italic;">refactors</span>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="color: #0ea5c1; font-weight: 700; flex-shrink: 0;">You:</span>
+          <span>"When we open the chat we should always call GET /history endpoints so that user does not start with blank chat"</span>
+        </div>
+        <div style="text-align: center; color: #a0aec0; margin-top: 0.25rem;">...10 rounds later, 90% context used</div>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1);">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        If you can't write a longer prompt — you probably don't know what you want yet.<br />
+        That's the signal to sit down, think, and describe the idea on paper.
+      </p>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 0.75rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        <strong>Testing problem:</strong> without the full picture upfront, the agent can't write tests for desired behavior — it tests <em>what it built</em>, not <em>what it should do</em>. With behaviors defined upfront, they become your test cases.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 16: The Document Approach -->
+  <section>
+    <h2>The Document Approach</h2>
+    <div class="content-box green" style="margin-top: 1.5rem;">
+      <span class="content-box-icon">📄</span>
+      <div class="content-box-content">
+        <h3>Create a feature document in your repo</h3>
+        <p style="color: #a0aec0;">
+          <code style="background: rgba(74, 222, 128, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;">prompt.md</code> (gitignored) or
+          <code style="background: rgba(74, 222, 128, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;">docs/chat-feature.md</code>
+          
+        </p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.25rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.3rem; min-width: 2rem; text-align: center;">✍️</span>
+        <p style="margin: 0; font-size: 1rem;">Write everything you want before starting</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.3rem; min-width: 2rem; text-align: center;">☕</span>
+        <p style="margin: 0; font-size: 1rem;">Take your time — hours, coffee breaks, next day</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.3rem; min-width: 2rem; text-align: center;">👥</span>
+        <p style="margin: 0; font-size: 1rem;">Review with a teammate if needed</p>
+      </div>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1.25rem; background: rgba(240, 195, 109, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center;">
+        Why would I start coding if I don't understand the problem and the solution?<br />
+        If my idea isn't ready, I leave the document for tomorrow.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 17: Anatomy of a Prompt Document -->
+  <section>
+    <h2>Anatomy of a Prompt Document</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(74, 222, 128, 0.1);">
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.3rem;">Idea</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">What are we building? One paragraph. High-level context.</p>
+      </div>
+      <div style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);">
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.3rem;">Behaviors</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">How should it work? List of specific behaviors. These become your test cases.</p>
+      </div>
+      <div style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(240, 195, 109, 0.1);">
+        <h3 style="margin-bottom: 0.35rem; font-size: 1.3rem;">Technical Details</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">Explicit decisions. Event names, endpoints, payloads, component structure. The more precise your input, the more precise the output. <strong style="color: #f0c36d;">You control the precision.</strong></p>
+      </div>
+    </div>
+    <p style="text-align: center; color: #a0aec0; font-size: 1rem; margin-top: 1.25rem;">
+      Start simple, no strict templates. AI works well with free format.
+    </p>
+  </section>
+
+  <!-- Slide 18: Backend Example -->
+  <section>
+    <h2>Backend Example</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 0.75rem;">
+      <!-- Left column: Idea + Behaviors -->
+      <div style="background: rgba(14, 165, 193, 0.08); border: 1px solid rgba(14, 165, 193, 0.3); border-radius: 12px; padding: 1.25rem; text-align: left; font-family: monospace; font-size: 0.75rem; line-height: 1.5;">
+        <p style="color: #0ea5c1; font-weight: 700; font-size: 0.8rem; margin: 0 0 0.35rem 0;">## Idea</p>
+        <p style="margin: 0 0 0.75rem 0; font-size: 0.75rem;">Community manager can post announcements for events. Attendees receive email and in-app notification. Email links to event. Clicking notification navigates to event.</p>
+
+        <p style="color: #0ea5c1; font-weight: 700; font-size: 0.8rem; margin: 0 0 0.35rem 0;">## Behaviours</p>
+        <p style="margin: 0; font-size: 0.75rem;">
+          - CM can create announcement for their event<br />
+          - CM can update/delete announcement for their event<br />
+          - Anyone can see event announcements<br />
+          - Attendees receive email on announcement created<br />
+          - Attendees receive in-app notification on created
+        </p>
+      </div>
+
+      <!-- Right column: Technical Details -->
+      <div style="background: rgba(14, 165, 193, 0.08); border: 1px solid rgba(14, 165, 193, 0.3); border-radius: 12px; padding: 1.25rem; text-align: left; font-family: monospace; font-size: 0.75rem; line-height: 1.5;">
+        <p style="color: #0ea5c1; font-weight: 700; font-size: 0.8rem; margin: 0 0 0.35rem 0;">## Technical Details</p>
+        <p style="margin: 0 0 0.5rem 0; font-size: 0.75rem;">Data model already implemented, migration applied</p>
+        <p style="margin: 0 0: 0.5rem 0; font-size: 0.75rem;">
+          Event: <strong>Events.AnnouncementCreated</strong><br />
+          Payload: EventId, AnnouncementId<br />
+          Subscribers:<br />
+          &nbsp;&nbsp;- CreateAnnouncementInAppNotification<br />
+          &nbsp;&nbsp;- SendAnnouncementEmail
+        </p>
+
+        <p style="color: #a0aec0; font-weight: 600; font-size: 0.8rem; margin: 0.75rem 0 0.25rem 0;">Usecases</p>
+        <p style="margin: 0; font-size: 0.75rem;">
+          - CreateAnnouncement: Content, Timestamps(auto)<br />
+          - UpdateAnnouncement, DeleteAnnouncement<br />
+          - GetById, GetByEventId<br />
+          - SendAnnouncementEmail<br />
+          - CreateAnnouncementInAppNotification
+        </p>
+
+        <p style="color: #a0aec0; font-weight: 600; font-size: 0.8rem; margin: 0.75rem 0 0.25rem 0;">Endpoints &amp; ACL</p>
+        <p style="margin: 0; font-size: 0.75rem;">
+          Create, Update, Delete → CommunityManager, Admin<br />
+          GetById, ByEventId → Authenticated user
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 19: Frontend Example -->
+  <section>
+    <h2>Frontend Example</h2>
+    <div style="background: rgba(14, 165, 193, 0.08); border: 1px solid rgba(14, 165, 193, 0.3); border-radius: 12px; padding: 1.5rem; text-align: left; font-family: monospace; font-size: 0.8rem; line-height: 1.6; margin-top: 1rem;">
+      <p style="color: #0ea5c1; font-weight: 700; font-size: 0.95rem; margin: 0 0 0.5rem 0;">## Idea</p>
+      <p style="margin: 0 0 1rem 0; font-size: 0.8rem;">AI chat for customers to query our knowledge base.</p>
+
+      <p style="color: #0ea5c1; font-weight: 700; font-size: 0.95rem; margin: 0 0 0.5rem 0;">## Behaviors</p>
+      <p style="margin: 0; font-size: 0.8rem;">
+        - Global button opens the chat<br />
+        - Cross icon closes the chat<br />
+        - Opening chat again persists all history<br />
+        - Sending message shows spinner<br />
+        - API response renders as chat message
+      </p>
+
+      <p style="color: #0ea5c1; font-weight: 700; font-size: 0.95rem; margin: 1rem 0 0.5rem 0;">## Technical Details</p>
+      <p style="margin: 0; font-size: 0.8rem;">
+        - API: GET /chat/:id (history), POST /chat/:id (new message)<br />
+        - No client-side message storage<br />
+        - Components: Chat, MessagesList, SendButton<br />
+        - Hooks: useCreateMessage, useFetchHistory<br />
+        - Spinner: use shared Spinner component (already exists)
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 20: Why Documents Win -->
+  <section>
+    <h2>Why Documents Win</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1.5rem; font-size: 0.85rem;">
+      <thead>
+        <tr style="border-bottom: 2px solid #0ea5c1;">
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);"></th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Terminal Prompting</th>
+          <th style="text-align: left; padding: 0.75rem; background: rgba(14, 165, 193, 0.1);">Document Prompting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Thinking time</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Rushed (fear of losing the terminal)</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Unlimited (it's a file)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Edge cases</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Discovered mid-session</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Discovered before coding (in most cases)</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Context cost</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Each correction burns tokens</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">One clean prompt</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Collaboration</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Can't share a terminal</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Share the doc with teammates</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #374151;">
+          <td style="padding: 0.6rem; font-weight: 600;">Reusability</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Lost after session</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">Lives in your repo</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.6rem; font-weight: 600;">Precision</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">You guess, agent guesses</td>
+          <td style="padding: 0.6rem; color: #a0aec0;">You define, agent follows</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ==================== Section 4: Permission Modes as Workflow ==================== -->
+
+  <!-- Slide 21: Three Modes, Three Purposes -->
+  <section>
+    <h2>Permission Modes as Workflow</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; font-size: 1.3rem;">Read-Only Mode</h3>
+          <span style="color: #a0aec0; font-size: 0.85rem;">⚡ Fast</span>
+        </div>
+        <p style="color: #a0aec0; margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+          Agent reads code, answers questions, suggests approaches. No code changes.
+        </p>
+        <p style="color: #0ea5c1; margin: 0.5rem 0 0 0; font-size: 0.9rem; font-style: italic;">
+          "What does it take? How complex is this? What am I missing?"
+        </p>
+      </div>
+      <div style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(240, 195, 109, 0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; font-size: 1.3rem;">Plan Mode</h3>
+          <span style="color: #a0aec0; font-size: 0.85rem;">🕐 Slow</span>
+        </div>
+        <p style="color: #a0aec0; margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+          Agent reads all relevant code, produces detailed execution plan. No code changes yet.
+        </p>
+        <p style="color: #f0c36d; margin: 0.5rem 0 0 0; font-size: 0.9rem; font-style: italic;">
+          "Plan the implementation based on my document."
+        </p>
+      </div>
+      <div style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(74, 222, 128, 0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="margin: 0; font-size: 1.3rem;">Execute</h3>
+          <span style="color: #a0aec0; font-size: 0.85rem;">🛠️ Accept edits</span>
+        </div>
+        <p style="color: #a0aec0; margin: 0.5rem 0 0 0; font-size: 0.95rem;">
+          Agent writes code following the plan. This is where changes happen.
+        </p>
+        <p style="color: #4ade80; margin: 0.5rem 0 0 0; font-size: 0.9rem; font-style: italic;">
+          "Execute the plan."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 22: The Workflow in Practice -->
+  <section>
+    <h2>The Workflow in Practice</h2>
+    <div style="display: grid; grid-template-columns: 7rem 1fr; gap: 0.5rem 1rem; margin-top: 1rem; font-size: 0.9rem; text-align: left;">
+      <!-- Read-only: 2 rows -->
+      <span style="background: #0ea5c1; color: #030620; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.8rem; text-align: center; grid-row: span 2; align-self: center;">Read-only</span>
+      <p style="margin: 0;"><span style="color: #0ea5c1; font-weight: 700;">You:</span> "We have 15 test data factories using API calls. What does it take to switch them to service layer calls?"</p>
+      <p style="margin: 0;"><span style="color: #4ade80; font-weight: 700;">Agent:</span> "You'll need DB connections, Redis setup, service initialization per factory."</p>
+
+      <!-- Decision -->
+      <span style="background: #f0c36d; color: #030620; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.8rem; text-align: center; align-self: center;">Decision</span>
+      <p style="margin: 0;"><span style="color: #0ea5c1; font-weight: 700;">You:</span> "OK, but that's too much to keep in every test. We should do a test setup function that initiates the environment in 1 line. Analyze dependencies and put everything into <code style="background: rgba(240, 195, 109, 0.2); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.85rem;">docs/factories-v2.md</code>"</p>
+
+      <!-- New session divider -->
+      <div style="grid-column: 1 / -1; margin-top: 0.25rem;">
+        <span style="color: #a0aec0; font-size: 0.8rem;">(new session)</span>
+      </div>
+
+      <!-- Plan mode: 2 rows -->
+      <span style="background: #0ea5c1; color: #030620; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.8rem; text-align: center; grid-row: span 2; align-self: center;">Plan mode</span>
+      <p style="margin: 0;"><span style="color: #0ea5c1; font-weight: 700;">You:</span> "Read <code style="background: rgba(14, 165, 193, 0.2); padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.85rem;">docs/factories-v2.md</code> and refactor users factory."</p>
+      <p style="margin: 0;"><span style="color: #4ade80; font-weight: 700;">Agent:</span> "Here is the execution plan with file-by-file changes..."</p>
+
+      <!-- Decision -->
+      <span style="background: #4ade80; color: #030620; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 6px; font-size: 0.8rem; text-align: center; align-self: center;">Decision</span>
+      <p style="margin: 0;"><span style="color: #0ea5c1; font-weight: 700;">You:</span> "Plan approved." <span style="color: #a0aec0;">(or not — it's your decision)</span></p>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Don't rush to execution. Cheap questions save expensive mistakes.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 23: When to Use Which -->
+  <section>
+    <h2>When to Use Which</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">🤔</span>
+        <div class="content-box-content">
+          <h3>"Am I exploring or unsure?"</h3>
+          <p style="color: #0ea5c1; font-weight: 600;">→ Read-only</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">📋</span>
+        <div class="content-box-content">
+          <h3>"Do I know what I want but need a detailed plan?"</h3>
+          <p style="color: #f0c36d; font-weight: 600;">→ Plan mode</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🛠️</span>
+        <div class="content-box-content">
+          <h3>"Do I have a plan and I'm ready to code?"</h3>
+          <p style="color: #4ade80; font-weight: 600;">→ Execute</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>"Is the task small and obvious?"</h3>
+          <p style="color: #4ade80; font-weight: 600;">→ Skip straight to execute</p>
+        </div>
+      </div>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 1rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        ⚠️ Plan mode can consume 50% of your context. Don't use it for quick questions — that's what read-only is for.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 5: Guidelines ==================== -->
+
+  <!-- Slide 24: The Research -->
+  <section>
+    <h2>Guidelines: What the Research Says</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box red" style="position: relative;">
+        <span style="position: absolute; top: 0.75rem; right: 1rem; background: #e8b4b8; color: #030620; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem;">Worst</span>
+        <span class="content-box-icon">❌</span>
+        <div class="content-box-content">
+          <h3><code style="font-size: 1.3rem;">/init</code> auto-generated guidelines</h3>
+          <p style="color: #a0aec0;">Research shows this makes output worse. Generic rules add noise, not signal.</p>
+        </div>
+      </div>
+      <div class="content-box yellow" style="position: relative;">
+        <span style="position: absolute; top: 0.75rem; right: 1rem; background: #f0c36d; color: #030620; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem;">Better</span>
+        <span class="content-box-icon">🤷</span>
+        <div class="content-box-content">
+          <h3>No guidelines at all</h3>
+          <p style="color: #a0aec0;">Surprisingly, performs better than <code>/init</code>. Models are good at finding patterns in your code.</p>
+        </div>
+      </div>
+      <div class="content-box green" style="position: relative;">
+        <span style="position: absolute; top: 0.75rem; right: 1rem; background: #4ade80; color: #030620; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem;">Best</span>
+        <span class="content-box-icon">✅</span>
+        <div class="content-box-content">
+          <h3>Brief, focused guidelines</h3>
+          <p style="color: #a0aec0;">5–10% accuracy improvement. Short and focused.</p>
+        </div>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        New models are very good at pattern-matching your codebase. They replicate what they see, not what you write in a markdown file.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 25: Codebase Consistency > Guidelines -->
+  <section>
+    <h2>Codebase Consistency > Guidelines</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.1);">
+        <h3 style="margin-bottom: 1rem;">Add Rules to Guidelines</h3>
+        <ul style="font-size: 0.95rem;">
+          <li>Write detailed rules for every convention</li>
+          <li>Error handling, validation, naming...</li>
+          <li>Maintenance burden grows</li>
+          <li>Rules can conflict with actual code</li>
+          <li>Agent weighs code higher anyway</li>
+        </ul>
+      </div>
+      <div style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);">
+        <h3 style="margin-bottom: 1rem;">Improve Codebase Consistency</h3>
+        <ul style="font-size: 0.95rem;">
+          <li>Make your code self-explanatory</li>
+          <li>Fix inconsistencies at the source</li>
+          <li>When Claude copies a bad pattern — fix where it learned it</li>
+          <li>The codebase IS your documentation</li>
+        </ul>
+      </div>
+    </div>
+    <div style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Both strategies work. It depends on your codebase. But if your code is consistent, you need far fewer rules.<br />
+        My approach: I aggressively improved consistency and reduced my guidelines from <strong>100+ lines to 10</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 26: What Stays in Guidelines -->
+  <section>
+    <h2>What Stays in Guidelines</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div>
+        <h3 style="color: #4ade80; margin-bottom: 1rem;">✅ Keep — Workflow</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #4ade80;">"In plan mode, list behaviors as test cases"</li>
+          <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #4ade80;">"Always run code review before completing"</li>
+          <li style="padding-left: 1rem; border-left: 3px solid #4ade80;">"Use read-only mode for investigation first"</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: #e8b4b8; margin-bottom: 1rem;">❌ Skip — Let the Code Speak</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #e8b4b8; color: #a0aec0; text-decoration: line-through;">"Use slog.Error for error handling"</li>
+          <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #e8b4b8; color: #a0aec0; text-decoration: line-through;">"Never use fmt.Printf"</li>
+          <li style="padding-left: 1rem; border-left: 3px solid #e8b4b8; color: #a0aec0; text-decoration: line-through;">"Validate with Zod schema"</li>
+        </ul>
+      </div>
+    </div>
+    <div style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 1.5rem;">
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Focus guidelines on workflow, not syntax. If you need a rule to enforce a pattern, your code isn't consistent enough yet. Fix the code, not the guidelines.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Closing ==================== -->
+
+  <!-- Slide 27: Key Takeaways -->
+  <section>
+    <h2>Key Takeaways</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);">
+        <p style="margin: 0; font-size: 1.05rem;">Monitor your context. Stay under <strong>75%</strong>. One task per session.</p>
+      </div>
+      <div style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);">
+        <p style="margin: 0; font-size: 1.05rem;">Write feature documents. <strong>Think before you code.</strong></p>
+      </div>
+      <div style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);">
+        <p style="margin: 0; font-size: 1.05rem;">Read-only → Plan → Execute. <strong>Control the pace.</strong></p>
+      </div>
+      <div style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);">
+        <p style="margin: 0; font-size: 1.05rem;">Codebase consistency > guidelines. <strong>Fix the code, not the rules.</strong></p>
+      </div>
+      <div style="border: 2px solid #4ade80; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(74, 222, 128, 0.1);">
+        <p style="margin: 0; font-size: 1.15rem; text-align: center; font-weight: 600;">
+          You are the brain. AI is your hands.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 28: Thank You -->
+  <section data-state="title" class="title-slide">
+    <h1>Thank You!</h1>
+  </section>
+</PresentationLayout>
