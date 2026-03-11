@@ -66,20 +66,24 @@ All LinkedIn covers share a simple, professional, dark aesthetic. Content change
 ### Visual Elements (use sparingly)
 
 **Text cards** — For highlighting key phrases or code:
+
 - Rounded rect (`rx="16"`) with `#374151` fill
 - Optional thin border in `#4b5563`
 - Text inside in white or teal
 
 **Simple icons** — Line-art style only:
+
 - Thin strokes (`stroke-width="2-3"`) in white or teal
 - No filled shapes, keep it minimal
 
 **Arrows / connectors** — For flow diagrams:
+
 - Simple straight lines or gentle curves
 - `stroke-width="2-3"` in `#94a3b8` or teal
 - Small triangle arrowheads
 
 **Dividers / separators**:
+
 - Thin lines in `#4b5563` when needed to separate sections
 
 ### Do NOT

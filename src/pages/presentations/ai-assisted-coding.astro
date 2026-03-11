@@ -15,19 +15,26 @@ const metadata = {
     <h2>Foundation and Mindset</h2>
   </section>
 
-  <!-- Slide 2: The DORA Reality -->
+  <!-- Slide 2: About Me -->
   <section>
-    <div style="text-align: center;">
-      <blockquote
-        style="font-size: 1.8rem; font-weight: 600; color: #0ea5c1; margin: 3rem auto; padding: 0; line-height: 1.4; max-width: 90%;"
-      >
-        "AI magnifies the strengths of high-performing organizations and the dysfunctions of struggling ones."
-      </blockquote>
-      <p style="font-size: 1.2rem; color: #a0aec0; margin-bottom: 3rem;">— DORA Report 2025</p>
-      <p style="font-size: 1.1rem; color: #e2e8f0; margin-top: 2rem;">
-        The gap between elite and struggling teams isn't staying the same.<br />
-        <strong style="color: #0ea5c1;">AI is actively widening it.</strong>
-      </p>
+    <h2>About Me</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; max-width: 80%; margin-left: auto; margin-right: auto;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🛠️</span>
+        <p style="margin: 0;">15 years of software engineering experience</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">❤️</span>
+        <p style="margin: 0;">I genuinely enjoy coding and building software</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🏗️</span>
+        <p style="margin: 0;">Currently building <strong>Agewise</strong> as CTO</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🤖</span>
+        <p style="margin: 0;">Me and my team delegate <strong>99% of coding</strong> to AI agents</p>
+      </div>
     </div>
   </section>
 
@@ -35,73 +42,127 @@ const metadata = {
   <section>
     <h2>Agenda</h2>
     <ul>
-      <li>The Cost of Ignoring AI</li>
-      <li>AI on a Broken Foundation</li>
-      <li>Why Integrations Fail</li>
-      <li>Building the Foundation</li>
+      <li>Possibilities — What AI Can Do Today</li>
+      <li>AI Adoption - Why It Fails</li>
+      <li>Mindset For Successful Adoption</li>
+      <li>Foundations</li>
       <li>Where to Start</li>
-      <li>Short Demo</li>
     </ul>
   </section>
 
-  <!-- Slide 4: What Happens If You Ignore AI -->
+  <!-- Section 1: Possibilities -->
+
+  <!-- Slide 4: What Can Be Delegated to AI -->
   <section>
-    <h2>What Happens If You Ignore AI</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
-      <div>
-        <h3 style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-          <span>For Employees</span>
-          <span style="font-size: 1.5rem;">👤</span>
-        </h3>
-        <ul style="font-size: 0.95rem; color: #a0aec0;">
-          <li style="margin-bottom: 0.75rem;">
-            <strong style="color: #e2e8f0;">Competition intensifies</strong>
-          </li>
-          <li style="margin-bottom: 0.75rem;">
-            <strong style="color: #e2e8f0;">vs. AI-skilled peers</strong><br />
-            They ship faster, solve harder problems, get promoted
-          </li>
-          <li>
-            <strong style="color: #e2e8f0;">vs. AI itself</strong><br />
-            Tasks you do manually become automated
-          </li>
-        </ul>
+    <h2>What Can Be Delegated to AI</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>Code Generation</h3>
+          <p style="color: #a0aec0;">Features, handlers, components, APIs — from specification to working code</p>
+        </div>
       </div>
-      <div>
-        <h3 style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-          <span>For Companies</span>
-          <span style="font-size: 1.5rem;">🏢</span>
-        </h3>
-        <ul style="font-size: 0.95rem; color: #a0aec0;">
-          <li style="margin-bottom: 0.75rem;">
-            <strong style="color: #e2e8f0;">Market pressure grows</strong>
-          </li>
-          <li style="margin-bottom: 0.75rem;">
-            <strong style="color: #e2e8f0;">vs. AI-powered competitors</strong><br />
-            They deliver faster, iterate quicker, outpace you
-          </li>
-          <li>
-            <strong style="color: #e2e8f0;">vs. lower cost structures</strong><br />
-            AI reduces their operational costs while you scale linearly
-          </li>
-        </ul>
+
+      <div class="content-box">
+        <span class="content-box-icon">🧪</span>
+        <div class="content-box-content">
+          <h3>Test Generation</h3>
+          <p style="color: #a0aec0;">Unit, integration, and E2E tests following your existing patterns</p>
+        </div>
+      </div>
+
+      <div class="content-box">
+        <span class="content-box-icon">👁️</span>
+        <div class="content-box-content">
+          <h3>Code Reviews</h3>
+          <p style="color: #a0aec0;">PRs reviewed against acceptance criteria, performance, and your standards</p>
+        </div>
+      </div>
+
+      <div class="content-box">
+        <span class="content-box-icon">🔄</span>
+        <div class="content-box-content">
+          <h3>Mass Refactorings</h3>
+          <p style="color: #a0aec0;">Rename, restructure, migrate patterns across the entire codebase</p>
+        </div>
+      </div>
+
+      <div class="content-box" style="grid-column: 1 / -1; max-width: 50%; margin: 0 auto;">
+        <span class="content-box-icon">🐛</span>
+        <div class="content-box-content">
+          <h3>Debugging & Bug Fixes</h3>
+          <p style="color: #a0aec0;">From stack trace to pull request</p>
+        </div>
       </div>
     </div>
-    <div
-      style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.15); margin-top: 2rem;"
-    >
-      <p style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
-        <span style="font-size: 1.5rem;">⚠️</span>
-        <strong>Waiting isn't neutral.</strong>
+  </section>
+
+  <!-- Slide 5: Thinking is the New Bottleneck -->
+  <section>
+    <h2>Thinking is the New Bottleneck</h2>
+    <div style="text-align: center; margin-top: 3rem;">
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8;">
+        I delegate 99% of coding to AI agents.<br />
+        The quality of my code has never been higher.
+      </p>
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 2rem;">
+        I spend more time <strong>thinking</strong> than writing code.<br />
+        My bottleneck isn't coding anymore —<br />
+        it's <strong>deciding what to build and how</strong>.
       </p>
     </div>
   </section>
 
-  <!-- Slide 5: AI on a Broken Foundation -->
+  <!-- Section 2: Why It Fails -->
+
+  <!-- Slide 9: Common Failure Patterns -->
+  <section>
+    <h2>Common Failure Patterns</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      <div class="content-box red">
+        <span class="content-box-icon">🌪️</span>
+        <div class="content-box-content">
+          <h3>Dropping AI randomly across the project</h3>
+          <p style="color: #a0aec0;">
+            It works in some places, fails in others. Each layer needs focused attention before AI can deliver consistently.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-box red">
+        <span class="content-box-icon">🤖</span>
+        <div class="content-box-content">
+          <h3>Giving up architectural control</h3>
+          <p style="color: #a0aec0;">Your architecture is your boundary. When AI makes structural decisions you didn't ask for, you lose control of your system.</p>
+        </div>
+      </div>
+
+      <div class="content-box red">
+        <span class="content-box-icon">🏗️</span>
+        <div class="content-box-content">
+          <h3>Letting AI loose</h3>
+          <p style="color: #a0aec0;">Not reviewing the plan, not checking the approach. Leads to uncontrolled decisions baked into your codebase.</p>
+        </div>
+      </div>
+
+      <div class="content-box red">
+        <span class="content-box-icon">🎯</span>
+        <div class="content-box-content">
+          <h3>Weak prompts, expecting magic</h3>
+          <p style="color: #a0aec0;">
+            Vague input, vague output. Then the conclusion is "AI isn't ready yet."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: AI on a Broken Foundation -->
   <section>
     <h2 style="text-align: center; color: #0ea5c1; margin-bottom: 2rem;">AI on a Broken Foundation</h2>
     <p style="font-size: 1.6rem; font-weight: 600; text-align: center; color: #e2e8f0; margin-bottom: 3rem;">
-      Give AI to a dysfunctional team. Watch your problems multiply.
+      AI doesn't fix broken processes. It amplifies them.
     </p>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
       <div class="content-box red">
@@ -140,76 +201,31 @@ const metadata = {
         </div>
       </div>
     </div>
-    <div
-      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.15); margin-top: 2rem;"
-    >
-      <p style="margin: 0;">
-        <span style="font-size: 1.5rem;">📊</span>
-        <strong>DORA 2025:</strong> AI makes things worse when applied to broken processes. <br />You don't get 2x
-        productivity. You get 2x problems.
+  </section>
+
+  <!-- Slide 11: The DORA Reality -->
+  <section>
+    <div style="text-align: center;">
+      <blockquote
+        style="font-size: 1.8rem; font-weight: 600; color: #0ea5c1; margin: 3rem auto; padding: 0; line-height: 1.4; max-width: 90%;"
+      >
+        "AI magnifies the strengths of high-performing organizations and the dysfunctions of struggling ones."
+      </blockquote>
+      <p style="font-size: 1.2rem; color: #a0aec0; margin-bottom: 3rem;">— DORA Report 2025</p>
+      <p style="font-size: 1.1rem; color: #e2e8f0; margin-top: 2rem;">
+        The gap between elite and struggling teams isn't staying the same.<br />
+        <strong style="color: #0ea5c1;">AI is actively widening it.</strong>
+      </p>
+      <p style="font-size: 1.2rem; color: #e2e8f0; margin-top: 2.5rem; line-height: 1.6;">
+        AI-assisted coding is built on <strong>traditional software engineering</strong>.<br />
+        The stronger your habits and fundamentals, the better your results.
       </p>
     </div>
   </section>
 
-  <!-- Slide 6: What can go wrong? -->
-  <section>
-    <h2>What can go wrong?</h2>
-    <h3>Why integrations fail?</h3>
-  </section>
+  <!-- Section 3: Mindset -->
 
-  <!-- Slide 7: Common Failure Patterns -->
-  <section>
-    <h2>Common Failure Patterns</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
-      <div class="content-box red">
-        <span class="content-box-icon">🌪️</span>
-        <div class="content-box-content">
-          <h3>Integrating AI everywhere at once</h3>
-          <p style="color: #a0aec0;">
-            <strong>Why it fails:</strong> No baseline to measure success, overwhelming to maintain
-          </p>
-        </div>
-      </div>
-
-      <div class="content-box red fragment">
-        <span class="content-box-icon">🤖</span>
-        <div class="content-box-content">
-          <h3>Letting AI set its own boundaries</h3>
-          <p style="color: #a0aec0;"><strong>Why it fails:</strong> AI doesn't understand your context deeply enough</p>
-        </div>
-      </div>
-
-      <div class="content-box red fragment">
-        <span class="content-box-icon">🏗️</span>
-        <div class="content-box-content">
-          <h3>Overreliance on AI</h3>
-          <p style="color: #a0aec0;"><strong>Why it fails:</strong> Too much context, too many decisions, too risky</p>
-        </div>
-      </div>
-
-      <div class="content-box red fragment">
-        <span class="content-box-icon">🎯</span>
-        <div class="content-box-content">
-          <h3>Expecting feature development in 1 prompt</h3>
-          <p style="color: #a0aec0;">
-            <strong>Why it fails:</strong> Features need iteration, edge cases, business context
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="fragment"
-      style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.15);"
-    >
-      <p style="display: flex; align-items: center; gap: 0.5rem; margin: 0;">
-        <span style="font-size: 1.5rem;">⚠️</span>
-        <strong>The Pattern: Lack of Foundation</strong> — All of these fail because they skip the foundational work.
-      </p>
-    </div>
-  </section>
-
-  <!-- Slide 8: The Hype vs Reality -->
+  <!-- Slide 12: Hype vs Reality -->
   <section>
     <h2>The Hype vs Reality</h2>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start;">
@@ -221,7 +237,7 @@ const metadata = {
           <li>❌ 10x productivity overnight</li>
         </ul>
       </div>
-      <div class="fragment">
+      <div>
         <h3>Reality</h3>
         <ul style="list-style: none;">
           <li>✅ AI helps <strong>YOU</strong> building features</li>
@@ -233,7 +249,7 @@ const metadata = {
     </div>
   </section>
 
-  <!-- Slide 9: Vibe Coding vs. AI-Assisted -->
+  <!-- Slide 13: Vibe Coding vs. AI-Assisted -->
   <section>
     <h2>Vibe Coding vs. AI-Assisted Coding</h2>
     <table style="width: 100%; border-collapse: collapse; margin-top: 2rem; font-size: 0.85rem;">
@@ -284,34 +300,142 @@ const metadata = {
     </table>
   </section>
 
-  <!-- Slide 10: Building the Foundation -->
+  <!-- Slide 14: Junior Developer Mental Model -->
   <section>
-    <h2>Building the Foundation</h2>
-  </section>
-
-  <!-- Slide 11: 1. Your Workflow Comes First -->
-  <section>
-    <h3>1. Your Workflow Comes First</h3>
-    <ul>
-      <li>Map your existing development workflow</li>
-      <li>Identify pain points and high-value targets</li>
-      <li>Only then consider where AI fits</li>
-    </ul>
-  </section>
-
-  <!-- Slide 12: 2. Your Codebase = Training Data -->
-  <section>
-    <h3>2. Your Codebase = Training Data</h3>
-    <p style="color: #a0aec0; margin-bottom: 2rem;">AI is pattern-matching, not magic</p>
-    <div class="fragment">
-      <p style="font-size: 2.5rem; font-weight: 700; color: #0ea5c1; margin: 2rem 0;">Garbage In ⇒ Garbage Out</p>
-      <p style="font-size: 1.1rem; color: #a0aec0;">Your codebase quality directly determines AI output quality.</p>
+    <h2>The "Junior Developer" Mental Model</h2>
+    <p>Think of AI as a talented junior developer on your team.</p>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">📋</span>
+        <div class="content-box-content">
+          <h3>Good examples to follow</h3>
+          <p style="color: #a0aec0;">Find similar implementation and replicate</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🏗️</span>
+        <div class="content-box-content">
+          <h3>Clear boundaries</h3>
+          <p style="color: #a0aec0;">Well-organized codebase speaks for itself — conventions show the way, not documentation</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔄</span>
+        <div class="content-box-content">
+          <h3>Feedback</h3>
+          <p style="color: #a0aec0;">What is wrong, what was broken — tests, linters, code review</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🎯</span>
+        <div class="content-box-content">
+          <h3>Objective</h3>
+          <p style="color: #a0aec0;">What to implement, new behaviors, how to implement it</p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.15); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center;">
+        <strong>You are the brain. AI is your hands.</strong>
+      </p>
     </div>
   </section>
 
-  <!-- Slide 13: 3. The 3-Layer Approach -->
+  <!-- Section 4: Foundations -->
+
+  <!-- Bridge: What Does AI Need From You? -->
   <section>
-    <h3 style="margin-bottom: 1rem;">3. The 3-Layer Approach</h3>
+    <h2>So What Does AI Need From You?</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem;">
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Clean, Consistent Codebase</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
+          Good examples + clear boundaries — AI replicates what it sees
+        </p>
+      </div>
+
+      <div
+        style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Strong Prompts With Context</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
+          Clear objective — what to implement, how, and why
+        </p>
+      </div>
+
+      <div
+        style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(240, 195, 109, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Feedback Loop</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
+          Tests, linters, code review — what is wrong, what was broken
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillar 1: Codebase = Training Data -->
+  <section>
+    <h2>Your Codebase = Training Data</h2>
+    <p style="color: #a0aec0; margin-bottom: 1.5rem;">AI is pattern-matching, not magic</p>
+    <div style="text-align: center;">
+      <p style="font-size: 2.5rem; font-weight: 700; color: #0ea5c1; margin: 1.5rem 0;">Garbage In ⇒ Garbage Out</p>
+      <p style="font-size: 1.1rem; color: #a0aec0;">Your codebase quality directly determines AI output quality.</p>
+      <div
+        style="border: 2px solid #ef4444; border-radius: 12px; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); margin-top: 2rem;"
+      >
+        <p style="margin: 0; font-size: 1.1rem;">
+          One bad pattern in your codebase becomes <strong>ten bad patterns</strong> by the end of the day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pillar 2: Weak Prompts → Weak Results -->
+  <section>
+    <h2>Weak Prompts → Weak Results</h2>
+    <div style="text-align: center; margin-top: 2rem;">
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8;">
+        Vague instructions produce vague code.<br />
+        Without constraints, architecture context, and clear scope,<br />
+        <strong>AI guesses wrong</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Pillar 3: No Feedback → No Safety Net -->
+  <section>
+    <h2>No Feedback → No Safety Net</h2>
+    <div style="text-align: center; margin-top: 2rem;">
+      <p style="font-size: 1.2rem; color: #e2e8f0; line-height: 1.8;">
+        More code → no automated checks → bugs compound → endless manual review
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2.5rem auto; max-width: 95%;">
+        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">AI writes code</span>
+        <span style="color: #ef4444; font-size: 1.5rem; text-align: center;">→</span>
+        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">No automated checks</span>
+        <span style="color: #ef4444; font-size: 1.5rem; text-align: center;">→</span>
+        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">Bugs compound</span>
+        <span style="color: #ef4444; font-size: 1.5rem; text-align: center;">→</span>
+        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">Endless manual review</span>
+      </div>
+      <div
+        style="border: 2px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1); margin-top: 1.5rem;"
+      >
+        <p style="margin: 0; font-size: 1.1rem;">
+          <strong>Tests, linters, and code review</strong> let AI verify its own work. Without them, you're just producing bugs faster.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 21: The 3-Layer Approach -->
+  <section>
+    <h3 style="margin-bottom: 1rem;">The 3-Layer Approach</h3>
     <div style="display: flex; flex-direction: column; gap: 1rem;">
       <div
         style="border: 3px solid #4ade80; border-radius: 12px; padding: 1rem 1.25rem; background: rgba(74, 222, 128, 0.1); position: relative;"
@@ -328,7 +452,6 @@ const metadata = {
       </div>
 
       <div
-        class="fragment"
         style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1); position: relative;"
       >
         <span
@@ -343,7 +466,6 @@ const metadata = {
       </div>
 
       <div
-        class="fragment"
         style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1rem 1.25rem; background: rgba(240, 195, 109, 0.1); position: relative;"
       >
         <span
@@ -359,34 +481,9 @@ const metadata = {
     </div>
   </section>
 
-  <!-- Slide 14: The "Junior Developer" Mental Model -->
-  <section>
-    <h2>The "Junior Developer" Mental Model</h2>
-    <p>Think of AI as a talented junior developer on your team.</p>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; align-items: start;">
-      <div>
-        <h3>Junior devs need:</h3>
-        <ul>
-          <li>Good examples to follow</li>
-          <li>Clear boundaries</li>
-          <li>Code review</li>
-          <li>Specific tasks</li>
-        </ul>
-      </div>
+  <!-- Section 5: Where to Start -->
 
-      <div class="fragment">
-        <h3>AI needs the same:</h3>
-        <ul>
-          <li>Strong codebase patterns</li>
-          <li>Well-defined scope</li>
-          <li>Your oversight</li>
-          <li>Focused objectives</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slide 15: Where to Start -->
+  <!-- Slide 22: Where to Start -->
   <section>
     <h2>Where to Start</h2>
     <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
@@ -394,81 +491,73 @@ const metadata = {
         <span class="content-box-icon">🌱</span>
         <div class="content-box-content">
           <h3>Start Small</h3>
-          <p style="color: #a0aec0;">Begin with unit tests or simple HTTP handlers</p>
+          <p style="color: #a0aec0;">Unit tests, HTTP handlers, API calls. My recommendation — start with automated tests, you'll need them.</p>
         </div>
       </div>
 
-      <div class="content-box fragment">
+      <div class="content-box">
         <span class="content-box-icon">📋</span>
         <div class="content-box-content">
-          <h3>Make Examples First</h3>
-          <p style="color: #a0aec0;">Create one perfect example, then let AI replicate</p>
+          <h3>Make Strong Examples First</h3>
+          <p style="color: #a0aec0;">Establish architecture and patterns, then let AI replicate. Don't let AI loose.</p>
         </div>
       </div>
 
-      <div class="content-box fragment">
+      <div class="content-box">
         <span class="content-box-icon">🔄</span>
         <div class="content-box-content">
-          <h3>Test and Refine</h3>
-          <p style="color: #a0aec0;">Iterate on guidelines based on actual output</p>
+          <h3>Iterate and Improve</h3>
+          <p style="color: #a0aec0;">Refine guidelines based on actual output until it's near-perfect.</p>
         </div>
       </div>
 
-      <div class="content-box fragment">
+      <div class="content-box">
         <span class="content-box-icon">📈</span>
         <div class="content-box-content">
-          <h3>Scale Gradually</h3>
-          <p style="color: #a0aec0;">Expand only after proving it works</p>
+          <h3>Expand</h3>
+          <p style="color: #a0aec0;">Start covering another layer, unit, or module. Only after proving it works.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Slide 16: Possibilities -->
+  <!-- Roadmap Teaser -->
+
+  <!-- Slide 23: What's Next -->
   <section>
-    <h2>Possibilities</h2>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem;">
-      <div class="content-box">
-        <span class="content-box-icon">🧪</span>
-        <div class="content-box-content">
-          <h3>Test Generation</h3>
-          <p style="color: #a0aec0;">Generating Unit, Integration and E2E tests</p>
-        </div>
+    <h2>What's Next: The Roadmap</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;">
+      <div
+        style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Prompting & Context Management</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
+          How to properly prompt tasks and manage context across sessions
+        </p>
       </div>
 
-      <div class="content-box fragment">
-        <span class="content-box-icon">👁️</span>
-        <div class="content-box-content">
-          <h3>Code Reviews</h3>
-          <p style="color: #a0aec0;">Acceptance Criteria, Performance, Guidelines</p>
-        </div>
+      <div
+        style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Feedback Loop</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
+          Making your agent smarter — linters, automated tests, and fixing its own mistakes
+        </p>
       </div>
 
-      <div class="content-box fragment">
-        <span class="content-box-icon">⚡</span>
-        <div class="content-box-content">
-          <h3>Code Generation</h3>
-          <p style="color: #a0aec0;">Code generation at all levels</p>
-        </div>
-      </div>
-
-      <div class="content-box fragment">
-        <span class="content-box-icon">✨</span>
-        <div class="content-box-content">
-          <h3>And more...</h3>
-          <p style="color: #a0aec0;">Documentation, refactoring, bug fixes</p>
-        </div>
+      <div
+        style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Orchestration</h3>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
+          Managing multiple agents working together on complex tasks
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Slide 17: Demo -->
+  <!-- Slide 24: Call to Action -->
   <section>
-    <h2>Let me show you a quick demo</h2>
-  </section>
-
-  <!-- Slide 18: Thank you -->
-  <section>
-    <h2>Thank you!</h2>
+    <h2>Thank You!</h2>
   </section>
 </PresentationLayout>

@@ -20,9 +20,9 @@ import AiProductivityChart from '~/components/ui/AiProductivityChart.astro';
 2025 changed how I feel about my job. I love it more. And no, I don't feel like AI is replacing me. I feel empowered.
 I have been coding with AI agents almost every day for a year. Today, I delegate 99%+ of my coding work to AI without compromising quality. From brainstorming and feature development to testing.
 
-My journey started with Copilot. I was not impressed, but I had a good use case for it, back then I was playing with a computer vision project, and it actually helped me autocompleting some framework specific functions. 
+My journey started with Copilot. I was not impressed, but I had a good use case for it, back then I was playing with a computer vision project, and it actually helped me autocompleting some framework specific functions.
 
-Then I tried Junie. That was my first real success — I showed it a pattern, and it replicated it. I finally got help with boilerplate and simple logic. 
+Then I tried Junie. That was my first real success — I showed it a pattern, and it replicated it. I finally got help with boilerplate and simple logic.
 
 Then came Claude Code. It opened a new world for me. I use it for almost every task now.
 
@@ -34,38 +34,37 @@ But not every company and not every engineer sees the same results. Research pai
 
 Every time I try to write about agentic engineering, I end up writing about software engineering. And I think that is the entire point.
 
-When I speak about [evals](/llm-evals-overview), I end up explaining automated testing and static checks. 
-When I write about feature development with AI, I end up explaining cognitive complexity, single responsibility, and clean structure. 
+When I speak about [evals](/llm-evals-overview), I end up explaining automated testing and static checks.
+When I write about feature development with AI, I end up explaining cognitive complexity, single responsibility, and clean structure.
 
 Those fundamentals existed long before LLMs. And they are the primary enabler of agentic engineering.
 
 With a strong codebase, you get great results from AI almost for free. Solid architecture, good test coverage, clear boundaries between modules — the agent just works. Without those things, you fight the agent constantly.
 
-I had my first successful experience with Sonnet 3.5 — and that model is so far from today's Opus 4.6. Of course, now I can delegate much bigger and more complex chunks of work to an agent. 
-But the fact that I was getting impressive results with a much weaker model tells me something important: <b>model intelligence is one of many variables in that equation</b>. 
+I had my first successful experience with Sonnet 3.5 — and that model is so far from today's Opus 4.6. Of course, now I can delegate much bigger and more complex chunks of work to an agent.
+But the fact that I was getting impressive results with a much weaker model tells me something important: <b>model intelligence is one of many variables in that equation</b>.
 
 <b>Your codebase, your guardrails, your engineering discipline — they matter more than the model intelligence.</b>
-
 
 ## What the Reports Actually Say
 
 <BlogQuote quote="When developers are allowed to use AI tools, they take 19% longer to complete issues — a significant slowdown." />
 
-*— [METR, 2025 — Randomized controlled trial with experienced open-source developers](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)*
+_— [METR, 2025 — Randomized controlled trial with experienced open-source developers](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)_
 
 <BlogQuote quote="Any correlation between AI adoption and key performance metrics evaporates at the company level." />
 
-*— [Faros AI — Telemetry from 10,000+ developers across 1,255 teams](https://www.faros.ai/blog/ai-software-engineering)*
+_— [Faros AI — Telemetry from 10,000+ developers across 1,255 teams](https://www.faros.ai/blog/ai-software-engineering)_
 
 The data is real. I don't disagree with it. But I think it is often misinterpreted.
 
-I think some developers are getting less than 1x from AI — it's actually slowing them down. They're fighting generated code, debugging AI mistakes, losing time. 
-Other developers are getting 2x, 5x or even more — shipping features in hours that used to take days. Average those two groups together and you probably get something close to 1x. 
+I think some developers are getting less than 1x from AI — it's actually slowing them down. They're fighting generated code, debugging AI mistakes, losing time.
+Other developers are getting 2x, 5x or even more — shipping features in hours that used to take days. Average those two groups together and you probably get something close to 1x.
 Marginal improvement. The headline is correct, right?
 
 But that average is meaningless. It hides two completely different realities.
 
-I speak to friends from different software companies. Some companies bought Copilot, Cursor, or even Claude Code — but never invested in education or changing how they work. 
+I speak to friends from different software companies. Some companies bought Copilot, Cursor, or even Claude Code — but never invested in education or changing how they work.
 Most people stopped at AI autocomplete, maybe function generation.
 
 On the other hand, I speak to individuals who multiplied their performance 2x-5x. They can't live without AI coding agents. I'm one of them. But we are a minority.
@@ -75,7 +74,8 @@ Maybe these studies measured that majority? I'm speculating, but that's what I t
 <AiProductivityChart />
 
 <div style="text-align: center; font-size: 0.85rem; font-style: italic; opacity: 0.6; margin-top: -0.5rem; margin-bottom: 1.5rem;">
-Even assuming only 10% of engineers multiplied their performance by more than 2x, the average still looks like marginal improvement. That's the problem with averages.
+  Even assuming only 10% of engineers multiplied their performance by more than 2x, the average still looks like
+  marginal improvement. That's the problem with averages.
 </div>
 
 But I strongly believe this from DORA report:
@@ -89,42 +89,44 @@ I'm coaching several teams on adopting Agentic Engineering in existing codebases
 Teams with strong fundamentals pick up agentic engineering practices really fast. They already have most of what they need — linters, automated testing, modularity, etc.
 We just need to make sure that the agent follows their rules.
 
-Others need to build fundamentals before gaining visible value. And the majority of our time is spent on software engineering — linters, automated testing, solid architecture, etc. 
+Others need to build fundamentals before gaining visible value. And the majority of our time is spent on software engineering — linters, automated testing, solid architecture, etc.
 AI feels like a secondary topic.
 
 Teams with strong software engineering foundations have significant boost right from the beginning.
 
-Sometimes I hear "our project is too complex for AI." I think it is too messy for AI. 
+Sometimes I hear "our project is too complex for AI." I think it is too messy for AI.
 No offense — it might happen for many reasons. Legacy code, business pressure, changing teams. But now there is a good reason for changing it. A solid codebase leads to better results with AI agents.
 
 LLMs are simple: garbage in, garbage out. An inconsistent codebase will lead to inconsistent output.
 
 ## The Threshold Effect
+
 What struck me the most is a threshold effect. The improvement from AI isn't linear.
 
-<b>Below the threshold</b>, AI is a net negative — it generates code that doesn't fit, breaks things, creates more work than it saves. 
-Copilot was net negative for me. Not because it was a bad product, but because I was using it to generate functions I do not fully understand. 
-That project was just a playground, it never meant to go into production.
+<b>Below the threshold</b>, AI is a net negative — it generates code that doesn't fit, breaks things, creates more work
+than it saves. Copilot was net negative for me. Not because it was a bad product, but because I was using it to generate
+functions I do not fully understand. That project was just a playground, it never meant to go into production.
 
-<b>Around the threshold</b>, AI is marginally useful — helps with boilerplate, sometimes gets things right.
-I used Junie. I was generating boilerplate endpoints with validation, simple business logic with detailed instructions. Then I spent a significant amount of time reviewing and correcting the code.
-Still, it improved my performance, while Junie is creating an endpoint I am working on a test. Then Claude Code came, I saw decent improvement, but still, it was not a game changer.
-I could let it loose, but I would quickly regret my decision. Stop reviewing the code and you quickly drop <b>below the threshold</b>
+<b>Around the threshold</b>, AI is marginally useful — helps with boilerplate, sometimes gets things right. I used
+Junie. I was generating boilerplate endpoints with validation, simple business logic with detailed instructions. Then I
+spent a significant amount of time reviewing and correcting the code. Still, it improved my performance, while Junie is
+creating an endpoint I am working on a test. Then Claude Code came, I saw decent improvement, but still, it was not a
+game changer. I could let it loose, but I would quickly regret my decision. Stop reviewing the code and you quickly drop
+<b>below the threshold</b>
 
-<b>Above the threshold</b>, something clicks. When you start investigating WHY your agent fails you quickly start getting answers.
-- Inconsistent code - e.g. different ways of handling errors
-- Bad examples - e.g. unstructured logging in some places
+<b>Above the threshold</b>, something clicks. When you start investigating WHY your agent fails you quickly start
+getting answers. - Inconsistent code - e.g. different ways of handling errors - Bad examples - e.g. unstructured logging
+in some places
 
-Once you start fixing those WHYs, you start getting compound effect. Suddenly, the agent generates code where error logging is always following your structured pattern. 
+Once you start fixing those WHYs, you start getting compound effect. Suddenly, the agent generates code where error logging is always following your structured pattern.
 Then you ask the agent to run the linter after every code change. Then you improve the linter a little bit.
 Then you generate tests together with features. Then ask agent to always run those tests after development.
-Then you ask to run subagent for code review. 
+Then you ask to run subagent for code review.
 
 It just starts spiraling, you cannot stop because you see how massive effect it has on the agent.
 
 But wait — linter, tests, reviews, that all existed before AI Coding, no?
 Yes. That is what crossing the threshold looks like — investing in the same engineering practices that always mattered.
-
 
 ## What Are You Going to Do?
 

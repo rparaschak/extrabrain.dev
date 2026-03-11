@@ -1,7 +1,7 @@
 ---
 publishDate: 2026-02-07T00:00:00Z
 title: 'Better AI Code: The Feedback Loop'
-excerpt: "By implementing a feedback loop you are able to dramatically improve the quality of AI generated code."
+excerpt: 'By implementing a feedback loop you are able to dramatically improve the quality of AI generated code.'
 image: ~/assets/images/blog/llm-evals-overview-cover.svg
 category: Agentic Engineering
 tags:
@@ -14,11 +14,12 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 
 ## Why Coding Agents produce inconsistent quality?
+
 I've spent plenty of time improving my AI coding workflows. Something worked well, something not. But now I can share what always works for me.
 
 Coding Agents are based on LLMs. LLMs are non-deterministic.
 Ask an LLM to review the same code twice, and you might get "looks good" one time and "this has a critical bug" the next.
-A compiler is deterministic. Feed it the same code 10 times and you get the same result. 
+A compiler is deterministic. Feed it the same code 10 times and you get the same result.
 
 Since Coding Agents are non-deterministic, the output varies from prompt to prompt, from session to session.
 That's why we need guardrails to reduce the impact of non-determinism when using AI for coding.
@@ -41,9 +42,11 @@ If something can be verified by a deterministic tool, do not rely on a non-deter
 ### Build
 
 The easiest way to implement that would be adding this line to your guidelines file:
+
 ```
 After any code changes YOU MUST ensure that the project builds with no errors
 ```
+
 Simple and straightforward.
 
 ### Linters
@@ -53,12 +56,14 @@ There are linters for any language, and many engineers underestimate their value
 For example, my favorite one is cognitive complexity check. It checks how difficult code is to understand.
 Sometimes my agent is going nuts, feature works, but the code is far from ideal.
 But after code is generated, agent can run linter, and if cognitive complexity is above the threshold, then it goes back to refactor and simplify the code.
-Again, enabling it is simple. 
+Again, enabling it is simple.
+
 ```
 After any code changes YOU MUST:
 - [] Run linter and fix errors
 - [] Run build to ensure it compiles without errors
 ```
+
 And that is only the tip of the iceberg.
 
 ## Code Review Agents
@@ -103,15 +108,15 @@ After any code changes YOU MUST:
 
 ## Summary
 
-Start with several lines in your guidelines file. Add a build check, a linter, a review agent, and tests. You do not need hooks, skills, or custom tooling to begin. 
+Start with several lines in your guidelines file. Add a build check, a linter, a review agent, and tests. You do not need hooks, skills, or custom tooling to begin.
 These fundamentals compound — each eval you add makes the next one more effective. As a bonus, this is your entry into Agentic Engineering.
 
-| Eval Type          | What it catches                        | Deterministic | Effort to enable    |
-|--------------------|----------------------------------------|---------------|---------------------|
-| Build              | Compilation errors, missing imports    | Yes           | One line            |
-| Linters            | Code complexity, style violations      | Yes           | One line            |
-| Code Review Agent  | Logic issues, architectural violations | No            | A few lines         |
-| Automated Tests    | Regressions, broken behavior           | Yes           | Requires test suite |
+| Eval Type         | What it catches                        | Deterministic | Effort to enable    |
+| ----------------- | -------------------------------------- | ------------- | ------------------- |
+| Build             | Compilation errors, missing imports    | Yes           | One line            |
+| Linters           | Code complexity, style violations      | Yes           | One line            |
+| Code Review Agent | Logic issues, architectural violations | No            | A few lines         |
+| Automated Tests   | Regressions, broken behavior           | Yes           | Requires test suite |
 
 ---
 
