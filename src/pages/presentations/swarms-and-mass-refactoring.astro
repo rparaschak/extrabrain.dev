@@ -1,0 +1,699 @@
+---
+import PresentationLayout from '~/layouts/PresentationLayout.astro';
+
+const metadata = {
+  title: 'Agentic Coding: Scaling with Agent Swarms',
+  description: 'Using agent swarms for codebase analysis and mass refactoring at scale.',
+  ignoreTitleTemplate: false,
+};
+---
+
+<PresentationLayout metadata={metadata}>
+  <!-- Slide 1: Title -->
+  <section data-state="title" class="title-slide">
+    <h1>Agentic Coding</h1>
+    <h2>Scaling with Agent Swarms</h2>
+  </section>
+
+  <!-- Slide 2: About Me -->
+  <section>
+    <h2>About Me</h2>
+    <div
+      style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; max-width: 80%; margin-left: auto; margin-right: auto;"
+    >
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🛠️</span>
+        <p style="margin: 0;">15 years of software engineering experience</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">❤️</span>
+        <p style="margin: 0;">I genuinely enjoy coding and building software</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🏗️</span>
+        <p style="margin: 0;">Currently building <strong>Agewise</strong> as CTO</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🤖</span>
+        <p style="margin: 0;">Me and my team delegate <strong>99% of coding</strong> to AI agents</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Agenda -->
+  <section>
+    <h2>Agenda</h2>
+    <ul>
+      <li>The Context Window Problem</li>
+      <li>Project Analysis with Agent Swarms</li>
+      <li>Mass Refactoring with Agent Swarms</li>
+      <li>A Real-World Migration Story</li>
+    </ul>
+  </section>
+
+  <!-- Slide 4: The Problem -->
+  <section>
+    <h2>The Context Window Problem</h2>
+    <div style="text-align: center; margin-top: 2rem;">
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8;">
+        You use Claude Code for single tasks — it works great.<br />
+        But your codebase has hundreds of files, dozens of modules.
+      </p>
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 2rem;">
+        One context window isn't enough.<br />
+        Precision drops when you force everything into a single session.
+      </p>
+      <div
+        style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.1); margin-top: 2.5rem;"
+      >
+        <p style="margin: 0; font-size: 1.2rem;">
+          It's like trying to read <strong>10 books at once</strong> — you can hold them all, but you won't remember the
+          details.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Running Example -->
+  <section>
+    <h2>The Running Example</h2>
+    <div
+      style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 2rem; background: rgba(14, 165, 193, 0.1); margin-top: 2rem;"
+    >
+      <h3 style="margin-bottom: 1rem; color: #0ea5c1;">Test Data Factory Migration</h3>
+      <ul style="font-size: 1.05rem; line-height: 1.8;">
+        <li>Test factories creating data through API endpoints</li>
+        <li>Problem: can't test data not created via endpoints + API overhead</li>
+        <li>Decision: migrate to use services directly</li>
+      </ul>
+      <div style="margin-top: 1.5rem; text-align: center;">
+        <p style="font-size: 1.4rem; font-weight: 700; color: #0ea5c1; margin: 0;">
+          35 factories. 100 test files. One engineer. One afternoon.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== Section 2: Project Analysis ==================== -->
+
+  <!-- Slide 6: Section Header -->
+  <section data-state="title" class="title-slide">
+    <h1 style="font-size: 2.2rem;">Project Analysis with Agent Swarms</h1>
+    <h2 style="font-size: 1.3rem; color: #a0aec0; margin-top: 1rem;">
+      Before you change anything, understand what you're dealing with.
+    </h2>
+  </section>
+
+  <!-- Slide 7: Naive vs Swarm -->
+  <section>
+    <h2>Single Agent vs. Swarm</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div
+        style="border: 3px solid #ef4444; border-radius: 12px; padding: 1.5rem; background: rgba(239, 68, 68, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #ef4444;">Naive Approach</h3>
+        <ul style="font-size: 0.95rem;">
+          <li>Ask Claude to analyze everything at once</li>
+          <li>Context gets diluted</li>
+          <li>Accuracy drops on details</li>
+          <li>Findings are incomplete</li>
+        </ul>
+      </div>
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #4ade80;">Swarm Approach</h3>
+        <ul style="font-size: 0.95rem;">
+          <li>Divide the codebase into subsets</li>
+          <li>Each agent analyzes a focused slice</li>
+          <li>Findings are precise and complete</li>
+          <li>Results converge into a summary</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 8: The Swarm Analysis Pattern -->
+  <section>
+    <h2>The Swarm Analysis Pattern</h2>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1.5rem;">
+      <!-- Orchestrator -->
+      <div
+        style="background: rgba(14, 165, 193, 0.2); border: 2px solid #0ea5c1; border-radius: 10px; padding: 0.75rem 2rem; font-weight: 600; font-size: 1.1rem;"
+      >
+        Main Agent — defines scope
+      </div>
+      <!-- Arrow down -->
+      <div style="font-size: 1.5rem; color: #0ea5c1;">↓ spawns N sub-agents</div>
+      <!-- Sub-agents -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; width: 100%;">
+        <div
+          style="background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 8px; padding: 0.75rem; text-align: center; font-size: 0.85rem;"
+        >
+          Agent 1<br /><span style="color: #a0aec0;">Module A</span>
+        </div>
+        <div
+          style="background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 8px; padding: 0.75rem; text-align: center; font-size: 0.85rem;"
+        >
+          Agent 2<br /><span style="color: #a0aec0;">Module B</span>
+        </div>
+        <div
+          style="background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 8px; padding: 0.75rem; text-align: center; font-size: 0.85rem;"
+        >
+          Agent 3<br /><span style="color: #a0aec0;">Module C</span>
+        </div>
+        <div
+          style="background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 8px; padding: 0.75rem; text-align: center; font-size: 0.85rem;"
+        >
+          Agent N<br /><span style="color: #a0aec0;">Module D</span>
+        </div>
+      </div>
+      <!-- Arrow down -->
+      <div style="font-size: 1.5rem; color: #0ea5c1;">↓ findings converge</div>
+      <!-- Summary -->
+      <div
+        style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; border-radius: 10px; padding: 0.75rem 2rem; font-weight: 600; font-size: 1.1rem;"
+      >
+        Structured Summary
+      </div>
+    </div>
+    <p style="text-align: center; color: #a0aec0; margin-top: 1rem; font-size: 0.95rem;">
+      Each agent analyzes a group of factories — what it creates, which endpoints it calls, which tests depend on it.
+    </p>
+  </section>
+
+  <!-- Slide 9: Practical Tips -->
+  <section>
+    <h2>Practical Tips for Analysis Swarms</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>Use Haiku for sub-agents</h3>
+          <p style="color: #a0aec0;">Fast, cheap, and more than sufficient for read-only analysis work</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔒</span>
+        <div class="content-box-content">
+          <h3>No conflicts</h3>
+          <p style="color: #a0aec0;">Agents only read and report — no file system conflicts possible</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🎯</span>
+        <div class="content-box-content">
+          <h3>Main agent distributes work</h3>
+          <p style="color: #a0aec0;">
+            The main agent decides how to split the scope. You can also guide the distribution if needed.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        I'm on the <strong>$100/month subscription</strong>. Running 10 Haiku agents for analysis — you don't even feel
+        it. It's not noticeable.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 3: Mass Refactoring ==================== -->
+
+  <!-- Slide 10: Section Header -->
+  <section data-state="title" class="title-slide">
+    <h1 style="font-size: 2.2rem;">Mass Refactoring with Agent Swarms</h1>
+    <h2 style="font-size: 1.3rem; color: #a0aec0; margin-top: 1rem;">
+      Build one perfect example. Let agents replicate the pattern.
+    </h2>
+  </section>
+
+  <!-- Slide 11: Tests Are Non-Negotiable -->
+  <section>
+    <div style="text-align: center; margin-top: 3rem;">
+      <blockquote
+        style="font-size: 1.8rem; font-weight: 600; color: #0ea5c1; margin: 0 auto; padding: 0; line-height: 1.4; max-width: 90%;"
+      >
+        "Refactoring without automated tests is gambling.<br />With or without AI."
+      </blockquote>
+      <div style="margin-top: 3rem; display: flex; flex-direction: column; gap: 1rem; max-width: 80%; margin-left: auto; margin-right: auto;">
+        <p style="font-size: 1.1rem; color: #e2e8f0; margin: 0;">
+          Tests are a <strong>prerequisite</strong>, not a nice-to-have.
+        </p>
+        <p style="font-size: 1.1rem; color: #e2e8f0; margin: 0;">
+          Both you and AI will miss details without automation.
+        </p>
+        <p style="font-size: 1.1rem; color: #e2e8f0; margin: 0;">
+          This applies whether a human or Claude does the refactoring.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12: The Golden Reference -->
+  <section>
+    <h2>The Golden Reference</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">🎯</span>
+        <div class="content-box-content">
+          <h3>Know your destination</h3>
+          <p style="color: #a0aec0;">Before mass refactoring, you need to know exactly what the result looks like</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔨</span>
+        <div class="content-box-content">
+          <h3>Refactor ONE unit first</h3>
+          <p style="color: #a0aec0;">Invest the time. Do it manually or with your main agent. Make it perfect.</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🤖</span>
+        <div class="content-box-content">
+          <h3>AI replicates patterns extremely well</h3>
+          <p style="color: #a0aec0;">This is where AI shines — replicating a known, proven pattern across many targets</p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        The first factory migration took <strong>1 hour</strong>. After that, I knew exactly what the target looked like.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 13: The Learnings Document -->
+  <section>
+    <h2>The Learnings Document</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #4ade80;">Consistent Targets</h3>
+        <p style="color: #a0aec0; font-size: 0.95rem;">
+          If all targets follow the same pattern — you may not need a document at all. The golden reference is enough.
+        </p>
+      </div>
+      <div
+        style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #f0c36d;">Targets with Variation</h3>
+        <p style="color: #a0aec0; font-size: 0.95rem;">
+          Edge cases, different behaviors? Create a learnings document. Capture patterns, tricky spots, exceptions.
+        </p>
+      </div>
+    </div>
+    <div style="margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">📝</span>
+        <div class="content-box-content">
+          <h3>Give it to agents as instructions</h3>
+          <p style="color: #a0aec0;">
+            After each iteration, add new learnings you discover. Each iteration gets smarter.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Too much variation? <strong>Split into phases.</strong> Categorize targets first, then mass-refactor category by
+        category.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 14: Executing the Refactoring -->
+  <section>
+    <h2>Executing the Refactoring</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >1</span
+        >
+        <p style="margin: 0;">Use <strong>Haiku sub-agents</strong> to discover and list all targets</p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >2</span
+        >
+        <p style="margin: 0;">
+          Split targets across <strong>N Sonnet agents</strong> — main agent distributes the work
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >3</span
+        >
+        <p style="margin: 0;">Execute in parallel — each agent handles its batch</p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #4ade80; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >4</span
+        >
+        <p style="margin: 0;">After each batch: <strong>run tests → review → adjust → commit</strong></p>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        34 remaining factories + 100 test files, module by module, <strong>~4 hours including review</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 15: The Review Problem -->
+  <section>
+    <h2>The Review Problem</h2>
+    <div style="text-align: center; margin-top: 2rem;">
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8;">
+        Mass refactoring = many changes.<br />
+        <strong>All of it needs to be reviewed.</strong>
+      </p>
+    </div>
+    <div
+      style="border: 3px solid #ef4444; border-radius: 12px; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); margin-top: 2rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 1.1rem;">
+        The temptation: offload everything to agents and make a <strong>leap of faith</strong>.<br />
+        But this is about <strong>giving up control</strong> — the opposite of what we want.
+      </p>
+    </div>
+    <div style="margin-top: 2rem; text-align: center;">
+      <div
+        style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; color: #e2e8f0;"
+      >
+        <span
+          style="background: rgba(14, 165, 193, 0.2); border: 1px solid #0ea5c1; padding: 0.5rem 1rem; border-radius: 8px;"
+          >Refactor</span
+        >
+        <span style="color: #0ea5c1;">→</span>
+        <span
+          style="background: rgba(14, 165, 193, 0.2); border: 1px solid #0ea5c1; padding: 0.5rem 1rem; border-radius: 8px;"
+          >Review</span
+        >
+        <span style="color: #0ea5c1;">→</span>
+        <span
+          style="background: rgba(14, 165, 193, 0.2); border: 1px solid #0ea5c1; padding: 0.5rem 1rem; border-radius: 8px;"
+          >Adjust</span
+        >
+        <span style="color: #0ea5c1;">→</span>
+        <span
+          style="background: rgba(74, 222, 128, 0.2); border: 1px solid #4ade80; padding: 0.5rem 1rem; border-radius: 8px;"
+          >Commit</span
+        >
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 2rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        You already get <strong>enormous speed</strong>. Don't be greedy.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 16: Handling Complexity -->
+  <section>
+    <h2>Handling Complexity</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">📊</span>
+        <div class="content-box-content">
+          <h3>Categorize first</h3>
+          <p style="color: #a0aec0;">Use Haiku to classify targets by complexity before executing anything</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>Batch the simple ones</h3>
+          <p style="color: #a0aec0;">Mass-refactor the straightforward targets in parallel</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔍</span>
+        <div class="content-box-content">
+          <h3>Complex cases — one by one</h3>
+          <p style="color: #a0aec0;">
+            The speed is already very high even one-by-one. Don't batch what isn't safe to batch.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        After each complex case, add learnings to your document for the next one.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 17: When Things Go Wrong -->
+  <section>
+    <h2>When Things Go Wrong</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">🧪</span>
+        <div class="content-box-content">
+          <h3>Tests are your first line of defense</h3>
+          <p style="color: #a0aec0;">Run tests after each batch, not after all batches</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔬</span>
+        <div class="content-box-content">
+          <h3>Isolate failures</h3>
+          <p style="color: #a0aec0;">If a batch fails: isolate the failing targets, re-run individually</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔄</span>
+        <div class="content-box-content">
+          <h3>Version control is your safety net</h3>
+          <p style="color: #a0aec0;">Commit after each successful batch — always have a clean rollback point</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 18: When NOT to Use Swarms -->
+  <section>
+    <h2>When NOT to Use Swarms</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box red">
+        <span class="content-box-icon">📁</span>
+        <div class="content-box-content">
+          <h3>Small codebase</h3>
+          <p style="color: #a0aec0;">{'<'} 20 files — single agent is faster than setup overhead</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <span class="content-box-icon">🎯</span>
+        <div class="content-box-content">
+          <h3>Few simple targets</h3>
+          <p style="color: #a0aec0;">Orchestration cost exceeds the benefit</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <span class="content-box-icon">🔗</span>
+        <div class="content-box-content">
+          <h3>Interconnected changes</h3>
+          <p style="color: #a0aec0;">Where each change depends on the previous one</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <span class="content-box-icon">🚫</span>
+        <div class="content-box-content">
+          <h3>No automated tests</h3>
+          <p style="color: #a0aec0;">You can't validate batch changes without them</p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        The overhead of setting up a swarm must be <strong>less than the time it saves</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 4: Full Story ==================== -->
+
+  <!-- Slide 19: The Factory Migration — Full Story -->
+  <section>
+    <h2>The Factory Migration — Full Story</h2>
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; position: relative;">
+      <!-- Timeline line -->
+      <div
+        style="position: absolute; left: 2.5rem; top: 0.5rem; bottom: 0.5rem; width: 3px; background: linear-gradient(to bottom, #0ea5c1, #4ade80);"
+      >
+      </div>
+      <!-- Hour 0-1 -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+        <span
+          style="position: absolute; left: 1.25rem; background: #0ea5c1; color: white; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1;"
+          >0-1h</span
+        >
+        <div>
+          <p style="margin: 0; font-weight: 600;">Golden Reference</p>
+          <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
+            First factory migration — invested time to get it perfect
+          </p>
+        </div>
+      </div>
+      <!-- Analysis -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+        <span
+          style="position: absolute; left: 1.25rem; background: #0ea5c1; color: white; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 1;"
+          >1-2h</span
+        >
+        <div>
+          <p style="margin: 0; font-weight: 600;">Analysis + Learnings Doc</p>
+          <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
+            Haiku swarm mapped dependencies. Created migration learnings document.
+          </p>
+        </div>
+      </div>
+      <!-- Execution -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+        <span
+          style="position: absolute; left: 1.25rem; background: #0ea5c1; color: white; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 1;"
+          >2-5h</span
+        >
+        <div>
+          <p style="margin: 0; font-weight: 600;">Module-by-Module Execution</p>
+          <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
+            Sonnet swarm — refactor → review → adjust → commit
+          </p>
+        </div>
+      </div>
+      <!-- Done -->
+      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+        <span
+          style="position: absolute; left: 1.25rem; background: #4ade80; color: #030620; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1;"
+          >Done</span
+        >
+        <div>
+          <p style="margin: 0; font-weight: 600;">35 factories + 100 test files migrated</p>
+          <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
+            Tests validated every step. Human review confirmed correctness.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #4ade80; border-radius: 12px; padding: 1rem; background: rgba(74, 222, 128, 0.1); margin-top: 1rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 1rem;">
+        <strong>~5 hours</strong> for what would be <strong>2-3 days</strong> manually.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 20: Key Principles -->
+  <section>
+    <h2>Key Principles</h2>
+    <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem;">
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">1.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Divide and conquer</strong> — don't cram a large codebase into one context
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">2.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Build the golden reference</strong> before going wide
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">3.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Capture learnings</strong> when targets vary — each iteration feeds the next
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">4.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Classify complexity</strong> before executing — not everything is simple
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">5.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Automated tests</strong> are your prerequisite, not your safety net
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">6.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Review every batch</strong> — don't make a leap of faith
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; padding: 0.6rem 1rem; border-left: 4px solid #0ea5c1; background: rgba(14, 165, 193, 0.05); border-radius: 0 8px 8px 0;"
+      >
+        <span style="font-weight: 700; color: #0ea5c1; min-width: 1.5rem;">7.</span>
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>Know when a single agent is enough</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 21: Thank You -->
+  <section>
+    <h2>Thank You!</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; text-align: center;">
+      <p style="font-size: 1.2rem; color: #e2e8f0;">
+        <strong style="color: #0ea5c1;">extrabrain.dev</strong>
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <p style="color: #a0aec0; margin: 0; font-size: 0.95rem;">Previous presentations in this series:</p>
+        <p style="margin: 0;"><a href="/presentations/ai-assisted-coding" style="color: #0ea5c1;">Foundation and Mindset</a></p>
+        <p style="margin: 0;">
+          <a href="/presentations/prompting-and-context" style="color: #0ea5c1;">Prompting & Context Management</a>
+        </p>
+        <p style="margin: 0;">
+          <a href="/presentations/guidelines-agents-workflows" style="color: #0ea5c1;"
+            >Guidelines, Agents, Workflows</a
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+</PresentationLayout>

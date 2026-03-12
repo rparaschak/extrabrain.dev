@@ -2,8 +2,8 @@
 import PresentationLayout from '~/layouts/PresentationLayout.astro';
 
 const metadata = {
-  title: 'AI-Assisted Coding: Foundation and Mindset',
-  description: 'Understanding the foundation and mindset needed to work effectively with AI-assisted coding tools.',
+  title: 'Agentic Coding: Foundation and Mindset',
+  description: 'Understanding the foundation and mindset needed to work effectively with agentic coding tools.',
   ignoreTitleTemplate: false,
 };
 ---
@@ -11,14 +11,16 @@ const metadata = {
 <PresentationLayout metadata={metadata}>
   <!-- Slide 1: Title -->
   <section data-state="title" class="title-slide">
-    <h1>AI-Assisted Coding</h1>
+    <h1>Agentic Coding</h1>
     <h2>Foundation and Mindset</h2>
   </section>
 
   <!-- Slide 2: About Me -->
   <section>
     <h2>About Me</h2>
-    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; max-width: 80%; margin-left: auto; margin-right: auto;">
+    <div
+      style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; max-width: 80%; margin-left: auto; margin-right: auto;"
+    >
       <div style="display: flex; align-items: center; gap: 1rem;">
         <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🛠️</span>
         <p style="margin: 0;">15 years of software engineering experience</p>
@@ -125,7 +127,8 @@ const metadata = {
         <div class="content-box-content">
           <h3>Dropping AI randomly across the project</h3>
           <p style="color: #a0aec0;">
-            It works in some places, fails in others. Each layer needs focused attention before AI can deliver consistently.
+            It works in some places, fails in others. Each layer needs focused attention before AI can deliver
+            consistently.
           </p>
         </div>
       </div>
@@ -134,7 +137,10 @@ const metadata = {
         <span class="content-box-icon">🤖</span>
         <div class="content-box-content">
           <h3>Giving up architectural control</h3>
-          <p style="color: #a0aec0;">Your architecture is your boundary. When AI makes structural decisions you didn't ask for, you lose control of your system.</p>
+          <p style="color: #a0aec0;">
+            Your architecture is your boundary. When AI makes structural decisions you didn't ask for, you lose control
+            of your system.
+          </p>
         </div>
       </div>
 
@@ -142,7 +148,9 @@ const metadata = {
         <span class="content-box-icon">🏗️</span>
         <div class="content-box-content">
           <h3>Letting AI loose</h3>
-          <p style="color: #a0aec0;">Not reviewing the plan, not checking the approach. Leads to uncontrolled decisions baked into your codebase.</p>
+          <p style="color: #a0aec0;">
+            Not reviewing the plan, not checking the approach. Leads to uncontrolled decisions baked into your codebase.
+          </p>
         </div>
       </div>
 
@@ -150,9 +158,7 @@ const metadata = {
         <span class="content-box-icon">🎯</span>
         <div class="content-box-content">
           <h3>Weak prompts, expecting magic</h3>
-          <p style="color: #a0aec0;">
-            Vague input, vague output. Then the conclusion is "AI isn't ready yet."
-          </p>
+          <p style="color: #a0aec0;">Vague input, vague output. Then the conclusion is "AI isn't ready yet."</p>
         </div>
       </div>
     </div>
@@ -316,7 +322,9 @@ const metadata = {
         <span class="content-box-icon">🏗️</span>
         <div class="content-box-content">
           <h3>Clear boundaries</h3>
-          <p style="color: #a0aec0;">Well-organized codebase speaks for itself — conventions show the way, not documentation</p>
+          <p style="color: #a0aec0;">
+            Well-organized codebase speaks for itself — conventions show the way, not documentation
+          </p>
         </div>
       </div>
       <div class="content-box">
@@ -362,9 +370,7 @@ const metadata = {
         style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.25rem 1.5rem; background: rgba(14, 165, 193, 0.1);"
       >
         <h3 style="margin-bottom: 0.5rem; font-size: 1.3rem;">Strong Prompts With Context</h3>
-        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">
-          Clear objective — what to implement, how, and why
-        </p>
+        <p style="color: #a0aec0; margin: 0; font-size: 1rem;">Clear objective — what to implement, how, and why</p>
       </div>
 
       <div
@@ -414,20 +420,35 @@ const metadata = {
       <p style="font-size: 1.2rem; color: #e2e8f0; line-height: 1.8;">
         More code → no automated checks → bugs compound → endless manual review
       </p>
-      <div style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2.5rem auto; max-width: 95%;">
-        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">AI writes code</span>
+      <div
+        style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2.5rem auto; max-width: 95%;"
+      >
+        <span
+          style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;"
+          >AI writes code</span
+        >
         <span style="color: #ef4444; font-size: 1.5rem; text-align: center;">→</span>
-        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">No automated checks</span>
+        <span
+          style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;"
+          >No automated checks</span
+        >
         <span style="color: #ef4444; font-size: 1.5rem; text-align: center;">→</span>
-        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">Bugs compound</span>
+        <span
+          style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;"
+          >Bugs compound</span
+        >
         <span style="color: #ef4444; font-size: 1.5rem; text-align: center;">→</span>
-        <span style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;">Endless manual review</span>
+        <span
+          style="background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; padding: 0.75rem 0.75rem; border-radius: 8px; text-align: center; font-size: 0.9rem;"
+          >Endless manual review</span
+        >
       </div>
       <div
         style="border: 2px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1); margin-top: 1.5rem;"
       >
         <p style="margin: 0; font-size: 1.1rem;">
-          <strong>Tests, linters, and code review</strong> let AI verify its own work. Without them, you're just producing bugs faster.
+          <strong>Tests, linters, and code review</strong> let AI verify its own work. Without them, you're just producing
+          bugs faster.
         </p>
       </div>
     </div>
@@ -491,7 +512,9 @@ const metadata = {
         <span class="content-box-icon">🌱</span>
         <div class="content-box-content">
           <h3>Start Small</h3>
-          <p style="color: #a0aec0;">Unit tests, HTTP handlers, API calls. My recommendation — start with automated tests, you'll need them.</p>
+          <p style="color: #a0aec0;">
+            Unit tests, HTTP handlers, API calls. My recommendation — start with automated tests, you'll need them.
+          </p>
         </div>
       </div>
 

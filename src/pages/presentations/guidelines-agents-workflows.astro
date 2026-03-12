@@ -1,0 +1,176 @@
+---
+import PresentationLayout from '~/layouts/PresentationLayout.astro';
+
+const metadata = {
+  title: '(Draft) Agentic Coding: Guidelines, Agents, Workflows',
+  description: 'Guidelines strategy, subagents, and advanced workflows for agentic coding.',
+  ignoreTitleTemplate: false,
+};
+---
+
+<PresentationLayout metadata={metadata}>
+  <!-- Slide 1: Title -->
+  <section data-state="title" class="title-slide">
+    <h1>Agentic Coding</h1>
+    <h2>Guidelines, Agents, Workflows</h2>
+    <p style="color: #a0aec0; font-size: 1rem; margin-top: 1rem;">(Draft)</p>
+  </section>
+
+  <!-- Slide 2: Agenda -->
+  <section>
+    <h2>Agenda</h2>
+    <ul>
+      <li>Guidelines: What the Research Says</li>
+      <li>Codebase Consistency vs. Rules</li>
+      <li>What Stays in Guidelines</li>
+    </ul>
+  </section>
+
+  <!-- ==================== Section 1: Guidelines ==================== -->
+
+  <!-- Slide 3: The Research -->
+  <section>
+    <h2>Guidelines: What the Research Says</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box red" style="position: relative;">
+        <span
+          style="position: absolute; top: 0.75rem; right: 1rem; background: #e8b4b8; color: #030620; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem;"
+          >Worst</span
+        >
+        <span class="content-box-icon">❌</span>
+        <div class="content-box-content">
+          <h3><code style="font-size: 1.3rem;">/init</code> auto-generated guidelines</h3>
+          <p style="color: #a0aec0;">Research shows this makes output worse. Generic rules add noise, not signal.</p>
+        </div>
+      </div>
+      <div class="content-box yellow" style="position: relative;">
+        <span
+          style="position: absolute; top: 0.75rem; right: 1rem; background: #f0c36d; color: #030620; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem;"
+          >Better</span
+        >
+        <span class="content-box-icon">🤷</span>
+        <div class="content-box-content">
+          <h3>No guidelines at all</h3>
+          <p style="color: #a0aec0;">
+            Surprisingly, performs better than <code>/init</code>. Models are good at finding patterns in your code.
+          </p>
+        </div>
+      </div>
+      <div class="content-box green" style="position: relative;">
+        <span
+          style="position: absolute; top: 0.75rem; right: 1rem; background: #4ade80; color: #030620; padding: 0.2rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem;"
+          >Best</span
+        >
+        <span class="content-box-icon">✅</span>
+        <div class="content-box-content">
+          <h3>Brief, focused guidelines</h3>
+          <p style="color: #a0aec0;">5–10% accuracy improvement. Short and focused.</p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        New models are very good at pattern-matching your codebase. They replicate what they see, not what you write in
+        a markdown file.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 4: Codebase Consistency > Guidelines -->
+  <section>
+    <h2>Codebase Consistency {'>'} Guidelines</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div
+        style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem;">Add Rules to Guidelines</h3>
+        <ul style="font-size: 0.95rem;">
+          <li>Write detailed rules for every convention</li>
+          <li>Error handling, validation, naming...</li>
+          <li>Maintenance burden grows</li>
+          <li>Rules can conflict with actual code</li>
+          <li>Agent weighs code higher anyway</li>
+        </ul>
+      </div>
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem;">Improve Codebase Consistency</h3>
+        <ul style="font-size: 0.95rem;">
+          <li>Make your code self-explanatory</li>
+          <li>Fix inconsistencies at the source</li>
+          <li>When Claude copies a bad pattern — fix where it learned it</li>
+          <li>The codebase IS your documentation</li>
+        </ul>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Both strategies work. It depends on your codebase. But if your code is consistent, you need far fewer rules.<br
+        />
+        My approach: I aggressively improved consistency and reduced my guidelines from <strong>100+ lines to 10</strong
+        >.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 5: What Stays in Guidelines -->
+  <section>
+    <h2>What Stays in Guidelines</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div>
+        <h3 style="color: #4ade80; margin-bottom: 1rem;">✅ Keep — Workflow</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #4ade80;">
+            "In plan mode, list behaviors as test cases"
+          </li>
+          <li style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #4ade80;">
+            "Always run code review before completing"
+          </li>
+          <li style="padding-left: 1rem; border-left: 3px solid #4ade80;">
+            "Use read-only mode for investigation first"
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="color: #e8b4b8; margin-bottom: 1rem;">❌ Skip — Let the Code Speak</h3>
+        <ul style="font-size: 1rem; list-style: none; padding: 0;">
+          <li
+            style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #e8b4b8; color: #a0aec0; text-decoration: line-through;"
+          >
+            "Use slog.Error for error handling"
+          </li>
+          <li
+            style="margin-bottom: 0.75rem; padding-left: 1rem; border-left: 3px solid #e8b4b8; color: #a0aec0; text-decoration: line-through;"
+          >
+            "Never use fmt.Printf"
+          </li>
+          <li
+            style="padding-left: 1rem; border-left: 3px solid #e8b4b8; color: #a0aec0; text-decoration: line-through;"
+          >
+            "Validate with Zod schema"
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Focus guidelines on workflow, not syntax. If you need a rule to enforce a pattern, your code isn't consistent
+        enough yet. Fix the code, not the guidelines.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Closing ==================== -->
+
+  <!-- Slide 6: Thank You -->
+  <section data-state="title" class="title-slide">
+    <h1>Thank You!</h1>
+  </section>
+</PresentationLayout>

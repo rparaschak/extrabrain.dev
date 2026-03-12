@@ -13,15 +13,50 @@ const presentations: Presentation[] = [
     id: 'ai-assisted-coding',
     slug: 'ai-assisted-coding',
     permalink: '/presentations/ai-assisted-coding',
-    title: 'AI-Assisted Coding: Foundation and Mindset',
-    description: 'Understanding the foundation and mindset needed to work effectively with AI-assisted coding tools.',
+    title: 'Agentic Coding: Foundation and Mindset',
+    description: 'Understanding the foundation and mindset needed to work effectively with agentic coding tools.',
+    agenda: [
+      'Possibilities — What AI Can Do Today',
+      'AI Adoption - Why It Fails',
+      'Mindset For Successful Adoption',
+      'Foundations',
+      'Where to Start',
+    ],
   },
   {
     id: 'prompting-and-context',
     slug: 'prompting-and-context',
     permalink: '/presentations/prompting-and-context',
     title: 'Agentic Coding: Prompting & Context Management',
-    description: 'How to manage context windows, structure work into sessions, write prompt documents, and use permission modes effectively.',
+    description:
+      'How to manage context windows, structure work into sessions, write prompt documents, and use permission modes.',
+    agenda: [
+      'Context Window Management',
+      'Session Strategy',
+      'Prompting with Documents',
+      'Permission Modes as Workflow',
+    ],
+  },
+  {
+    id: 'guidelines-agents-workflows',
+    slug: 'guidelines-agents-workflows',
+    permalink: '/presentations/guidelines-agents-workflows',
+    title: '(Draft) Agentic Coding: Guidelines, Agents, Workflows',
+    description: 'Guidelines strategy, subagents, and advanced workflows for agentic coding.',
+    agenda: ['Guidelines: What the Research Says', 'Codebase Consistency vs. Rules', 'What Stays in Guidelines'],
+  },
+  {
+    id: 'swarms-and-mass-refactoring',
+    slug: 'swarms-and-mass-refactoring',
+    permalink: '/presentations/swarms-and-mass-refactoring',
+    title: 'Agentic Coding: Scaling with Agent Swarms',
+    description: 'Using agent swarms for codebase analysis and mass refactoring at scale.',
+    agenda: [
+      'The Context Window Problem',
+      'Project Analysis with Agent Swarms',
+      'Mass Refactoring with Agent Swarms',
+      'A Real-World Migration Story',
+    ],
   },
   {
     id: 'modern-frontend-testing-strategies',
@@ -29,6 +64,7 @@ const presentations: Presentation[] = [
     permalink: '/presentations/modern-frontend-testing-strategies',
     title: 'Modern Frontend Testing Strategies',
     description: 'Building Efficient Test Suites That Scale',
+    agenda: ['Why Testing Matters', "Without Tests, You're Stuck", 'Testing Strategies That Scale'],
   },
 ];
 ---
@@ -39,16 +75,26 @@ const presentations: Presentation[] = [
       <h1 class="text-4xl md:text-5xl font-bold tracking-tighter mb-4 font-heading">Presentations</h1>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <div class="flex flex-col gap-6">
       {
         presentations.map((presentation) => (
           <a
             href={presentation.permalink}
-            class="block p-6 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 hover:bg-secondary-dark hover:border-secondary-dark dark:hover:bg-secondary-dark dark:hover:border-secondary-dark transition-all duration-200"
+            class="group flex flex-col md:flex-row rounded-lg shadow-lg border border-gray-200 dark:border-slate-700 hover:border-secondary-dark dark:hover:border-secondary-dark transition-all duration-200 overflow-hidden"
           >
-            <h2 class="text-xl font-bold text-default dark:text-slate-300 hover:text-white dark:hover:text-white transition ease-in duration-200">
-              {presentation.title}
-            </h2>
+            <div class="md:w-1/3 bg-gray-100 dark:bg-slate-900 p-6 md:p-8 flex items-center justify-center">
+              <h2 class="text-xl md:text-2xl font-bold text-default dark:text-slate-200 text-center font-heading">{presentation.title}</h2>
+            </div>
+            <div class="md:w-2/3 bg-white dark:bg-slate-800 p-6 md:p-8">
+              <p class="text-muted dark:text-slate-400 mb-4">{presentation.description}</p>
+              {presentation.agenda && presentation.agenda.length > 0 && (
+                <ul class="list-disc list-inside text-sm text-muted dark:text-slate-400 space-y-1">
+                  {presentation.agenda.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </a>
         ))
       }

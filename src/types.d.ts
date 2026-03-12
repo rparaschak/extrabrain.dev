@@ -295,6 +295,9 @@ export interface Presentation {
   /** Optional summary of presentation content. */
   description?: string;
 
+  /** Agenda items for the presentation. */
+  agenda?: string[];
+
   /**  */
   metadata?: MetaData;
 }
