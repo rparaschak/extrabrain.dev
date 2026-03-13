@@ -56,10 +56,13 @@ const metadata = {
     <h2>The Context Window Problem</h2>
     <div style="text-align: center; margin-top: 2rem;">
       <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8;">
-        You use Claude Code for single tasks — it works great.<br />
-        But your codebase has hundreds of files, dozens of modules.
+        Working on a single feature, module, or bug? One agent handles it fine.
       </p>
-      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 2rem;">
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 1.5rem;">
+        But what if you need to <strong>analyze the entire codebase</strong>?<br />
+        Read every test file. Map all dependencies. Understand how 13 factories connect to 136 tests.
+      </p>
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 1.5rem;">
         One context window isn't enough.<br />
         Precision drops when you force everything into a single session.
       </p>
@@ -88,7 +91,7 @@ const metadata = {
       </ul>
       <div style="margin-top: 1.5rem; text-align: center;">
         <p style="font-size: 1.4rem; font-weight: 700; color: #0ea5c1; margin: 0;">
-          35 factories. 100 test files. One engineer. One afternoon.
+          13 factories. 136 test files. One engineer. One afternoon.
         </p>
       </div>
     </div>
@@ -194,18 +197,18 @@ const metadata = {
         </div>
       </div>
       <div class="content-box">
-        <span class="content-box-icon">🔒</span>
+        <span class="content-box-icon">✂️</span>
         <div class="content-box-content">
-          <h3>No conflicts</h3>
-          <p style="color: #a0aec0;">Agents only read and report — no file system conflicts possible</p>
+          <h3>Divide the work upfront</h3>
+          <p style="color: #a0aec0;">Split the scope yourself or ask the main agent to help distribute it across sub-agents</p>
         </div>
       </div>
       <div class="content-box">
         <span class="content-box-icon">🎯</span>
         <div class="content-box-content">
-          <h3>Main agent distributes work</h3>
+          <h3>Orchestrator orchestrates, doesn't code</h3>
           <p style="color: #a0aec0;">
-            The main agent decides how to split the scope. You can also guide the distribution if needed.
+            The main agent distributes work and collects results. Sub-agents do the actual analysis.
           </p>
         </div>
       </div>
@@ -267,13 +270,13 @@ const metadata = {
         <span class="content-box-icon">🔨</span>
         <div class="content-box-content">
           <h3>Refactor ONE unit first</h3>
-          <p style="color: #a0aec0;">Invest the time. Do it manually or with your main agent. Make it perfect.</p>
+          <p style="color: #a0aec0;">Invest the time. Do it manually or with your main agent. Make it good.</p>
         </div>
       </div>
       <div class="content-box">
         <span class="content-box-icon">🤖</span>
         <div class="content-box-content">
-          <h3>AI replicates patterns extremely well</h3>
+          <h3>Replicate golden example</h3>
           <p style="color: #a0aec0;">This is where AI shines — replicating a known, proven pattern across many targets</p>
         </div>
       </div>
@@ -369,14 +372,14 @@ const metadata = {
           style="background: #4ade80; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
           >4</span
         >
-        <p style="margin: 0;">After each batch: <strong>run tests → review → adjust → commit</strong></p>
+        <p style="margin: 0;">Verify batch: <strong>run tests → review → adjust → commit</strong></p>
       </div>
     </div>
     <div
       style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
     >
       <p style="margin: 0; text-align: center; font-size: 0.95rem;">
-        34 remaining factories + 100 test files, module by module, <strong>~4 hours including review</strong>
+        12 remaining factories + 136 test files, module by module, <strong>~4 hours including review</strong>
       </p>
     </div>
   </section>
@@ -505,7 +508,7 @@ const metadata = {
         <span class="content-box-icon">📁</span>
         <div class="content-box-content">
           <h3>Small codebase</h3>
-          <p style="color: #a0aec0;">{'<'} 20 files — single agent is faster than setup overhead</p>
+          <p style="color: #a0aec0;">{'<'} Single agent might be faster than setup overhead</p>
         </div>
       </div>
       <div class="content-box red">
@@ -529,13 +532,6 @@ const metadata = {
           <p style="color: #a0aec0;">You can't validate batch changes without them</p>
         </div>
       </div>
-    </div>
-    <div
-      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
-    >
-      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
-        The overhead of setting up a swarm must be <strong>less than the time it saves</strong>.
-      </p>
     </div>
   </section>
 
@@ -570,7 +566,7 @@ const metadata = {
           >1-2h</span
         >
         <div>
-          <p style="margin: 0; font-weight: 600;">Analysis + Learnings Doc</p>
+          <p style="margin: 0; font-weight: 600;">First Batch + Learning Document</p>
           <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
             Haiku swarm mapped dependencies. Created migration learnings document.
           </p>
@@ -596,7 +592,7 @@ const metadata = {
           >Done</span
         >
         <div>
-          <p style="margin: 0; font-weight: 600;">35 factories + 100 test files migrated</p>
+          <p style="margin: 0; font-weight: 600;">13 factories + 136 test files migrated</p>
           <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
             Tests validated every step. Human review confirmed correctness.
           </p>
@@ -607,7 +603,7 @@ const metadata = {
       style="border: 2px solid #4ade80; border-radius: 12px; padding: 1rem; background: rgba(74, 222, 128, 0.1); margin-top: 1rem;"
     >
       <p style="margin: 0; text-align: center; font-size: 1rem;">
-        <strong>~5 hours</strong> for what would be <strong>2-3 days</strong> manually.
+        <strong>~5 hours</strong> for what would be <strong>2-3 days</strong> of unpleasant work.
       </p>
     </div>
   </section>
