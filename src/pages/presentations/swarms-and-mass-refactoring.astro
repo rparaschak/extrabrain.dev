@@ -185,7 +185,32 @@ const metadata = {
     </p>
   </section>
 
-  <!-- Slide 9: Practical Tips -->
+  <!-- Slide 9: How to Launch a Swarm -->
+  <section>
+    <h2>How Do You Launch a Swarm?</h2>
+    <p style="margin-top: 1rem; margin-bottom: 1.5rem; color: #a0aec0;">
+      You just describe what you want. The agent figures out the rest.
+    </p>
+    <div
+      style="background: rgba(14, 165, 193, 0.08); border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.5rem 2rem; text-align: left; font-family: monospace; font-size: 0.95rem; line-height: 1.8; color: #e2e8f0;"
+    >
+      <span style="color: #a0aec0;">$</span> Look into <span style="color: #0ea5c1;">src/tests/</span> directory.<br />
+      Find all test files.<br />
+      For each test file, <span style="color: #0ea5c1;">run a Haiku sub-agent</span> that analyzes the test<br />
+      and explains the steps taken in each test case.<br /><br />
+      As the result I want a <span style="color: #4ade80;">report about the module's test coverage</span><br />
+      so I can share it with our QA lead.
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        That's it. The main agent reads the directory, spawns sub-agents, collects results, and writes the report.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 10: Practical Tips -->
   <section>
     <h2>Practical Tips for Analysis Swarms</h2>
     <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
@@ -540,19 +565,19 @@ const metadata = {
   <!-- Slide 19: The Factory Migration — Full Story -->
   <section>
     <h2>The Factory Migration — Full Story</h2>
-    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; position: relative;">
+    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.5rem; position: relative; text-align: left;">
       <!-- Timeline line -->
       <div
-        style="position: absolute; left: 2.5rem; top: 0.5rem; bottom: 0.5rem; width: 3px; background: linear-gradient(to bottom, #0ea5c1, #4ade80);"
+        style="position: absolute; left: 1.25rem; top: 0.5rem; bottom: 0.5rem; width: 3px; background: linear-gradient(to bottom, #0ea5c1, #4ade80);"
       >
       </div>
       <!-- Hour 0-1 -->
-      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+      <div style="display: flex; align-items: center; gap: 1.25rem; padding: 0.75rem 0;">
         <span
-          style="position: absolute; left: 1.25rem; background: #0ea5c1; color: white; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1;"
+          style="background: #0ea5c1; color: white; font-weight: 700; width: 2.5rem; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1; flex-shrink: 0;"
           >0-1h</span
         >
-        <div>
+        <div style="text-align: left;">
           <p style="margin: 0; font-weight: 600;">Golden Reference</p>
           <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
             First factory migration — invested time to get it perfect
@@ -560,12 +585,12 @@ const metadata = {
         </div>
       </div>
       <!-- Analysis -->
-      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+      <div style="display: flex; align-items: center; gap: 1.25rem; padding: 0.75rem 0;">
         <span
-          style="position: absolute; left: 1.25rem; background: #0ea5c1; color: white; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 1;"
+          style="background: #0ea5c1; color: white; font-weight: 700; width: 2.5rem; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 1; flex-shrink: 0;"
           >1-2h</span
         >
-        <div>
+        <div style="text-align: left;">
           <p style="margin: 0; font-weight: 600;">First Batch + Learning Document</p>
           <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
             Haiku swarm mapped dependencies. Created migration learnings document.
@@ -573,12 +598,12 @@ const metadata = {
         </div>
       </div>
       <!-- Execution -->
-      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+      <div style="display: flex; align-items: center; gap: 1.25rem; padding: 0.75rem 0;">
         <span
-          style="position: absolute; left: 1.25rem; background: #0ea5c1; color: white; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 1;"
+          style="background: #0ea5c1; color: white; font-weight: 700; width: 2.5rem; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; z-index: 1; flex-shrink: 0;"
           >2-5h</span
         >
-        <div>
+        <div style="text-align: left;">
           <p style="margin: 0; font-weight: 600;">Module-by-Module Execution</p>
           <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
             Sonnet swarm — refactor → review → adjust → commit
@@ -586,12 +611,12 @@ const metadata = {
         </div>
       </div>
       <!-- Done -->
-      <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; padding-left: 4.5rem; position: relative;">
+      <div style="display: flex; align-items: center; gap: 1.25rem; padding: 0.75rem 0;">
         <span
-          style="position: absolute; left: 1.25rem; background: #4ade80; color: #030620; font-weight: 700; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1;"
+          style="background: #4ade80; color: #030620; font-weight: 700; width: 2.5rem; min-width: 2.5rem; height: 2.5rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; z-index: 1; flex-shrink: 0;"
           >Done</span
         >
-        <div>
+        <div style="text-align: left;">
           <p style="margin: 0; font-weight: 600;">13 factories + 136 test files migrated</p>
           <p style="margin: 0; color: #a0aec0; font-size: 0.9rem;">
             Tests validated every step. Human review confirmed correctness.
