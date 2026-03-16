@@ -51,20 +51,27 @@ const metadata = {
     </ul>
   </section>
 
-  <!-- Slide 4: The Problem -->
+  <!-- Slide 4a: The Problem — what works -->
   <section>
     <h2>The Context Window Problem</h2>
-    <div style="text-align: center; margin-top: 2rem;">
-      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8;">
-        Working on a single feature, module, or bug? One agent handles it fine.
+    <div style="text-align: center; margin-top: 4rem;">
+      <p style="font-size: 1.5rem; color: #e2e8f0; line-height: 1.8;">
+        Working on a single feature, module, or bug?
       </p>
-      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 1.5rem;">
-        But what if you need to <strong>analyze the entire codebase</strong>?<br />
-        Read every test file. Map all dependencies. Understand how 13 factories connect to 136 tests.
+      <p style="font-size: 1.5rem; color: #4ade80; line-height: 1.8; margin-top: 2rem; font-weight: 600;">
+        One agent handles it fine.
       </p>
-      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 1.8; margin-top: 1.5rem;">
-        One context window isn't enough.<br />
-        Precision drops when you force everything into a single session.
+    </div>
+  </section>
+
+  <!-- Slide 4b: The Problem — what doesn't -->
+  <section>
+    <h2>But What About the Entire Codebase?</h2>
+    <div style="text-align: center; margin-top: 2.5rem;">
+      <p style="font-size: 1.3rem; color: #e2e8f0; line-height: 2;">
+        Read every test file.<br />
+        Map all dependencies.<br />
+        Understand how 13 factories connect to 136 tests.
       </p>
       <div
         style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.1); margin-top: 2.5rem;"
@@ -91,7 +98,7 @@ const metadata = {
       </ul>
       <div style="margin-top: 1.5rem; text-align: center;">
         <p style="font-size: 1.4rem; font-weight: 700; color: #0ea5c1; margin: 0;">
-          13 factories. 136 test files. One engineer. One afternoon.
+          13 factories. 136 test files. Migrated in one afternoon.
         </p>
       </div>
     </div>
@@ -215,17 +222,17 @@ const metadata = {
     <h2>Practical Tips for Analysis Swarms</h2>
     <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
       <div class="content-box">
-        <span class="content-box-icon">⚡</span>
+        <span class="content-box-icon">🧠</span>
         <div class="content-box-content">
-          <h3>Use Haiku for sub-agents</h3>
-          <p style="color: #a0aec0;">Fast, cheap, and more than sufficient for read-only analysis work</p>
+          <h3>Think about which model to use</h3>
+          <p style="color: #a0aec0;">Not every sub-agent needs the most powerful model. Match model to task complexity.</p>
         </div>
       </div>
       <div class="content-box">
-        <span class="content-box-icon">✂️</span>
+        <span class="content-box-icon">📐</span>
         <div class="content-box-content">
-          <h3>Divide the work upfront</h3>
-          <p style="color: #a0aec0;">Split the scope yourself or ask the main agent to help distribute it across sub-agents</p>
+          <h3>Control the chunk size</h3>
+          <p style="color: #a0aec0;">Too big — the sub-agent loses focus. Too small — orchestration overhead. Check if the split makes sense.</p>
         </div>
       </div>
       <div class="content-box">
@@ -244,6 +251,56 @@ const metadata = {
       <p style="margin: 0; text-align: center; font-size: 0.95rem;">
         I'm on the <strong>$100/month subscription</strong>. Running 10 Haiku agents for analysis — you don't even feel
         it. It's not noticeable.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 11: Choosing the Right Model -->
+  <section>
+    <h2>Choosing the Right Model</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem;">
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.75rem; color: #4ade80;">Haiku</h3>
+        <ul style="font-size: 0.85rem; line-height: 1.6;">
+          <li>Read-only analysis</li>
+          <li>Listing and categorizing</li>
+          <li>Simple pattern matching</li>
+          <li>High volume, low complexity</li>
+        </ul>
+        <p style="color: #4ade80; font-size: 0.85rem; margin-top: 0.75rem; margin-bottom: 0;">Fast and cheap</p>
+      </div>
+      <div
+        style="border: 3px solid #0ea5c1; border-radius: 12px; padding: 1.5rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.75rem; color: #0ea5c1;">Sonnet</h3>
+        <ul style="font-size: 0.85rem; line-height: 1.6;">
+          <li>Code refactoring</li>
+          <li>Writing and editing files</li>
+          <li>Following complex instructions</li>
+          <li>The workhorse for most tasks</li>
+        </ul>
+        <p style="color: #0ea5c1; font-size: 0.85rem; margin-top: 0.75rem; margin-bottom: 0;">Best balance</p>
+      </div>
+      <div
+        style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.1);"
+      >
+        <h3 style="margin-bottom: 0.75rem; color: #f0c36d;">Opus</h3>
+        <ul style="font-size: 0.85rem; line-height: 1.6;">
+          <li>Architectural decisions</li>
+          <li>Complex multi-step reasoning</li>
+          <li>Orchestrating other agents</li>
+          <li>When precision matters most</li>
+        </ul>
+        <p style="color: #f0c36d; font-size: 0.85rem; margin-top: 0.75rem; margin-bottom: 0;">Most capable</p>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Don't default to the most powerful model. <strong>Match the model to the task.</strong>
       </p>
     </div>
   </section>
@@ -368,7 +425,7 @@ const metadata = {
           style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
           >1</span
         >
-        <p style="margin: 0;">Use <strong>Haiku sub-agents</strong> to discover and list all targets</p>
+        <p style="margin: 0;">Use <strong>sub-agents</strong> to discover and list all targets — Haiku or Sonnet for speed</p>
       </div>
       <div
         style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
@@ -378,7 +435,7 @@ const metadata = {
           >2</span
         >
         <p style="margin: 0;">
-          Split targets across <strong>N Sonnet agents</strong> — main agent distributes the work
+          Split targets across <strong>N sub-agents</strong> — pick Haiku, Sonnet, or Opus depending on complexity
         </p>
       </div>
       <div
@@ -468,7 +525,7 @@ const metadata = {
         <span class="content-box-icon">📊</span>
         <div class="content-box-content">
           <h3>Categorize first</h3>
-          <p style="color: #a0aec0;">Use Haiku to classify targets by complexity before executing anything</p>
+          <p style="color: #a0aec0;">Classify targets by complexity before executing — Haiku or Sonnet work well for this</p>
         </div>
       </div>
       <div class="content-box">
@@ -710,9 +767,7 @@ const metadata = {
           <a href="/presentations/prompting-and-context" style="color: #0ea5c1;">Prompting & Context Management</a>
         </p>
         <p style="margin: 0;">
-          <a href="/presentations/guidelines-agents-workflows" style="color: #0ea5c1;"
-            >Guidelines, Agents, Workflows</a
-          >
+          <a href="/presentations/orchestration" style="color: #0ea5c1;">Orchestration</a>
         </p>
       </div>
     </div>

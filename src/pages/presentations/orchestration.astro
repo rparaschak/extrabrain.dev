@@ -1,0 +1,1024 @@
+---
+import PresentationLayout from '~/layouts/PresentationLayout.astro';
+
+const metadata = {
+  title: 'Agentic Coding: Orchestration',
+  description:
+    'How to split work between agents, orchestrate specialized teams, and define workflows with skills.',
+  ignoreTitleTemplate: false,
+};
+---
+
+<PresentationLayout metadata={metadata}>
+  <!-- Slide 1: Title -->
+  <section data-state="title" class="title-slide">
+    <h1>Agentic Coding</h1>
+    <h2>Orchestration</h2>
+  </section>
+
+  <!-- Slide 2: About Me -->
+  <section>
+    <h2>About Me</h2>
+    <div
+      style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; max-width: 80%; margin-left: auto; margin-right: auto;"
+    >
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🛠️</span>
+        <p style="margin: 0;">15 years of software engineering experience</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">❤️</span>
+        <p style="margin: 0;">I genuinely enjoy coding and building software</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🏗️</span>
+        <p style="margin: 0;">Currently building <strong>Agewise</strong> as CTO</p>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <span style="font-size: 1.5rem; min-width: 2rem; text-align: center;">🤖</span>
+        <p style="margin: 0;">Me and my team delegate <strong>99% of coding</strong> to AI agents</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Agenda -->
+  <section>
+    <h2>Agenda</h2>
+    <ul>
+      <li>The Context Problem Revisited</li>
+      <li>Two Types of Agents</li>
+      <li>Basic Orchestration</li>
+      <li>Orchestrating a Specialized Team</li>
+      <li>Skills as Workflows</li>
+    </ul>
+  </section>
+
+  <!-- ==================== Section 1: The Problem ==================== -->
+
+  <!-- Slide 4: The Context Problem — Revisited -->
+  <section>
+    <h2>The Context Problem — Revisited</h2>
+    <p style="color: #a0aec0; margin-bottom: 1.5rem;">
+      Previous talk: "one task per session." But what happens when even one task is too big?
+    </p>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+      <div
+        style="border: 3px solid #e8b4b8; border-radius: 12px; padding: 1.5rem; background: rgba(232, 180, 184, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #e8b4b8;">Without Orchestration</h3>
+        <ul style="font-size: 0.95rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.6rem;">Developing a bigger feature</li>
+          <li style="margin-bottom: 0.6rem;">→ Hit the context limit</li>
+          <li style="margin-bottom: 0.6rem;">→ Jump to another session</li>
+          <li style="margin-bottom: 0.6rem;">→ Summarize the chat, start over</li>
+          <li style="color: #e8b4b8; font-weight: 600;">Context lost each time</li>
+        </ul>
+      </div>
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #4ade80;">With Orchestration</h3>
+        <ul style="font-size: 0.95rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.6rem;">Main agent stays at high level</li>
+          <li style="margin-bottom: 0.6rem;">→ Delegates coding to sub-agents</li>
+          <li style="margin-bottom: 0.6rem;">→ Uses much less context</li>
+          <li style="margin-bottom: 0.6rem;">→ Orchestrator keeps sharp context</li>
+          <li style="color: #4ade80; font-weight: 600;">Knowledge preserved across tasks</li>
+        </ul>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Orchestration is the evolution of "one task per session." Now your session can handle many tasks — by
+        delegating.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 5: When to Consider Orchestration -->
+  <section>
+    <h2>When to Consider Orchestration</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+      <div class="content-box green" style="margin: 0;">
+        <span class="content-box-icon">🔄</span>
+        <div class="content-box-content">
+          <h3>Iterative work</h3>
+          <ul style="color: #a0aec0; font-size: 0.85rem; margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
+            <li>Many iterations, each needs verification</li>
+            <li>Main agent carries knowledge forward</li>
+            <li>Context stays clean between iterations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-box" style="margin: 0;">
+        <span class="content-box-icon">🧩</span>
+        <div class="content-box-content">
+          <h3>Different types of work</h3>
+          <ul style="color: #a0aec0; font-size: 0.85rem; margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
+            <li>Analyze, decide, build backend, frontend, test</li>
+            <li>One agent = bloated context</li>
+            <li>Specialized agents = focused context</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Orchestration is not about parallelism — it is about keeping each agent's context focused and sharp.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 2: Two Types of Agents ==================== -->
+
+  <!-- Slide 6: Section Header -->
+  <section data-state="title" class="title-slide">
+    <h1 style="font-size: 2.2rem;">Two Types of Agents</h1>
+    <h2 style="font-size: 1.3rem; color: #a0aec0; margin-top: 1rem;">The building blocks of orchestration</h2>
+  </section>
+
+  <!-- Slide 7: Non-Specialized Agents -->
+  <section>
+    <h2>Non-Specialized Agents</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>No configuration needed</h3>
+          <p style="color: #a0aec0;">
+            Just prompt: <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >"implement this test using a sub-agent"</code
+            >
+          </p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🎛️</span>
+        <div class="content-box-content">
+          <h3>Model selection</h3>
+          <p style="color: #a0aec0;">
+            <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >"implement this feature using an Opus sub-agent"</code
+            >
+          </p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>Run multiple in parallel</h3>
+          <p style="color: #a0aec0;">
+            <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >"implement auth and notifications using two sub-agents in parallel"</code
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Non-specialized agents are your go-to for quick delegation. No setup, no files — just ask.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 8: Specialized Agents -->
+  <section>
+    <h2>Specialized Agents</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">📁</span>
+        <div class="content-box-content">
+          <h3>
+            Defined in <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 1.1rem;"
+              >.claude/</code
+            > directory
+          </h3>
+          <p style="color: #a0aec0;">Agent files with special instructions tailored to a specific role</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">⚙️</span>
+        <div class="content-box-content">
+          <h3>Contain</h3>
+          <p style="color: #a0aec0;">Workflow rules, guidelines, hooks, skills, and allowed tools</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🎯</span>
+        <div class="content-box-content">
+          <h3>Repeatable roles with consistent behavior</h3>
+          <p style="color: #a0aec0;">
+            Same agent, same process, every time. Your backend engineer always follows the same workflow.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Specialized agents are your team members. They follow the same process every time.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 3: Basic Orchestration ==================== -->
+
+  <!-- Slide 9: Section Header -->
+  <section data-state="title" class="title-slide">
+    <h1 style="font-size: 2.2rem;">Basic Orchestration</h1>
+    <h2 style="font-size: 1.3rem; color: #a0aec0; margin-top: 1rem;">One orchestrator. Many hands.</h2>
+  </section>
+
+  <!-- Slide 10: The Pattern -->
+  <section>
+    <h2>The Pattern</h2>
+    <div
+      style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2rem auto; max-width: 95%;"
+    >
+      <div
+        style="background: rgba(14, 165, 193, 0.15); border: 2px solid #0ea5c1; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.85rem; font-weight: 700; color: #0ea5c1; margin: 0 0 0.35rem 0;">Plan</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Eats significant context</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
+      <div
+        style="background: rgba(240, 195, 109, 0.15); border: 2px solid #f0c36d; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.85rem; font-weight: 700; color: #f0c36d; margin: 0 0 0.35rem 0;">Delegate</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Spawn sub-agent</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
+      <div
+        style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.85rem; font-weight: 700; color: #4ade80; margin: 0 0 0.35rem 0;">Execute</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Sub-agent codes</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
+      <div
+        style="background: rgba(14, 165, 193, 0.15); border: 2px solid #0ea5c1; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.85rem; font-weight: 700; color: #0ea5c1; margin: 0 0 0.35rem 0;">Result</p>
+        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Back to orchestrator</p>
+      </div>
+    </div>
+    <p style="text-align: center; color: #a0aec0; margin-top: 1rem; font-size: 1rem;">
+      The main agent's context is not cluttered with the actual implementation. It keeps the high-level picture.
+    </p>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Your orchestrator thinks. Sub-agents code.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 11: Why It Works — Context Stays Clean -->
+  <section>
+    <h2>Why It Works — Context Stays Clean</h2>
+    <div style="margin-top: 2rem; max-width: 90%; margin-left: auto; margin-right: auto;">
+      <!-- Without orchestration -->
+      <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: #e8b4b8;">Without orchestration</p>
+      <div
+        style="display: flex; border-radius: 12px; overflow: hidden; height: 3rem; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem;"
+      >
+        <div
+          style="flex: 30; background: rgba(14, 165, 193, 0.25); border: 2px solid #0ea5c1; display: flex; align-items: center; justify-content: center; border-right: none; border-radius: 12px 0 0 12px;"
+        >
+          Planning
+        </div>
+        <div
+          style="flex: 50; background: rgba(240, 195, 109, 0.25); border: 2px solid #f0c36d; display: flex; align-items: center; justify-content: center; border-right: none;"
+        >
+          Execution 50%
+        </div>
+        <div
+          style="flex: 20; background: rgba(232, 180, 184, 0.25); border: 2px solid #e8b4b8; display: flex; align-items: center; justify-content: center; border-radius: 0 12px 12px 0;"
+        >
+          Task 2 💥
+        </div>
+      </div>
+
+      <!-- With orchestration -->
+      <p style="font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; color: #4ade80;">With orchestration</p>
+      <div
+        style="display: flex; border-radius: 12px; overflow: hidden; height: 3rem; font-size: 0.85rem; font-weight: 600;"
+      >
+        <div
+          style="flex: 30; background: rgba(14, 165, 193, 0.25); border: 2px solid #0ea5c1; display: flex; align-items: center; justify-content: center; border-right: none; border-radius: 12px 0 0 12px;"
+        >
+          Planning
+        </div>
+        <div
+          style="flex: 5; background: rgba(74, 222, 128, 0.25); border: 2px solid #4ade80; display: flex; align-items: center; justify-content: center; border-right: none; font-size: 0.7rem;"
+        >
+          T1
+        </div>
+        <div
+          style="flex: 5; background: rgba(74, 222, 128, 0.25); border: 2px solid #4ade80; display: flex; align-items: center; justify-content: center; border-right: none; font-size: 0.7rem;"
+        >
+          T2
+        </div>
+        <div
+          style="flex: 5; background: rgba(74, 222, 128, 0.25); border: 2px solid #4ade80; display: flex; align-items: center; justify-content: center; border-right: none; font-size: 0.7rem;"
+        >
+          T3
+        </div>
+        <div
+          style="flex: 5; background: rgba(74, 222, 128, 0.25); border: 2px solid #4ade80; display: flex; align-items: center; justify-content: center; border-right: none; font-size: 0.7rem;"
+        >
+          T4
+        </div>
+        <div
+          style="flex: 50; background: rgba(74, 222, 128, 0.08); border: 2px dashed #4ade80; display: flex; align-items: center; justify-content: center; border-radius: 0 12px 12px 0; color: #4ade80;"
+        >
+          Room for many more ✓
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 2rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        I use this almost every day when I'm doing feature iterations. I delegate every sub-feature to a new sub-agent so
+        that my main session with its knowledge lives longer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 12: Use Case — Library Migration -->
+  <section>
+    <h2>Use Case — Library Migration</h2>
+    <p style="color: #a0aec0; font-size: 1rem; margin-bottom: 1.25rem;">
+      Migrating 10 services to use new library methods. You want full control over each one.
+    </p>
+    <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >1</span
+        >
+        <p style="margin: 0;">Start with service #1 — <strong>plan the change</strong></p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >2</span
+        >
+        <p style="margin: 0;"><strong>Delegate the plan</strong> to a sub-agent</p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >3</span
+        >
+        <p style="margin: 0;">Happy with result → <strong>spawn agent for service #2</strong></p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >4</span
+        >
+        <p style="margin: 0;">
+          Agent uses <strong>all knowledge from migration #1</strong> — no context wasted on implementation
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #4ade80; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >✓</span
+        >
+        <p style="margin: 0;">Repeat for all remaining services — <strong>single session</strong></p>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        In many cases, you are able to migrate all of the services using a single session.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide: Reusing Knowledge Across Iterations -->
+  <section>
+    <h2>Reusing Knowledge Across Iterations</h2>
+    <p style="color: #a0aec0; font-size: 1rem; margin-bottom: 1.25rem;">
+      Your orchestrator becomes a knowledge holder — it improves with every iteration.
+    </p>
+    <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;">
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >1</span
+        >
+        <p style="margin: 0;">First iteration — orchestrator learns the <strong>patterns and edge cases</strong></p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >2</span
+        >
+        <p style="margin: 0;">Second iteration — spawns sub-agent with <strong>better instructions</strong> based on what it learned</p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >3</span
+        >
+        <p style="margin: 0;">Each next iteration — <strong>more accurate</strong>, because the orchestrator carries all prior knowledge</p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80; border-radius: 10px; padding: 1rem 1.25rem;"
+      >
+        <span
+          style="background: #4ade80; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;"
+          >✓</span
+        >
+        <p style="margin: 0;">Sub-agents get a <strong>clean, focused context</strong> — orchestrator keeps the big picture</p>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        The orchestrator does not just delegate — it accumulates knowledge and gets better at delegating with every iteration.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 13: Use Case — Feature Development -->
+  <section>
+    <h2>Use Case — Feature Development</h2>
+    <p style="color: #a0aec0; font-size: 1rem; margin-bottom: 1rem;">
+      Building a complex feature with multiple sub-features, iteration by iteration.
+    </p>
+    <div
+      style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 1.5rem auto; max-width: 95%;"
+    >
+      <div
+        style="background: rgba(14, 165, 193, 0.15); border: 2px solid #0ea5c1; padding: 0.75rem 0.5rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.8rem; font-weight: 700; color: #0ea5c1; margin: 0 0 0.25rem 0;">Table</p>
+        <p style="font-size: 0.7rem; color: #a0aec0; margin: 0;">main agent</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.2rem;">→</span>
+      <div
+        style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; padding: 0.75rem 0.5rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.8rem; font-weight: 700; color: #4ade80; margin: 0 0 0.25rem 0;">Sort + Filter</p>
+        <p style="font-size: 0.7rem; color: #a0aec0; margin: 0;">sub-agent</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.2rem;">→</span>
+      <div
+        style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; padding: 0.75rem 0.5rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.8rem; font-weight: 700; color: #4ade80; margin: 0 0 0.25rem 0;">Pagination</p>
+        <p style="font-size: 0.7rem; color: #a0aec0; margin: 0;">sub-agent</p>
+      </div>
+      <span style="color: #0ea5c1; font-size: 1.2rem;">→</span>
+      <div
+        style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; padding: 0.75rem 0.5rem; border-radius: 10px; text-align: center;"
+      >
+        <p style="font-size: 0.8rem; font-weight: 700; color: #4ade80; margin: 0 0 0.25rem 0;">Live Updates</p>
+        <p style="font-size: 0.7rem; color: #a0aec0; margin: 0;">sub-agent</p>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.25rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        If you do that in a single session, you might hit the context limit. But if you delegate those iterations to
+        sub-agents, most likely you won't need another session for this feature.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 4: Orchestrating a Specialized Team ==================== -->
+
+  <!-- Slide 14: Section Header -->
+  <section data-state="title" class="title-slide">
+    <h1 style="font-size: 2.2rem;">Orchestrating a Specialized Team</h1>
+    <h2 style="font-size: 1.3rem; color: #a0aec0; margin-top: 1rem;">From solo agent to a team.</h2>
+  </section>
+
+  <!-- Slide 15: The Team — Diagram -->
+  <section>
+    <h2>The Team</h2>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 1.5rem;">
+      <!-- Orchestrator -->
+      <div
+        style="background: rgba(14, 165, 193, 0.2); border: 2px solid #0ea5c1; border-radius: 10px; padding: 0.75rem 2rem; font-weight: 600; font-size: 1.1rem;"
+      >
+        Orchestrator — defines scope, delegates
+      </div>
+      <!-- Arrow down -->
+      <div style="font-size: 1.5rem; color: #0ea5c1;">↓ spawns</div>
+      <!-- Sub-agents -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; width: 100%;">
+        <div
+          style="background: rgba(74, 222, 128, 0.1); border: 2px solid #4ade80; border-radius: 8px; padding: 1rem; text-align: center;"
+        >
+          <p style="font-weight: 700; color: #4ade80; margin: 0 0 0.5rem 0;">Backend Engineer</p>
+          <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+            Writes the actual code. Has specific workflows, rules, hooks, skills.
+          </p>
+        </div>
+        <div
+          style="background: rgba(14, 165, 193, 0.1); border: 2px solid #0ea5c1; border-radius: 8px; padding: 1rem; text-align: center;"
+        >
+          <p style="font-weight: 700; color: #0ea5c1; margin: 0 0 0.5rem 0;">Test Engineer</p>
+          <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+            Writes tests with a fresh context. Not biased by implementation details.
+          </p>
+        </div>
+        <div
+          style="background: rgba(240, 195, 109, 0.1); border: 2px solid #f0c36d; border-radius: 8px; padding: 1rem; text-align: center;"
+        >
+          <p style="font-weight: 700; color: #f0c36d; margin: 0 0 0.5rem 0;">Performance Reviewer</p>
+          <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+            SQL queries, N+1 patterns, inefficient index usage.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        The main orchestrator is only a delegator. It lets your main session live much longer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 16: The Possibilities -->
+  <section>
+    <h2>The Possibilities</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">💻</span>
+        <div class="content-box-content">
+          <h3>Backend Engineer</h3>
+          <p style="color: #a0aec0;">Implementation</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🧪</span>
+        <div class="content-box-content">
+          <h3>Test Engineer</h3>
+          <p style="color: #a0aec0;">Testing with fresh context</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>Performance Code Reviewer</h3>
+          <p style="color: #a0aec0;">SQL, N+1, indexes</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">📋</span>
+        <div class="content-box-content">
+          <h3>PO Agent</h3>
+          <p style="color: #a0aec0;">Requirements validation</p>
+        </div>
+      </div>
+      <div class="content-box" style="grid-column: span 2;">
+        <span class="content-box-icon">🎨</span>
+        <div class="content-box-content">
+          <h3>UI Components Reviewer</h3>
+          <p style="color: #a0aec0;">Frontend consistency</p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        The possibilities are endless. You design the team that fits your project.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Section 5: Skills as Workflows ==================== -->
+
+  <!-- Slide 17: Section Header -->
+  <section data-state="title" class="title-slide">
+    <h1 style="font-size: 2.2rem;">Skills as Workflows</h1>
+    <h2 style="font-size: 1.3rem; color: #a0aec0; margin-top: 1rem;">Define once, invoke when needed.</h2>
+  </section>
+
+  <!-- Slide 18: What Are Skills? -->
+  <section>
+    <h2>What Are Skills?</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">📁</span>
+        <div class="content-box-content">
+          <h3>
+            Defined in <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 1.1rem;"
+              >.claude/commands/</code
+            >
+          </h3>
+          <p style="color: #a0aec0;">Markdown files with instructions for specific workflows</p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">📂</span>
+        <div class="content-box-content">
+          <h3>Can be nested</h3>
+          <p style="color: #a0aec0;">
+            <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >.claude/commands/backend/performance-review.md</code
+            >
+            →
+            <code
+              style="background: rgba(74, 222, 128, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >/backend:performance-review</code
+            >
+          </p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">⚡</span>
+        <div class="content-box-content">
+          <h3>Invoked by</h3>
+          <p style="color: #a0aec0;">
+            <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >/skill-name</code
+            > or <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >"Use skill-name for this task"</code
+            >
+          </p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🤖</span>
+        <div class="content-box-content">
+          <h3>Auto-invocation</h3>
+          <p style="color: #a0aec0;">
+            Claude can invoke skills automatically based on their description. E.g., "ALWAYS use this skill to generate
+            SVG files"
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #f0c36d; border-radius: 12px; padding: 1rem; background: rgba(240, 195, 109, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Previously, skills and commands were different mechanisms. They have been merged — that is why they are defined
+        in <code style="background: rgba(240, 195, 109, 0.2); padding: 0.1rem 0.3rem; border-radius: 3px;"
+          >/commands</code
+        >, not <code style="background: rgba(240, 195, 109, 0.2); padding: 0.1rem 0.3rem; border-radius: 3px;"
+          >/skills</code
+        >.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 19: Why Skills, Not Guidelines? -->
+  <section>
+    <h2>Why Skills, Not Guidelines?</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <div
+        style="border: 3px solid #f0c36d; border-radius: 12px; padding: 1.5rem; background: rgba(240, 195, 109, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #f0c36d;">Workflows in Guidelines</h3>
+        <ul style="font-size: 0.95rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.6rem;">Always active</li>
+          <li style="margin-bottom: 0.6rem;">Small inline change? Claude still spawns a sub-agent</li>
+          <li style="margin-bottom: 0.6rem;">Sub-agents have overhead</li>
+          <li style="color: #f0c36d; font-weight: 600;">Workflow conflicts with simple tasks</li>
+        </ul>
+      </div>
+      <div
+        style="border: 3px solid #4ade80; border-radius: 12px; padding: 1.5rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <h3 style="margin-bottom: 1rem; color: #4ade80;">Workflows in Skills</h3>
+        <ul style="font-size: 0.95rem; list-style: none; padding: 0;">
+          <li style="margin-bottom: 0.6rem;">Invoked manually when needed</li>
+          <li style="margin-bottom: 0.6rem;">Full control over when it runs</li>
+          <li style="margin-bottom: 0.6rem;">Small change? Just do it directly</li>
+          <li style="color: #4ade80; font-weight: 600;">Big feature? Invoke the workflow</li>
+        </ul>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.5rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        I invoke the skill manually — because if I'm working on a small thing, I do not need this workflow. But when
+        I'm working on a new feature, I always invoke it.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 20: My Evolution — From Auto to Manual -->
+  <section>
+    <h2>My Evolution — From Auto to Manual</h2>
+    <div style="display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.25rem;">
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(232, 180, 184, 0.1); border: 1px solid #e8b4b8; border-radius: 10px; padding: 0.75rem 1rem;"
+      >
+        <span
+          style="background: #e8b4b8; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"
+          >1</span
+        >
+        <p style="margin: 0; font-size: 0.9rem;">
+          <strong>Workflow in guidelines</strong> — always active, overhead on small tasks. Not efficient.
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(240, 195, 109, 0.1); border: 1px solid #f0c36d; border-radius: 10px; padding: 0.75rem 1rem;"
+      >
+        <span
+          style="background: #f0c36d; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"
+          >2</span
+        >
+        <p style="margin: 0; font-size: 0.9rem;">
+          <strong>Moved to a skill</strong> — but still had guideline instructions telling Claude when to invoke it.
+          Wanted full automation.
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(240, 195, 109, 0.1); border: 1px solid #f0c36d; border-radius: 10px; padding: 0.75rem 1rem;"
+      >
+        <span
+          style="background: #f0c36d; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"
+          >3</span
+        >
+        <p style="margin: 0; font-size: 0.9rem;">
+          <strong>Optimizing automation</strong> — debugging and tweaking guidelines to explain when to auto-invoke.
+          Spending more time on automation than on actual work.
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(14, 165, 193, 0.1); border: 1px solid #0ea5c1; border-radius: 10px; padding: 0.75rem 1rem;"
+      >
+        <span
+          style="background: #0ea5c1; color: white; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"
+          >4</span
+        >
+        <p style="margin: 0; font-size: 0.9rem;">
+          <strong>Realized the trap</strong> — optimizing tiny pieces that didn't make sense. The cost of debugging
+          automation was higher than just typing <code
+            style="background: rgba(14, 165, 193, 0.2); padding: 0.1rem 0.3rem; border-radius: 3px;"
+            >/backend:dev</code
+          >.
+        </p>
+      </div>
+      <div
+        style="display: flex; align-items: center; gap: 1rem; background: rgba(74, 222, 128, 0.1); border: 1px solid #4ade80; border-radius: 10px; padding: 0.75rem 1rem;"
+      >
+        <span
+          style="background: #4ade80; color: #030620; font-weight: 700; min-width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem;"
+          >5</span
+        >
+        <p style="margin: 0; font-size: 0.9rem;">
+          <strong>Settled on manual invocation</strong> — I am not looking for a fully automated workflow. I invoke it
+          when needed. Much cheaper than the debugging.
+        </p>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        Don't chase full automation. Manually invoking a workflow is cheap. Debugging why it triggers at the wrong time
+        is expensive.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 21: Controlling Skill Invocation -->
+  <section>
+    <h2>Controlling Skill Invocation</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box">
+        <span class="content-box-icon">🖐️</span>
+        <div class="content-box-content">
+          <h3>Manual invocation</h3>
+          <p style="color: #a0aec0;">
+            <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >/backend:dev</code
+            > or <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+              >"Use backend dev skill for this task"</code
+            >
+          </p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🤖</span>
+        <div class="content-box-content">
+          <h3>Automatic invocation</h3>
+          <p style="color: #a0aec0;">
+            Claude reads skill descriptions and invokes matching ones. E.g., "ALWAYS use this skill to generate SVG
+            files" in the description triggers it automatically.
+          </p>
+        </div>
+      </div>
+      <div class="content-box">
+        <span class="content-box-icon">🔒</span>
+        <div class="content-box-content">
+          <h3>
+            <code
+              style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 1.1rem;"
+              >disable-model-invocation</code
+            >
+          </h3>
+          <p style="color: #a0aec0;">
+            Parameter in skill frontmatter to prevent Claude from invoking the skill on its own. Useful when you want
+            full control.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        You control the automation level. Some skills should always run. Others — only when you ask.
+      </p>
+    </div>
+  </section>
+
+  <!-- Slide 22: My Backend Development Workflow -->
+  <section>
+    <h2>My Backend Development Workflow</h2>
+    <p style="color: #a0aec0; font-size: 1rem; margin-bottom: 1rem;">
+      A skill I invoke with <code
+        style="background: rgba(14, 165, 193, 0.2); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9rem;"
+        >/backend:dev</code
+      > when working on features.
+    </p>
+    <div
+      style="background: rgba(14, 165, 193, 0.08); border: 2px solid #0ea5c1; border-radius: 12px; padding: 1.5rem 2rem; text-align: left; font-family: monospace; font-size: 0.9rem; line-height: 1.8; color: #e2e8f0;"
+    >
+      <span style="color: #0ea5c1; font-weight: 700;">1.</span> Plan should contain a list of
+      <span style="color: #0ea5c1;">behaviors</span><br />
+      &nbsp;&nbsp;&nbsp;we are changing or implementing<br /><br />
+      <span style="color: #0ea5c1; font-weight: 700;">2.</span> Delegate execution to
+      <span style="color: #4ade80;">Backend Engineer</span><br />
+      &nbsp;&nbsp;&nbsp;1 agent = 1 feature slice. May use multiple sub-agents<br /><br />
+      <span style="color: #0ea5c1; font-weight: 700;">3.</span> Spawn
+      <span style="color: #4ade80;">Backend Test Engineer</span><br />
+      &nbsp;&nbsp;&nbsp;to write tests for the defined behaviors<br /><br />
+      <span style="color: #0ea5c1; font-weight: 700;">4.</span> Run the tests — if they fail,<br />
+      &nbsp;&nbsp;&nbsp;delegate fixes to the <span style="color: #4ade80;">Engineer</span><br /><br />
+      <span style="color: #0ea5c1; font-weight: 700;">5.</span> After tests are green,<br />
+      &nbsp;&nbsp;&nbsp;run all <span style="color: #f0c36d;">Code Reviewers</span><br /><br />
+      <span style="color: #0ea5c1; font-weight: 700;">6.</span> Fix or report about findings
+    </div>
+    <div
+      style="border: 2px solid #0ea5c1; border-radius: 12px; padding: 1rem; background: rgba(14, 165, 193, 0.1); margin-top: 1.25rem;"
+    >
+      <p style="margin: 0; text-align: center; font-size: 0.95rem;">
+        This is my daily workflow for features. One command, and the entire team orchestration kicks in.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== Closing ==================== -->
+
+  <!-- Slide 23: When NOT to Orchestrate -->
+  <section>
+    <h2>When NOT to Orchestrate</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 1.5rem;">
+      <div class="content-box red">
+        <span class="content-box-icon">✏️</span>
+        <div class="content-box-content">
+          <h3>Small inline changes</h3>
+          <p style="color: #a0aec0;">Sub-agents have overhead, just do it directly</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <span class="content-box-icon">📄</span>
+        <div class="content-box-content">
+          <h3>Single-file fixes</h3>
+          <p style="color: #a0aec0;">Orchestration cost exceeds the benefit</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <span class="content-box-icon">🔍</span>
+        <div class="content-box-content">
+          <h3>Quick questions or exploration</h3>
+          <p style="color: #a0aec0;">Use read-only mode instead</p>
+        </div>
+      </div>
+      <div class="content-box red">
+        <span class="content-box-icon">🔗</span>
+        <div class="content-box-content">
+          <h3>Tightly coupled changes</h3>
+          <p style="color: #a0aec0;">When every change depends on the previous one</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 24: Key Takeaways -->
+  <section>
+    <h2>Key Takeaways</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+      <div
+        style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <p style="margin: 0; font-size: 1.05rem;">
+          Orchestration keeps your main context <strong>clean and sharp</strong>.
+        </p>
+      </div>
+      <div
+        style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <p style="margin: 0; font-size: 1.05rem;">
+          Non-specialized agents for <strong>quick delegation</strong>, specialized for
+          <strong>repeatable roles</strong>.
+        </p>
+      </div>
+      <div
+        style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <p style="margin: 0; font-size: 1.05rem;">
+          Define workflows in skills — <strong>invoke them when the task is big enough</strong>.
+        </p>
+      </div>
+      <div
+        style="border: 2px solid #0ea5c1; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(14, 165, 193, 0.1);"
+      >
+        <p style="margin: 0; font-size: 1.05rem;">
+          When you master basic orchestration, you are <strong>ready for agent swarms</strong>.
+        </p>
+      </div>
+      <div
+        style="border: 2px solid #4ade80; border-radius: 10px; padding: 1rem 1.25rem; background: rgba(74, 222, 128, 0.1);"
+      >
+        <p style="margin: 0; font-size: 1.15rem; text-align: center; font-weight: 600;">
+          Your orchestrator is the brain. Sub-agents are the hands.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 25: Thank You -->
+  <section>
+    <h2>Thank You!</h2>
+    <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; text-align: center;">
+      <p style="font-size: 1.2rem; color: #e2e8f0;">
+        <strong style="color: #0ea5c1;">extrabrain.dev</strong>
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <p style="color: #a0aec0; margin: 0; font-size: 0.95rem;">Previous presentations in this series:</p>
+        <p style="margin: 0;">
+          <a href="/presentations/ai-assisted-coding" style="color: #0ea5c1;">Foundation and Mindset</a>
+        </p>
+        <p style="margin: 0;">
+          <a href="/presentations/prompting-and-context" style="color: #0ea5c1;">Prompting & Context Management</a>
+        </p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <p style="color: #a0aec0; margin: 0; font-size: 0.95rem;">Next in this series:</p>
+        <p style="margin: 0;">
+          <a href="/presentations/swarms-and-mass-refactoring" style="color: #0ea5c1;"
+            >Scaling with Agent Swarms</a
+          >
+        </p>
+      </div>
+    </div>
+  </section>
+</PresentationLayout>
