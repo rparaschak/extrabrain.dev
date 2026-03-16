@@ -106,7 +106,7 @@ const metadata = {
         <div class="content-box-content">
           <h3>Iterative work</h3>
           <ul style="color: #a0aec0; font-size: 0.85rem; margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
-            <li>Many iterations, each needs verification</li>
+            <li>Many iterations, each needs verification and decision making</li>
             <li>Main agent carries knowledge forward</li>
             <li>Context stays clean between iterations</li>
           </ul>
@@ -115,7 +115,7 @@ const metadata = {
       <div class="content-box" style="margin: 0;">
         <span class="content-box-icon">🧩</span>
         <div class="content-box-content">
-          <h3>Different types of work</h3>
+          <h3>Specialized work</h3>
           <ul style="color: #a0aec0; font-size: 0.85rem; margin: 0.5rem 0 0 0; padding-left: 1.2rem;">
             <li>Analyze, decide, build backend, frontend, test</li>
             <li>One agent = bloated context</li>
@@ -130,6 +130,47 @@ const metadata = {
       <p style="margin: 0; text-align: center; font-size: 0.95rem;">
         Orchestration is not about parallelism — it is about keeping each agent's context focused and sharp.
       </p>
+    </div>
+  </section>
+
+  <!-- Slide: Examples -->
+  <section>
+    <h2>Examples</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <h3 style="color: #0ea5c1; font-size: 1rem; margin: 0;">🔄 Iterative work</h3>
+        <div class="content-box" style="margin: 0;">
+          <div class="content-box-content">
+            <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+              Creating a feature. Adding sorting. Adding filtering. Adding pagination. Adding tests.
+            </p>
+          </div>
+        </div>
+        <div class="content-box" style="margin: 0;">
+          <div class="content-box-content">
+            <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+              Find and breakdown all components that are bigger than 200 LoC.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <h3 style="color: #f0c36d; font-size: 1rem; margin: 0;">🧩 Specialized work</h3>
+        <div class="content-box" style="margin: 0;">
+          <div class="content-box-content">
+            <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+              Help me define the architecture for feature in feature.md. Implement backend and frontend. Review the code.
+            </p>
+          </div>
+        </div>
+        <div class="content-box" style="margin: 0;">
+          <div class="content-box-content">
+            <p style="color: #a0aec0; font-size: 0.85rem; margin: 0;">
+              Make a deep analysis of feature X. Make me a list of tests we should write. Implement those tests.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -245,7 +286,7 @@ const metadata = {
   <section>
     <h2>The Pattern</h2>
     <div
-      style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2rem auto; max-width: 95%;"
+      style="display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0.5rem; margin: 2rem auto; max-width: 85%;"
     >
       <div
         style="background: rgba(14, 165, 193, 0.15); border: 2px solid #0ea5c1; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
@@ -255,16 +296,9 @@ const metadata = {
       </div>
       <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
       <div
-        style="background: rgba(240, 195, 109, 0.15); border: 2px solid #f0c36d; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
-      >
-        <p style="font-size: 0.85rem; font-weight: 700; color: #f0c36d; margin: 0 0 0.35rem 0;">Delegate</p>
-        <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Spawn sub-agent</p>
-      </div>
-      <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
-      <div
         style="background: rgba(74, 222, 128, 0.15); border: 2px solid #4ade80; padding: 1rem 0.75rem; border-radius: 10px; text-align: center;"
       >
-        <p style="font-size: 0.85rem; font-weight: 700; color: #4ade80; margin: 0 0 0.35rem 0;">Execute</p>
+        <p style="font-size: 0.85rem; font-weight: 700; color: #4ade80; margin: 0 0 0.35rem 0;">Delegate</p>
         <p style="font-size: 0.75rem; color: #a0aec0; margin: 0;">Sub-agent codes</p>
       </div>
       <span style="color: #0ea5c1; font-size: 1.5rem;">→</span>
