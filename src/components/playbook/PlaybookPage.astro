@@ -1,0 +1,60 @@
+---
+import type { PlaybookPage } from '~/types';
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  page: PlaybookPage;
+  prev?: PlaybookPage;
+  next?: PlaybookPage;
+}
+
+const { page, prev, next } = Astro.props;
+---
+
+<article>
+  <header class="mb-8">
+    <h1 class="text-4xl md:text-5xl font-bold leading-tighter tracking-tighter font-heading">
+      {page.title}
+    </h1>
+    {page.description && <p class="mt-4 text-xl text-muted dark:text-slate-400">{page.description}</p>}
+    <div class="border-t dark:border-slate-700 mt-6"></div>
+  </header>
+
+  <div
+    class="prose prose-md lg:prose-xl dark:prose-invert dark:prose-headings:text-slate-300 prose-headings:font-heading prose-headings:leading-tighter prose-headings:tracking-tighter prose-headings:font-bold prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg prose-headings:scroll-mt-[80px] prose-li:my-0"
+  >
+    <slot />
+  </div>
+
+  {
+    (prev || next) && (
+      <nav
+        class="mt-12 pt-6 border-t dark:border-slate-700 flex justify-between items-center"
+        aria-label="Page navigation"
+      >
+        {prev ? (
+          <a
+            href={prev.permalink}
+            class="group flex items-center gap-2 text-muted dark:text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors"
+          >
+            <Icon name="tabler:arrow-left" class="w-4 h-4" />
+            <span class="text-sm">{prev.title}</span>
+          </a>
+        ) : (
+          <div />
+        )}
+        {next ? (
+          <a
+            href={next.permalink}
+            class="group flex items-center gap-2 text-muted dark:text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors"
+          >
+            <span class="text-sm">{next.title}</span>
+            <Icon name="tabler:arrow-right" class="w-4 h-4" />
+          </a>
+        ) : (
+          <div />
+        )}
+      </nav>
+    )
+  }
+</article>

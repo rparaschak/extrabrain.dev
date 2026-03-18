@@ -1,0 +1,32 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import PlaybookLayout from '~/components/playbook/PlaybookLayout.astro';
+
+import { fetchPlaybookPages, getStaticPathsPlaybookPage, getPlaybookNavigation } from '~/utils/playbook';
+import { playbookSidebar } from '~/data/playbook/sidebar';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsPlaybookPage();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+const allPages = await fetchPlaybookPages();
+const { prev, next } = getPlaybookNavigation(page.section, page.slug, allPages);
+
+const metadata = {
+  title: page.title,
+  description: page.description,
+};
+---
+
+<Layout metadata={metadata}>
+  <PlaybookLayout page={page} sections={playbookSidebar} allPages={allPages} prev={prev} next={next}>
+    {page.Content && <page.Content />}
+  </PlaybookLayout>
+</Layout>

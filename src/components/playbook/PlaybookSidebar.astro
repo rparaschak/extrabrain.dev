@@ -1,0 +1,75 @@
+---
+import type { PlaybookPage } from '~/types';
+import type { PlaybookSidebarSection } from '~/data/playbook/sidebar';
+
+export interface Props {
+  sections: PlaybookSidebarSection[];
+  pages: PlaybookPage[];
+  currentSection: string;
+  currentPage: string;
+}
+
+const { sections, pages, currentSection, currentPage } = Astro.props;
+---
+
+<nav
+  class="playbook-sidebar sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto text-sm pr-4"
+  aria-label="Playbook navigation"
+>
+  <ul class="space-y-4">
+    {
+      sections.map((section) => {
+        const isActiveSection = section.slug === currentSection;
+        const sectionPages = section.pages
+          .map((slug) => pages.find((p) => p.slug === slug && p.section === section.slug))
+          .filter((p): p is PlaybookPage => !!p);
+
+        return (
+          <li>
+            <details open={isActiveSection}>
+              <summary class="cursor-pointer font-semibold text-xs uppercase tracking-wider text-muted dark:text-slate-400 mb-1 select-none hover:text-primary dark:hover:text-blue-400 transition-colors list-none flex items-center gap-1">
+                <svg
+                  class="playbook-chevron w-3 h-3 shrink-0 transition-transform"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M4 2l4 4-4 4" />
+                </svg>
+                {section.title}
+              </summary>
+              <ul class="mt-1 space-y-0.5 border-l border-gray-200 dark:border-slate-700 ml-1.5">
+                {sectionPages.map((page) => {
+                  const isActive = page.slug === currentPage && section.slug === currentSection;
+                  return (
+                    <li>
+                      <a
+                        href={page.permalink}
+                        class:list={[
+                          'block py-1 pl-4 border-l-2 -ml-px transition-colors',
+                          isActive
+                            ? 'border-primary dark:border-blue-400 text-primary dark:text-blue-400 font-medium'
+                            : 'border-transparent text-muted dark:text-slate-400 hover:text-primary dark:hover:text-blue-400',
+                        ]}
+                      >
+                        {page.draft && <span class="text-yellow-500 dark:text-yellow-400 mr-1 text-xs">●</span>}
+                        <span class:list={[page.draft && 'opacity-60']}>{page.title}</span>
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </details>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<style>
+  details[open] > summary .playbook-chevron {
+    transform: rotate(90deg);
+  }
+</style>

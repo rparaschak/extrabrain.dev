@@ -1,0 +1,45 @@
+---
+import TableOfContents from '~/components/blog/TableOfContents.astro';
+import PlaybookSidebar from './PlaybookSidebar.astro';
+import PlaybookPageComponent from './PlaybookPage.astro';
+import type { PlaybookPage } from '~/types';
+import type { PlaybookSidebarSection } from '~/data/playbook/sidebar';
+
+export interface Props {
+  page: PlaybookPage;
+  sections: PlaybookSidebarSection[];
+  allPages: PlaybookPage[];
+  prev?: PlaybookPage;
+  next?: PlaybookPage;
+}
+
+const { page, sections, allPages, prev, next } = Astro.props;
+
+const tocHeadings = (page.headings || []).filter((h) => h.depth === 2 || h.depth === 3);
+const hasToc = tocHeadings.length >= 2;
+---
+
+<section class="py-8 sm:py-16 lg:py-20 mx-auto">
+  <div class="flex max-w-[1400px] mx-auto px-4 sm:px-6">
+    <!-- Left sidebar -->
+    <aside class="hidden lg:block w-[250px] shrink-0">
+      <PlaybookSidebar sections={sections} pages={allPages} currentSection={page.section} currentPage={page.slug} />
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-1 min-w-0 max-w-[868px] mx-auto px-6 sm:px-6">
+      <PlaybookPageComponent page={page} prev={prev} next={next}>
+        <slot />
+      </PlaybookPageComponent>
+    </div>
+
+    <!-- Right TOC -->
+    {
+      hasToc && (
+        <aside class="hidden xl:block w-[220px] shrink-0 ml-8">
+          <TableOfContents headings={page.headings!} />
+        </aside>
+      )
+    }
+  </div>
+</section>

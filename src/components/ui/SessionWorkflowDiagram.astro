@@ -1,0 +1,253 @@
+---
+
+---
+
+<div class="not-prose my-6 flex justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 180" class="w-full rounded-lg">
+    <defs>
+      <linearGradient id="swBg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0d1117"></stop>
+        <stop offset="100%" stop-color="#161b22"></stop>
+      </linearGradient>
+      <filter id="swGlowCyan" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+      </filter>
+      <filter id="swGlowAmber" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+      </filter>
+      <filter id="swGlowGreen" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+      </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="700" height="180" rx="8" fill="url(#swBg)"></rect>
+
+    <!-- Subtle grid -->
+    <g opacity="0.04" stroke="#c9d1d9" stroke-width="0.5">
+      <line x1="60" y1="0" x2="60" y2="180"></line>
+      <line x1="120" y1="0" x2="120" y2="180"></line>
+      <line x1="180" y1="0" x2="180" y2="180"></line>
+      <line x1="240" y1="0" x2="240" y2="180"></line>
+      <line x1="300" y1="0" x2="300" y2="180"></line>
+      <line x1="360" y1="0" x2="360" y2="180"></line>
+      <line x1="420" y1="0" x2="420" y2="180"></line>
+      <line x1="480" y1="0" x2="480" y2="180"></line>
+      <line x1="540" y1="0" x2="540" y2="180"></line>
+      <line x1="600" y1="0" x2="600" y2="180"></line>
+      <line x1="660" y1="0" x2="660" y2="180"></line>
+    </g>
+
+    <!-- Decorative corners -->
+    <g stroke="#30363d" stroke-width="1" fill="none" opacity="0.3">
+      <polyline points="15,35 15,15 35,15"></polyline>
+      <polyline points="665,15 685,15 685,35"></polyline>
+      <polyline points="685,145 685,165 665,165"></polyline>
+      <polyline points="35,165 15,165 15,145"></polyline>
+    </g>
+
+    <!-- Title -->
+    <text
+      x="350"
+      y="38"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="14"
+      font-weight="700"
+      fill="#e6edf3">SESSION WORKFLOW</text
+    >
+
+    <!-- Box 1: Investigate (cyan) -->
+    <rect
+      x="30"
+      y="58"
+      width="138"
+      height="100"
+      rx="8"
+      fill="#0ea5c1"
+      opacity="0.1"
+      stroke="#0ea5c1"
+      stroke-width="1.5"
+      filter="url(#swGlowCyan)"></rect>
+    <text
+      x="99"
+      y="82"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      font-weight="700"
+      fill="#67e8f9">Investigate</text
+    >
+    <text
+      x="99"
+      y="104"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">Can we implement X?</text
+    >
+    <text
+      x="99"
+      y="118"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">Does this API support Y?</text
+    >
+    <text
+      x="99"
+      y="132"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">How does it affect tests?</text
+    >
+
+    <!-- Arrow 1 -->
+    <text
+      x="183"
+      y="113"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="16"
+      fill="#0ea5c1">→</text
+    >
+
+    <!-- Box 2: Document (amber) -->
+    <rect
+      x="198"
+      y="58"
+      width="138"
+      height="100"
+      rx="8"
+      fill="#f0c36d"
+      opacity="0.1"
+      stroke="#f0c36d"
+      stroke-width="1.5"
+      filter="url(#swGlowAmber)"></rect>
+    <text
+      x="267"
+      y="82"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      font-weight="700"
+      fill="#f0c36d">Document</text
+    >
+    <text
+      x="267"
+      y="108"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">Idea, behaviours,</text
+    >
+    <text
+      x="267"
+      y="122"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">technical details</text
+    >
+
+    <!-- Arrow 2 -->
+    <text
+      x="351"
+      y="113"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="16"
+      fill="#0ea5c1">→</text
+    >
+
+    <!-- Box 3: Plan (cyan) -->
+    <rect
+      x="366"
+      y="58"
+      width="138"
+      height="100"
+      rx="8"
+      fill="#0ea5c1"
+      opacity="0.1"
+      stroke="#0ea5c1"
+      stroke-width="1.5"
+      filter="url(#swGlowCyan)"></rect>
+    <text
+      x="435"
+      y="82"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      font-weight="700"
+      fill="#67e8f9">Plan</text
+    >
+    <text
+      x="435"
+      y="108"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">Give doc to agent.</text
+    >
+    <text
+      x="435"
+      y="122"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">Review plan.</text
+    >
+
+    <!-- Arrow 3 -->
+    <text
+      x="519"
+      y="113"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="16"
+      fill="#0ea5c1">→</text
+    >
+
+    <!-- Box 4: Execute (green) -->
+    <rect
+      x="534"
+      y="58"
+      width="138"
+      height="100"
+      rx="8"
+      fill="#22c55e"
+      opacity="0.1"
+      stroke="#22c55e"
+      stroke-width="1.5"
+      filter="url(#swGlowGreen)"></rect>
+    <text
+      x="603"
+      y="82"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="12"
+      font-weight="700"
+      fill="#86efac">Execute</text
+    >
+    <text
+      x="603"
+      y="108"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">Implement.</text
+    >
+    <text
+      x="603"
+      y="122"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="9"
+      fill="#8b949e">One task at a time.</text
+    >
+  </svg>
+</div>

@@ -1,0 +1,190 @@
+---
+
+---
+
+<div class="not-prose my-6 flex justify-center">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280" class="w-full rounded-lg">
+    <defs>
+      <linearGradient id="otBg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0d1117"></stop>
+        <stop offset="100%" stop-color="#161b22"></stop>
+      </linearGradient>
+      <filter id="otGlowGreen" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+      </filter>
+      <filter id="otGlowRed" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+        <feComposite in="SourceGraphic" in2="blur" operator="over"></feComposite>
+      </filter>
+    </defs>
+
+    <!-- Background -->
+    <rect width="700" height="280" rx="8" fill="url(#otBg)"></rect>
+
+    <!-- Subtle grid -->
+    <g opacity="0.04" stroke="#c9d1d9" stroke-width="0.5">
+      <line x1="60" y1="0" x2="60" y2="280"></line>
+      <line x1="120" y1="0" x2="120" y2="280"></line>
+      <line x1="180" y1="0" x2="180" y2="280"></line>
+      <line x1="240" y1="0" x2="240" y2="280"></line>
+      <line x1="300" y1="0" x2="300" y2="280"></line>
+      <line x1="360" y1="0" x2="360" y2="280"></line>
+      <line x1="420" y1="0" x2="420" y2="280"></line>
+      <line x1="480" y1="0" x2="480" y2="280"></line>
+      <line x1="540" y1="0" x2="540" y2="280"></line>
+      <line x1="600" y1="0" x2="600" y2="280"></line>
+      <line x1="660" y1="0" x2="660" y2="280"></line>
+    </g>
+
+    <!-- Decorative corners -->
+    <g stroke="#30363d" stroke-width="1" fill="none" opacity="0.3">
+      <polyline points="15,35 15,15 35,15"></polyline>
+      <polyline points="665,15 685,15 685,35"></polyline>
+      <polyline points="685,245 685,265 665,265"></polyline>
+      <polyline points="35,265 15,265 15,245"></polyline>
+    </g>
+
+    <!-- Left box: One session for everything (red) -->
+    <rect
+      x="30"
+      y="25"
+      width="310"
+      height="230"
+      rx="10"
+      fill="#ef4444"
+      opacity="0.08"
+      stroke="#ef4444"
+      stroke-width="1.5"
+      filter="url(#otGlowRed)"></rect>
+
+    <text
+      x="185"
+      y="60"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="14"
+      font-weight="700"
+      fill="#fca5a5">One session for everything</text
+    >
+
+    <text
+      x="185"
+      y="100"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#8b949e">Table + filters + sorting</text
+    >
+    <text
+      x="185"
+      y="120"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#8b949e">+ adjustments + bug fixes</text
+    >
+
+    <!-- Separator line -->
+    <line x1="80" y1="145" x2="290" y2="145" stroke="#ef4444" stroke-width="0.5" opacity="0.4"></line>
+
+    <text
+      x="185"
+      y="175"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#fca5a5">Context bloats.</text
+    >
+    <text
+      x="185"
+      y="195"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#fca5a5">Agent drifts.</text
+    >
+    <text
+      x="185"
+      y="215"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#fca5a5">Quality drops.</text
+    >
+
+    <!-- Right box: One focused task per session (green) -->
+    <rect
+      x="360"
+      y="25"
+      width="310"
+      height="230"
+      rx="10"
+      fill="#22c55e"
+      opacity="0.08"
+      stroke="#22c55e"
+      stroke-width="1.5"
+      filter="url(#otGlowGreen)"></rect>
+
+    <text
+      x="515"
+      y="60"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="14"
+      font-weight="700"
+      fill="#86efac">One focused task per session</text
+    >
+
+    <text
+      x="515"
+      y="100"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#86efac">Session 1:</text
+    >
+    <text
+      x="515"
+      y="118"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#8b949e">Table with filters</text
+    >
+
+    <text
+      x="515"
+      y="148"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#86efac">Session 2:</text
+    >
+    <text
+      x="515"
+      y="166"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#8b949e">Sorting and adjustments</text
+    >
+
+    <text
+      x="515"
+      y="196"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#86efac">Session 3:</text
+    >
+    <text
+      x="515"
+      y="214"
+      text-anchor="middle"
+      font-family="'SF Mono','Fira Code','Consolas',monospace"
+      font-size="11"
+      fill="#8b949e">Bug fixes from review</text
+    >
+  </svg>
+</div>

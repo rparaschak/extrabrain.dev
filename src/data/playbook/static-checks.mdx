@@ -1,16 +1,9 @@
 ---
-publishDate: 2026-02-13T00:00:00Z
-title: 'Agentic Coding: Static Checks'
-excerpt: 'Combining AI with static tools like linters or compilers can significantly improve quality.'
-image: ~/assets/images/blog/evals-static-cover.svg
-category: Agentic Engineering
-tags:
-  - Software Development
-  - Agentic Engineering
-draft: false
+title: 'Static Checks'
+description: 'Combining AI with static tools like linters or compilers can significantly improve quality.'
+section: 'feedback-loop'
 ---
 
-import CallToAction from '~/components/widgets/CallToAction.astro';
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 import CodeComparison from '~/components/ui/CodeComparison.astro';
 import EvalFlowDiagram from '~/components/ui/EvalFlowDiagram.astro';
@@ -302,17 +295,17 @@ Here's what it looks like when it all works:
 
 ```
 ⏺ Bash(cd /Users/xxx/workspace/yyy/zzz/bakckend && make check 2>&1)
-  ⎿  go vet cmd/server/main.go
+  ⎿  go vet cmd/server/main.go
      go run github.com/golangci/golangci-lint/v2/cmd/golangci-lint@latest run --fix ./...
      0 issues.
-  ⎿  (timeout 2m)
+  ⎿  (timeout 2m)
 
 ⏺ Bash(make test 2>&1)
-  ⎿  ./scripts/run-tests.sh --short
+  ⎿  ./scripts/run-tests.sh --short
      Starting server on port 3002 (env: autotest)...
      Server started (PID: 34901)
      … +92 lines (ctrl+o to expand)
-  ⎿  (timeout 5m)
+  ⎿  (timeout 5m)
 
 ⏺ All 939 tests pass, 0 issues from linter.
 ```

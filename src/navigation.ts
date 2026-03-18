@@ -6,6 +6,10 @@ export const headerData = {
       text: 'Blog',
       href: getBlogPermalink(),
     },
+    {
+      text: 'Playbook',
+      href: '/playbook',
+    },
   ],
   actions: [],
 };

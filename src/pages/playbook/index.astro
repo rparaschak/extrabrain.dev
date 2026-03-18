@@ -1,0 +1,18 @@
+---
+import { fetchPlaybookPages } from '~/utils/playbook';
+import { playbookSidebar } from '~/data/playbook/sidebar';
+
+export const prerender = true;
+
+const allPages = await fetchPlaybookPages();
+
+// Find first non-draft page from sidebar order
+for (const section of playbookSidebar) {
+  for (const pageSlug of section.pages) {
+    const page = allPages.find((p) => p.slug === pageSlug && p.section === section.slug);
+    if (page) {
+      return Astro.redirect(page.permalink);
+    }
+  }
+}
+---

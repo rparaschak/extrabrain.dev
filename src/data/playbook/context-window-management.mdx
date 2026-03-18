@@ -1,0 +1,91 @@
+---
+title: 'Context Window Management'
+description: 'The 75% rule, monitoring tools, and why I disabled auto-compact.'
+section: 'core-concepts'
+---
+
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+import ContextWindowDiagram from '~/components/ui/ContextWindowDiagram.astro';
+import OneTaskPerSessionDiagram from '~/components/ui/OneTaskPerSessionDiagram.astro';
+
+## The Context Problem
+
+There is a context window problem. The more context you have in your session, the worse the model performs.
+Attention degrades. Agent drifts from instructions and makes unexpected decisions. Latency rises, so each response takes longer.
+And if you are paying per token, not on the subscription, then your expenses rise too.
+
+I am sceptical about 1 million token models because I feel that the best threshold for me is up to 150,000 tokens per session.
+
+## The 75% Rule
+
+If we take Opus with 200,000 tokens of context limit, then 75% is 150K.
+
+<ContextWindowDiagram />
+
+- **Under 100,000 tokens** — high accuracy, best performance. This is where I do the real work.
+- **Between 100K and 150K** — I usually wrap up things. This window is for small adjustments or questions.
+- **Above 150K** — danger zone. From that moment I do not trust my agent.
+
+## Monitor Your Context
+
+If you don't track your context window, you cannot manage it.
+
+### `/context` command
+
+You might run it after every prompt or after every few prompts, so you know where you stand before sending the next feature into development. You can also see how much tokens your tools and guidelines use.
+
+### Custom status line
+
+To configure that, you can easily run `/status-line` and explain what you want. In my case, I have a visual progress bar with a colour scheme — green under 50%, yellow between 50% and 75%, and red above 75%.
+
+![Custom status line with context progress bar](~/assets/images/playbook/status-line-context.png)
+
+Currently the default model from Claude Code gives you 1 million context. I never use it. I still follow my 75% rule, but my hard limit stays at 150K to make sure that my model keeps focus.
+
+For this reason, either use `/status-line` and configure your status line, or use `/context`.
+
+## Auto-Compact
+
+I am pretty sure that everyone has seen auto-compact in action. Whenever you hit the context limit, your model starts auto-compacting the conversation — basically an advanced prompt to make a summary of everything that was done and everything you told to the model.
+
+But the problem is that auto-compact removes information from your context without telling you what was lost. Your instructions, your constraints, decisions — all of those may silently disappear. It means you lose control.
+
+There is a configuration which allows you to turn off auto-compact. I personally disabled it because I would like to have manual control over that. You can disable it by running `/config` and setting Auto-compact to `false`.
+
+![Disabling auto-compact in Claude Code config](~/assets/images/playbook/config-autocompact.png)
+
+When context gets high, I either ask to summarise what was done, review it, and then I can use the summary as the beginning of the next session. The difference is that I know what is in my summary. I can also give the instructions on what has to be in this summary, what is important for me.
+
+```
+I need to refactor the next module. Make a summary of our conversation
+so I can continue in the next session.
+Keep all of the details about the refactoring sequence and the structure
+of the new data factory.
+Do not mention anything specific to communities factory.
+```
+
+## One Task Per Session
+
+Let's say you are developing a UI which has a new page with table, filter, sorting, and then of course you will need to do some adjustments and bug fixes.
+
+If you try to work in a single session, then your context might bloat and agent will start performing poorly. The quality drops.
+
+What you can do instead is using multiple sessions for this single assignment.
+
+<OneTaskPerSessionDiagram />
+
+That way you are going to have more focused context windows and much less chance for hallucination.
+
+When you see the task growing bigger than expected — **stop. Start a new session.**
+
+## Takeaways
+
+- With Opus 4.6, use 100K tokens as a soft limit, 150K tokens as a hard limit
+- If you don't track your context window, you cannot manage it — use `/status-line` or `/context`
+- Disable auto-compact and take manual control over your summaries
+- Split your work into multiple focused sessions instead of one long session
+- You are the brain and AI is your hands
+
+---
+
+<FreeConsultationCTA />

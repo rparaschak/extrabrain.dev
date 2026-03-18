@@ -283,6 +283,20 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
 
+export interface PlaybookPage {
+  id: string;
+  slug: string;
+  permalink: string;
+  title: string;
+  description?: string;
+  section: string;
+  draft?: boolean;
+  metadata?: MetaData;
+  Content?: AstroComponentFactory;
+  content?: string;
+  headings?: { depth: number; slug: string; text: string }[];
+}
+
 export interface Presentation {
   /** A unique ID number that identifies a presentation. */
   id: string;

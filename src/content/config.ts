@@ -65,6 +65,18 @@ const postCollection = defineCollection({
   }),
 });
 
+const playbookCollection = defineCollection({
+  loader: glob({ pattern: ['*.md', '*.mdx'], base: 'src/data/playbook' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+    section: z.string(),
+    draft: z.boolean().optional(),
+    metadata: metadataDefinition(),
+  }),
+});
+
 export const collections = {
   post: postCollection,
+  playbook: playbookCollection,
 };

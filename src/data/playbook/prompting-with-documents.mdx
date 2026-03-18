@@ -1,0 +1,179 @@
+---
+title: 'Prompting with Documents'
+description: 'Feature documents vs drip feeding, document structure, and why writing before coding matters.'
+section: 'core-concepts'
+draft: true
+---
+
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+## Two Approaches
+
+There are two ways to give your agent instructions. Many engineers start with the first one and never move to the second.
+
+### Drip Feeding
+
+```
+> Create a chat component. It should open when clicking the chat button.
+  ✓ Done
+> Add a spinner after sending the message.
+  ✓ Done
+> Use the spinner from the component library instead of implementing your own.
+  ✓ Done     
+```
+
+Small details, one prompt at a time.
+
+This works. But it is slower. Before you start, you do not see the full picture. 
+You discover edge cases mid-session and spend prompts on corrections that you could have avoided. 
+Instead of drinking your coffee - you wait.
+
+### Document Prompting
+
+The other approach is different. You start describing the feature — its behaviour, practical details — in a single document. 
+A Markdown file, right in your repository(or elsewhere). Before the agent writes a single line of code, you already see the end goal.
+
+You can take your time. Drink coffee. Or actually continue the next day. Why would I start coding if I do not understand the problem and the solution? If my idea is not ready in my head, I simply leave the document for tomorrow.
+
+## How My Prompt Document Looks
+
+I do not use any templates. I keep it free form. But it usually consists of three sections.
+
+**What we are building** — one paragraph. High-level context. What is this feature and why are we building it.
+
+**Behaviours** — a list of specific behaviours. How the feature should work from the user's perspective. These become my test cases later. Each line is a testable statement. If I cannot describe the behaviour clearly, I am not ready to build it.
+
+**Technical details** — this is where I make explicit decisions. Architecture, function names, endpoints, payload structure, component hierarchy, database models — anything I want to control.
+
+The more precise my input is, the more precise is my output. The less technical details I give, the more unpredictability the model gives to me. The more technical details I provide, the more deterministic solution I am going to get. I control the precision.
+
+## Example
+
+Here is a real example from one of my projects — an event announcements feature.
+
+```markdown
+# Contact Requests
+
+## Idea
+Users should be able to submit contact requests to communities. Each
+request carries a free-form payload (e.g. a message). Community managers
+and admins can view and review incoming requests. To prevent spam, users
+are rate-limited to 3 requests per community within a 24-hour window.
+
+## Behaviours
+- User can create a contact request for a community
+- Contact request is created with status "new" and includes the user's
+  payload
+- User is rate-limited to 3 requests per community per 24 hours.
+- Contact requests can be filtered by community, user, and status
+- Contact requests are ordered by created_at descending
+- Admin can update the payload of a contact request
+- Admin can update the status of a contact request (e.g. to "reviewed")
+
+## Technical Details
+- Data model already implemented, migration applied
+- ContactRequest model: Id, CommunityId, UserId, Status, Payload,
+  CreatedAt
+- Status values: `ContactRequestStatusNew`,
+  `ContactRequestStatusReviewed`
+
+### Usecases
+
+#### CreateContactRequest
+Creates a contact request for a given community.
+Args: CommunityId, Payload (map[string]any)
+Enforces rate limit: 3 per user per community per 24h.
+Error: `ErrContactRequestRateLimitExceeded`
+
+#### GetContactRequests
+Returns contact requests filtered by optional criteria.
+Opts: CommunityId, UserId, Status
+Ordered by created_at DESC. No default limit.
+
+#### UpdateContactRequest
+Updates payload and/or status of an existing contact request.
+Args: ContactRequestId, Payload (optional), Status (optional)
+Error: `ErrInvalidContactRequestStatus` when status is not recognized
+
+### Endpoints
+Simple and thin endpoints for all usecases.
+
+ACL:
+- Create: authenticated user
+- GetContactRequests, Update: CommunityManager and Admin
+```
+
+Notice how this document has all three sections. The idea gives the agent context. The behaviours tell it what the feature should do. And the technical details leave very little room for guessing — model fields, status values, usecase signatures, error names, access control rules. The agent does not need to invent any of that. It just executes.
+
+## Behaviours Become Tests
+
+There is a reason I always describe behaviours in my documents. In my workflow, I have a test engineer agent that creates test cases for each behaviour listed in the feature document. I am automating this process — I always ship the code together with tests.
+
+Later, my development agent runs those tests to verify that the code is working according to the defined behaviours. The behaviours in the document are not just a description for humans. They are the source of truth that flows through the entire pipeline — from the document, to the test cases, to the verification.
+
+If a behaviour is not in the document, it does not get tested. If it does not get tested, there is no guarantee it works. That is why every line in the behaviours section matters.
+
+Using the contact requests example from above, here is what the test structure looks like. Each behaviour from the document became a test case.
+
+```go
+func TestContactRequests_Usecase(t *testing.T) {
+    // setup: test environment, users, factories
+
+    t.Run("Creating a contact request", func(t *testing.T) {
+        t.Run("Creates with valid data", func(t *testing.T) { ... })
+        t.Run("Enforces rate limit of 3 per user per community per 24h", func(t *testing.T) { ... })
+    })
+
+    t.Run("Getting contact requests", func(t *testing.T) {
+        t.Run("Filters by communityId", func(t *testing.T) { ... })
+        t.Run("Filters by userId", func(t *testing.T) { ... })
+        t.Run("Excludes other communities when filtered", func(t *testing.T) { ... })
+        t.Run("Filters by status", func(t *testing.T) { ... })
+        t.Run("Orders by created_at DESC", func(t *testing.T) { ... })
+    })
+
+    t.Run("Updating a contact request", func(t *testing.T) {
+        t.Run("Updates payload", func(t *testing.T) { ... })
+        t.Run("Updates status", func(t *testing.T) { ... })
+        t.Run("Rejects invalid status", func(t *testing.T) { ... })
+    })
+
+    t.Run("Access control", func(t *testing.T) {
+        t.Run("Authenticated user can create a contact request", func(t *testing.T) { ... })
+        t.Run("Community manager can view and update contact requests", func(t *testing.T) { ... })
+        t.Run("Admin can view and update contact requests", func(t *testing.T) { ... })
+        t.Run("Regular user cannot view or update other users requests", func(t *testing.T) { ... })
+    })
+}
+```
+
+Every `t.Run` maps back to a behaviour in the document. The document is the specification, the tests are the verification.
+
+## Building Documents with Your Agent
+
+You do not have to write the document alone. You can use a new session to help refine a document with your agent. Rubber duck with it. Brainstorm how the feature should work. Your coding agent can be your product manager as well as your architect — I am not saying delegate this work to them, I am saying you can get their opinions.
+
+You can ask the agent to write the document for you based on your rough ideas, and then review what it produced. Challenge it. Ask questions. Let it push back on your assumptions. The agent sees the codebase — it might catch things you missed or suggest a simpler approach.
+
+The key is that you start the execution only when you see that the document is something you can approve. The document is yours. The agent helps you shape it, but the decisions stay with you.
+
+## When to Use Which
+
+Not everything needs a document.
+
+If you are just exploring or not sure what to build — just prompt in the terminal. Use [investigation sessions](/playbook/core-concepts/session-strategies) to explore and build understanding first.
+
+If the task is small, straightforward, and obvious — skip the document. Go straight to execution.
+
+But when the feature has multiple behaviours, edge cases, or requires collaboration with teammates — write a document first. The time you invest in writing pays back in fewer corrections, less wasted context, and more predictable results.
+
+## Takeaways
+
+- Drip feeding works for small tasks, but document prompting gives you more control over bigger features
+- Your document does not need a template — just describe what you are building, how it should behave, and the technical decisions you have made
+- The more precise your input, the more deterministic the output
+- A prompt in the terminal is gone after the session — a document stays in your repository
+
+---
+
+<FreeConsultationCTA />
