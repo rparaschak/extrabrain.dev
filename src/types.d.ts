@@ -42,6 +42,9 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+
+  /** Headings extracted from the post content for TOC */
+  headings?: { depth: number; slug: string; text: string }[];
 }
 
 export interface Taxonomy {

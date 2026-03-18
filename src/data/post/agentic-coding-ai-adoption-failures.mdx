@@ -1,0 +1,26 @@
+---
+publishDate: 2026-03-18T00:00:00Z
+title: 'Where AI Adoption Fails'
+excerpt: "Common failure patterns I see when working with clients and speaking to companies about AI coding adoption."
+category: Agentic Engineering
+tags:
+  - Software Development
+  - Agentic Engineering
+draft: true
+---
+
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+When working with clients and speaking to companies, I see common failure patterns.
+
+**Dropping AI randomly across the project.** Someone tries to one-shot a feature. It does not work. They tweak the prompt. Still does not work. The thing is, your codebase consists of layers — handlers, business logic, database models. Instead of one-shotting an entire feature, learn to generate HTTP handlers with validation consistently. When you are successful with those, move to the next layer. Without processing layer by layer, you will hit inconsistent results.
+
+**Giving up architectural control.** You want AI to fill the boxes, but you define the frame. You set the limits. Yes, you can ask AI to help you with architecture — but that is an explicit request. You cannot rely on AI deciding on architecture implicitly while implementing a feature.
+
+**Letting AI loose.** Sometimes engineers prompt successfully — first generation works, second works, third works. But they stop reviewing. Technical debt fills up. The success rate goes down and suddenly you have lost control over the codebase. Two weeks later, you cannot read your own code because it is not yours anymore.
+
+**Weak prompting.** Probably the most common issue I see. The task is described in two or three sentences. Good for you that you understand it in your head, but now you need to explain to AI what outcome you expect, why you are doing it, and how you plan to do it. Current models are really smart at figuring out the "how," but that is where nondeterminism kicks in. You can reduce it by prompting the details. For example: "We need a GET events and POST events request. The payload should always contain community ID. When an event is created, fire an event in the event bus. There should be an index for the community ID property in the database table."
+
+---
+
+<FreeConsultationCTA />

@@ -1,0 +1,90 @@
+---
+publishDate: 2026-03-17T00:00:00Z
+title: 'Agentic Coding: Junior Model'
+excerpt: "Think of AI as a junior developer — give it good examples, clear boundaries, constant feedback, and a clear objective."
+image: ~/assets/images/blog/agentic-coding-mindset-cover.svg
+category: Agentic Engineering
+tags:
+  - Software Development
+  - Agentic Engineering
+draft: false
+---
+
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+I think of AI as a junior developer on my team.
+
+Current models can perform better than some senior engineers. But when I treat them as a junior — when I give them clear examples, boundaries, and feedback — I get better results than when I assume they'll figure it out on their own.
+
+What does a junior developer need? Good examples to follow, clear boundaries, feedback, and a clear objective.
+
+## Good Examples
+
+Imagine you have consistent HTTP handlers. Every endpoint follows the same pattern — validation, error handling, response format. There is not much variation. You have solid examples for all HTTP methods. The code style is consistent.
+
+For a junior, it is easy. Open an existing handler, replicate the pattern, match the style. The same is true for AI.
+
+Your codebase is the training data. When the agent looks at how you handle a GET request, it should find one clear example, not three different approaches. One bad pattern in your codebase becomes the standard bad pattern by the end of the day. If your handlers are consistent, AI will generate consistent handlers. If they are a mess, AI will generate a mess.
+
+The same applies to tests. When every test file follows the same structure — setup, execution, assertions — AI replicates that structure. When each test file looks different, AI picks one at random.
+
+## Clear Boundaries
+
+A well-organized codebase speaks conventions through architecture, not documentation.
+
+It should be obvious that you use the already defined push notification service instead of creating a new one for your feature. Instead of a soup of service calls, you have strictly defined module dependencies. Your event model belongs to the events module. Module A cannot query the model from module B.
+
+A junior developer who joins a project with strong architecture quickly understands where things go. The structure tells them — this is where handlers live, this is how models are defined, this module depends on that module and nothing else.
+
+AI works the same way. When the architecture is clear, the agent does not need to guess where to put things. It follows the structure. When boundaries are blurry, AI makes its own decisions — and those decisions often break your architecture.
+
+## Feedback
+
+What do we do with junior developers? We tell them:
+
+- The logic should be broken down — this function is doing too much
+- The boundary is broken — this service should be defined in that module
+- Tests are red — a regression bug is introduced
+- The linter is indicating a code smell
+- The code is overcomplicated and needs to be simplified
+
+AI benefits from the same feedback. Tests, linters, and code reviews — they are your automated feedback loop. I wrote more about this in my posts on [the feedback loop](/llm-evals-overview) and [static checks](/llm-evals-static).
+
+## Clear Objective
+
+Many people say that LLMs are non-deterministic. True. But humans are non-deterministic too.
+
+Software engineering is about creativity. A clear objective raises the bar of the output. We have the ability to explain how a feature should work. We can explain the endpoints, the units of business logic, the database schema, the events. Any detail will be taken into consideration.
+
+This is an example of a weak prompt that gives a lot of freedom to the coding agent:
+
+```
+Implement forgot password feature.
+```
+
+And here is a more detailed prompt that introduces constraints and breaks down the implementation:
+
+```
+Implement forgot password feature.
+- Reset token should expire in 24h
+- Reset token is JWT string. Use package we use for auth token generation.
+- JWT should be created with the same private key we use for auth
+- Create a new type of JWT payload. Type: reset-password
+- When password is reset, store the token in redis with 24h TTL
+- Before resetting: check a) if token is not expired; b) token is not in redis
+```
+
+This is a very simple example of how you can prompt differently to achieve different results. Very often my prompt is actually a document that I write over the course of a day. Sometimes I start today and finish tomorrow. If I cannot explain it on paper, it means I don't know how it should be implemented.
+
+## What AI Needs From You
+
+Three things:
+
+1. **A clean and consistent codebase** — where AI can find good examples and understand the boundaries
+2. **Strong prompts** — with context, a clear objective of what to implement, how, and why
+3. **A feedback loop** — tests, linters, code reviews
+
+---
+
+<FreeConsultationCTA />
