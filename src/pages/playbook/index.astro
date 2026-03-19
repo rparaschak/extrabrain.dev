@@ -1,18 +1,27 @@
 ---
-import { fetchPlaybookPages } from '~/utils/playbook';
+import Layout from '~/layouts/PageLayout.astro';
+import PlaybookLayout from '~/components/playbook/PlaybookLayout.astro';
+import { fetchPlaybookPages, getIntroductionPage, getPlaybookNavigation } from '~/utils/playbook';
 import { playbookSidebar } from '~/data/playbook/sidebar';
 
 export const prerender = true;
 
-const allPages = await fetchPlaybookPages();
-
-// Find first non-draft page from sidebar order
-for (const section of playbookSidebar) {
-  for (const pageSlug of section.pages) {
-    const page = allPages.find((p) => p.slug === pageSlug && p.section === section.slug);
-    if (page) {
-      return Astro.redirect(page.permalink);
-    }
-  }
+const page = await getIntroductionPage();
+if (!page) {
+  return Astro.redirect('/404');
 }
+
+const allPages = await fetchPlaybookPages();
+const { prev, next } = getPlaybookNavigation(page.section, page.slug, allPages);
+
+const metadata = {
+  title: page.title,
+  description: page.description,
+};
 ---
+
+<Layout metadata={metadata}>
+  <PlaybookLayout page={page} sections={playbookSidebar} allPages={allPages} prev={prev} next={next}>
+    {page.Content && <page.Content />}
+  </PlaybookLayout>
+</Layout>

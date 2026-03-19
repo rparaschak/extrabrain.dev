@@ -7,7 +7,7 @@ export const headerData = {
       href: getBlogPermalink(),
     },
     {
-      text: 'Playbook',
+      text: 'AI Coding Playbook',
       href: '/playbook',
     },
   ],

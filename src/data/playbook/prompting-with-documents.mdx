@@ -19,18 +19,18 @@ There are two ways to give your agent instructions. Many engineers start with th
 > Add a spinner after sending the message.
   ✓ Done
 > Use the spinner from the component library instead of implementing your own.
-  ✓ Done     
+  ✓ Done
 ```
 
 Small details, one prompt at a time.
 
-This works. But it is slower. Before you start, you do not see the full picture. 
-You discover edge cases mid-session and spend prompts on corrections that you could have avoided. 
+This works. But it is slower. Before you start, you do not see the full picture.
+You discover edge cases mid-session and spend prompts on corrections that you could have avoided.
 Instead of drinking your coffee - you wait.
 
 ### Document Prompting
 
-The other approach is different. You start describing the feature — its behaviour, practical details — in a single document. 
+The other approach is different. You start describing the feature — its behaviour, practical details — in a single document.
 A Markdown file, right in your repository(or elsewhere). Before the agent writes a single line of code, you already see the end goal.
 
 You can take your time. Drink coffee. Or actually continue the next day. Why would I start coding if I do not understand the problem and the solution? If my idea is not ready in my head, I simply leave the document for tomorrow.
@@ -55,12 +55,14 @@ Here is a real example from one of my projects — an event announcements featur
 # Contact Requests
 
 ## Idea
+
 Users should be able to submit contact requests to communities. Each
 request carries a free-form payload (e.g. a message). Community managers
 and admins can view and review incoming requests. To prevent spam, users
 are rate-limited to 3 requests per community within a 24-hour window.
 
 ## Behaviours
+
 - User can create a contact request for a community
 - Contact request is created with status "new" and includes the user's
   payload
@@ -71,6 +73,7 @@ are rate-limited to 3 requests per community within a 24-hour window.
 - Admin can update the status of a contact request (e.g. to "reviewed")
 
 ## Technical Details
+
 - Data model already implemented, migration applied
 - ContactRequest model: Id, CommunityId, UserId, Status, Payload,
   CreatedAt
@@ -80,25 +83,30 @@ are rate-limited to 3 requests per community within a 24-hour window.
 ### Usecases
 
 #### CreateContactRequest
+
 Creates a contact request for a given community.
 Args: CommunityId, Payload (map[string]any)
 Enforces rate limit: 3 per user per community per 24h.
 Error: `ErrContactRequestRateLimitExceeded`
 
 #### GetContactRequests
+
 Returns contact requests filtered by optional criteria.
 Opts: CommunityId, UserId, Status
 Ordered by created_at DESC. No default limit.
 
 #### UpdateContactRequest
+
 Updates payload and/or status of an existing contact request.
 Args: ContactRequestId, Payload (optional), Status (optional)
 Error: `ErrInvalidContactRequestStatus` when status is not recognized
 
 ### Endpoints
+
 Simple and thin endpoints for all usecases.
 
 ACL:
+
 - Create: authenticated user
 - GetContactRequests, Update: CommunityManager and Admin
 ```

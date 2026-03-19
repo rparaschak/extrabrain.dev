@@ -1,7 +1,7 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import type { PlaybookPage } from '~/types';
-import { playbookSidebar } from '~/data/playbook/sidebar';
+import { playbookSidebar, playbookTopPages } from '~/data/playbook/sidebar';
 import { cleanSlug } from './permalinks';
 
 const getNormalizedPlaybookPage = async (page: CollectionEntry<'playbook'>): Promise<PlaybookPage> => {
@@ -9,14 +9,16 @@ const getNormalizedPlaybookPage = async (page: CollectionEntry<'playbook'>): Pro
   const { Content, headings } = await render(page);
 
   const slug = cleanSlug(id);
+  const section = data.section || '';
+  const permalink = section ? `/playbook/${section}/${slug}` : `/playbook`;
 
   return {
     id,
     slug,
-    permalink: `/playbook/${data.section}/${slug}`,
+    permalink,
     title: data.title,
     description: data.description,
-    section: data.section,
+    section,
     draft: data.draft || false,
     metadata: data.metadata || {},
     Content,
@@ -38,13 +40,22 @@ export const fetchPlaybookPages = async (): Promise<PlaybookPage[]> => {
 export const getStaticPathsPlaybookPage = async () => {
   const pages = await fetchPlaybookPages();
 
-  return pages.map((page) => ({
-    params: {
-      section: page.section,
-      page: page.slug,
-    },
-    props: { page },
-  }));
+  // Only return pages that have a section (sectioned pages use dynamic route)
+  return pages
+    .filter((page) => page.section)
+    .map((page) => ({
+      params: {
+        section: page.section,
+        page: page.slug,
+      },
+      props: { page },
+    }));
+};
+
+/** Get the introduction page (no section) */
+export const getIntroductionPage = async (): Promise<PlaybookPage | undefined> => {
+  const pages = await fetchPlaybookPages();
+  return pages.find((p) => p.slug === 'introduction' && !p.section);
 };
 
 export const getPlaybookNavigation = (
@@ -52,8 +63,14 @@ export const getPlaybookNavigation = (
   currentSlug: string,
   allPages: PlaybookPage[]
 ): { prev?: PlaybookPage; next?: PlaybookPage } => {
-  // Build flat ordered list from sidebar config
+  // Build flat ordered list: top pages first, then sidebar sections
   const ordered: PlaybookPage[] = [];
+
+  for (const pageSlug of playbookTopPages) {
+    const found = allPages.find((p) => p.slug === pageSlug && !p.section);
+    if (found) ordered.push(found);
+  }
+
   for (const section of playbookSidebar) {
     for (const pageSlug of section.pages) {
       const found = allPages.find((p) => p.slug === pageSlug && p.section === section.slug);

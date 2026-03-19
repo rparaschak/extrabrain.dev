@@ -70,7 +70,7 @@ const playbookCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
-    section: z.string(),
+    section: z.string().optional(),
     draft: z.boolean().optional(),
     metadata: metadataDefinition(),
   }),

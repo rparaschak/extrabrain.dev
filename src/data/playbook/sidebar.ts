@@ -4,6 +4,9 @@ export interface PlaybookSidebarSection {
   pages: string[];
 }
 
+/** Standalone pages shown at the top of the sidebar (no section grouping) */
+export const playbookTopPages: string[] = ['introduction'];
+
 export const playbookSidebar: PlaybookSidebarSection[] = [
   {
     slug: 'core-concepts',

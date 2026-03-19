@@ -21,10 +21,31 @@ const hasToc = tocHeadings.length >= 2;
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
   <div class="flex max-w-[1400px] mx-auto px-4 sm:px-6">
-    <!-- Left sidebar -->
+    <!-- Left sidebar (desktop) -->
     <aside class="hidden lg:block w-[250px] shrink-0">
       <PlaybookSidebar sections={sections} pages={allPages} currentSection={page.section} currentPage={page.slug} />
     </aside>
+
+    <!-- Mobile drawer toggle (sticky left edge) -->
+    <button
+      id="playbook-menu-btn"
+      class="lg:hidden fixed left-0 top-1/2 -translate-y-1/2 z-30 w-6 h-12 flex items-center justify-center bg-white dark:bg-slate-800 border border-l-0 border-gray-200 dark:border-slate-700 rounded-r-lg shadow-md text-muted dark:text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="playbook-drawer"
+    >
+      <svg
+        class="w-3.5 h-3.5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
 
     <!-- Main content -->
     <div class="flex-1 min-w-0 max-w-[868px] mx-auto px-6 sm:px-6">
@@ -43,3 +64,77 @@ const hasToc = tocHeadings.length >= 2;
     }
   </div>
 </section>
+
+<!-- Mobile drawer overlay -->
+<div id="playbook-drawer-overlay" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm hidden" aria-hidden="true">
+</div>
+
+<!-- Mobile drawer -->
+<aside
+  id="playbook-drawer"
+  class="fixed top-0 left-0 z-50 h-full w-[280px] bg-white dark:bg-slate-900 shadow-xl transform -translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto"
+  aria-label="Playbook navigation"
+>
+  <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-slate-700">
+    <span class="font-semibold text-sm">Playbook</span>
+    <button
+      id="playbook-drawer-close"
+      class="p-1 rounded-md text-muted dark:text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors"
+      aria-label="Close navigation menu"
+    >
+      <svg
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <div class="p-4">
+    <PlaybookSidebar sections={sections} pages={allPages} currentSection={page.section} currentPage={page.slug} />
+  </div>
+</aside>
+
+<script>
+  function initPlaybookDrawer() {
+    const btn = document.getElementById('playbook-menu-btn');
+    const drawer = document.getElementById('playbook-drawer');
+    const overlay = document.getElementById('playbook-drawer-overlay');
+    const closeBtn = document.getElementById('playbook-drawer-close');
+
+    if (!btn || !drawer || !overlay || !closeBtn) return;
+
+    function openDrawer() {
+      drawer!.classList.remove('-translate-x-full');
+      overlay!.classList.remove('hidden');
+      btn!.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      drawer!.classList.add('-translate-x-full');
+      overlay!.classList.add('hidden');
+      btn!.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+        closeDrawer();
+      }
+    });
+  }
+
+  initPlaybookDrawer();
+  document.addEventListener('astro:after-swap', initPlaybookDrawer);
+</script>
