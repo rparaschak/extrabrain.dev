@@ -1,30 +1,31 @@
 ---
 title: 'Context Window Management'
-description: 'The 75% rule, monitoring tools, and why I disabled auto-compact.'
+description: 'The 150K rule, monitoring tools, and why I disabled auto-compact.'
 section: 'core-concepts'
 ---
 
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
 import ContextWindowDiagram from '~/components/ui/ContextWindowDiagram.astro';
-import OneTaskPerSessionDiagram from '~/components/ui/OneTaskPerSessionDiagram.astro';
 
-## The Context Problem
+## The Context Rot Problem
 
-There is a context window problem. The more context you have in your session, the worse the model performs.
+You might now that the more context you have in your session, the worse the model performs.
 Attention degrades. Agent drifts from instructions and makes unexpected decisions. Latency rises, so each response takes longer.
 And if you are paying per token, not on the subscription, then your expenses rise too.
 
-I am sceptical about 1 million token models because I feel that the best threshold for me is up to 150,000 tokens per session.
+I am sceptical about 1 million token models because I feel that the best threshold for me is up to 150K tokens per session.
 
-## The 75% Rule
+## The 150K Rule
 
-If we take Opus with 200,000 tokens of context limit, then 75% is 150K.
+Opus now has 1 million tokens of context, but quality still degrades with bloated context. I keep it simple: 150K is my hard limit.
 
 <ContextWindowDiagram />
 
 - **Under 100,000 tokens** — high accuracy, best performance. This is where I do the real work.
 - **Between 100K and 150K** — I usually wrap up things. This window is for small adjustments or questions.
 - **Above 150K** — danger zone. From that moment I do not trust my agent.
+
+Currently the default model from Claude Code gives you 1 million context. I never use it. I still follow the 150K rule to make sure that my model keeps focus.
 
 ## Monitor Your Context
 
@@ -36,11 +37,9 @@ You might run it after every prompt or after every few prompts, so you know wher
 
 ### Custom status line
 
-To configure that, you can easily run `/status-line` and explain what you want. In my case, I have a visual progress bar with a colour scheme — green under 50%, yellow between 50% and 75%, and red above 75%.
+To configure that, you can easily run `/status-line` and explain what you want. In my case, I have a visual progress bar with a colour scheme — green under 100K, yellow between 100K and 150K, and red above 150K.
 
 ![Custom status line with context progress bar](~/assets/images/playbook/status-line-context.png)
-
-Currently the default model from Claude Code gives you 1 million context. I never use it. I still follow my 75% rule, but my hard limit stays at 150K to make sure that my model keeps focus.
 
 For this reason, either use `/status-line` and configure your status line, or use `/context`.
 
@@ -64,26 +63,19 @@ of the new data factory.
 Do not mention anything specific to communities factory.
 ```
 
-## One Task Per Session
+## Other Ways to Optimise Context
 
-Let's say you are developing a UI which has a new page with table, filter, sorting, and then of course you will need to do some adjustments and bug fixes.
+Sometimes 150K is simply not enough for what you need to do. For that reason, I use different techniques to optimise my context window:
 
-If you try to work in a single session, then your context might bloat and agent will start performing poorly. The quality drops.
-
-What you can do instead is using multiple sessions for this single assignment.
-
-<OneTaskPerSessionDiagram />
-
-That way you are going to have more focused context windows and much less chance for hallucination.
-
-When you see the task growing bigger than expected — **stop. Start a new session.**
+- **Session strategies** — split work into focused sessions, separate investigation from execution. Each session gets a fresh context. More on this in [Session Strategies](/playbook/core-concepts/session-strategies).
+- **Use swarms** — instead of one agent doing everything, spin up multiple agents that each handle a smaller piece of the task. Each agent gets its own fresh context. See [Swarms](/playbook/orchestration/swarms).
+- **Specialised teams** — assign different roles to different agents (reviewer, implementer, architect). Each one works in a narrow context instead of accumulating everything. See [Teams](/playbook/orchestration/teams).
 
 ## Takeaways
 
 - With Opus 4.6, use 100K tokens as a soft limit, 150K tokens as a hard limit
 - If you don't track your context window, you cannot manage it — use `/status-line` or `/context`
 - Disable auto-compact and take manual control over your summaries
-- Split your work into multiple focused sessions instead of one long session
 - You are the brain and AI is your hands
 
 ---

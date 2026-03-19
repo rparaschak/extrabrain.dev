@@ -57,19 +57,19 @@
       font-family="'SF Mono','Fira Code','Consolas',monospace"
       font-size="16"
       font-weight="700"
-      fill="#e6edf3">THE 75% RULE</text
+      fill="#e6edf3">THE 150K RULE</text
     >
 
-    <!-- Bar dimensions: x=50, width=600, y=70, height=56 -->
-    <!-- 0-100K = 50% = 300px (x: 50 to 350) -->
-    <!-- 100K-150K = 25% = 150px (x: 350 to 500) -->
-    <!-- 150K-200K = 25% = 150px (x: 500 to 650) -->
+    <!-- Bar: x=50, width=600, y=70, height=56 -->
+    <!-- Green: 0–100K = 340px (x: 50–390) -->
+    <!-- Yellow: 100K–150K = 170px (x: 390–560) -->
+    <!-- Red: 150K–1M = 90px (x: 560–650) — intentionally smaller -->
 
-    <!-- Green zone: 0–100K (50%) -->
+    <!-- Green zone: 0–100K -->
     <rect
       x="50"
       y="70"
-      width="300"
+      width="340"
       height="56"
       rx="6"
       fill="#22c55e"
@@ -78,20 +78,20 @@
       stroke-width="1.5"
       filter="url(#cwGlowGreen)"></rect>
     <text
-      x="200"
+      x="220"
       y="103"
       text-anchor="middle"
       font-family="'SF Mono','Fira Code','Consolas',monospace"
       font-size="13"
       font-weight="600"
-      fill="#86efac">0–50% — High accuracy</text
+      fill="#86efac">0–100K — High accuracy</text
     >
 
-    <!-- Yellow zone: 100K–150K (25%) -->
+    <!-- Yellow zone: 100K–150K -->
     <rect
-      x="350"
+      x="390"
       y="70"
-      width="150"
+      width="170"
       height="56"
       rx="0"
       fill="#f59e0b"
@@ -100,20 +100,20 @@
       stroke-width="1.5"
       filter="url(#cwGlowAmber)"></rect>
     <text
-      x="425"
+      x="475"
       y="103"
       text-anchor="middle"
       font-family="'SF Mono','Fira Code','Consolas',monospace"
       font-size="12"
       font-weight="600"
-      fill="#fbbf24">50–75% — Wrap up</text
+      fill="#fbbf24">100K–150K — Wrap up</text
     >
 
-    <!-- Red zone: 150K–200K (25%) -->
+    <!-- Red zone: 150K–1M -->
     <rect
-      x="500"
+      x="560"
       y="70"
-      width="150"
+      width="90"
       height="56"
       rx="0"
       fill="#ef4444"
@@ -121,22 +121,22 @@
       stroke="#ef4444"
       stroke-width="1.5"
       filter="url(#cwGlowRed)"></rect>
-    <!-- Round only right corners by clipping -->
+    <!-- Round only right corners -->
     <rect x="644" y="70" width="6" height="56" rx="6" fill="#ef4444" opacity="0.12"></rect>
     <text
-      x="575"
+      x="605"
       y="103"
       text-anchor="middle"
       font-family="'SF Mono','Fira Code','Consolas',monospace"
-      font-size="12"
+      font-size="11"
       font-weight="600"
-      fill="#fca5a5">75%+ — Danger</text
+      fill="#fca5a5">Danger</text
     >
 
     <!-- Tick marks -->
     <line x1="50" y1="130" x2="50" y2="140" stroke="#8b949e" stroke-width="1"></line>
-    <line x1="350" y1="130" x2="350" y2="140" stroke="#8b949e" stroke-width="1"></line>
-    <line x1="500" y1="130" x2="500" y2="140" stroke="#8b949e" stroke-width="1"></line>
+    <line x1="390" y1="130" x2="390" y2="140" stroke="#8b949e" stroke-width="1"></line>
+    <line x1="560" y1="130" x2="560" y2="140" stroke="#8b949e" stroke-width="1"></line>
     <line x1="650" y1="130" x2="650" y2="140" stroke="#8b949e" stroke-width="1"></line>
 
     <!-- Labels -->
@@ -149,7 +149,7 @@
       fill="#8b949e">0K</text
     >
     <text
-      x="350"
+      x="390"
       y="158"
       text-anchor="middle"
       font-family="'SF Mono','Fira Code','Consolas',monospace"
@@ -157,7 +157,7 @@
       fill="#8b949e">100K</text
     >
     <text
-      x="500"
+      x="560"
       y="158"
       text-anchor="middle"
       font-family="'SF Mono','Fira Code','Consolas',monospace"
@@ -170,7 +170,7 @@
       text-anchor="middle"
       font-family="'SF Mono','Fira Code','Consolas',monospace"
       font-size="12"
-      fill="#8b949e">200K</text
+      fill="#8b949e">1M</text
     >
   </svg>
 </div>
