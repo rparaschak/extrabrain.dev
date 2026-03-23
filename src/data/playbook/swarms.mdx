@@ -5,4 +5,146 @@ section: 'orchestration'
 draft: true
 ---
 
-Draft page — content to be written.
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+## What Are Subagents
+
+I use subagents really often — both when I am analysing existing features and when I am splitting the implementation work. Subagents are a great way to optimise your context. You can manually control how to delegate the assignments to your subagent, or it can be done automatically by Claude.
+
+Spawning a subagent is simple. It is about prompting Claude to spawn an agent of a specific type.
+
+```
+Spawn Haiku agents to analyse all tests in this module and list all test cases.
+Run a Sonnet agent to list all usecases in this module with a short summary of what each one does.
+Then based on those two outputs, run Opus to implement the missing tests.
+```
+
+By doing this we are isolating the context. Our Sonnet is focused on analysing the code. Our Haiku is focused on tests. And our Opus gets only what it needs — it does not need to read all of the test files and all of the function bodies. It only gets a summary, read what it needs and implements missing tests.
+
+### Choosing the Right Model
+
+Not every subagent needs the same model. I match the model to the task:
+
+- **Haiku** — fast and cheap. Use for discovery and listing tasks. Finding all endpoints, listing test cases, collecting file inventories.
+- **Sonnet** — moderate complexity. Good for analysis, simple refactoring, code reviews.
+- **Opus** — complex work. Implementation, orchestration, test engineering. If you reach for Opus, it signals genuine complexity.
+
+### A Warning About Cost
+
+Running a swarm of Opus agents can get expensive fast. Always consider the pricing and the speed before you decide on the model.
+
+Side note — I often think about environmental impact when I use Opus. I am not an expert on this, but this thought chases me and sometimes forces me to switch to Sonnet or Haiku. Just a fun fact.
+
+## Swarm Analysis
+
+When it comes to analysis of a project, you might want to ask Claude to analyse your code. But if the codebase is relatively big and does not fit into the context window, you lose precision and accuracy.
+
+The simple way is asking Claude to spawn multiple agents to go through each area you are interested in and find the needed information. For example, if you want to refactor every endpoint and migrate from one validation library to another, you might ask Claude to spawn 10 agents that will split the endpoints between them. Each agent goes through its assigned endpoints and collects a summary of what needs to be done.
+
+The output of the swarm is summaries — not raw code. Those summaries are then passed to the implementation agent, so it only receives what it needs.
+
+### Real Example: Technical Due Diligence
+
+From time to time I run technical due diligence and audits for my clients where I need to go through the codebase and see the patterns — what they are lacking and how to improve. Before AI, I was doing that manually. I had the framework and the script that I used to analyse the code. I was going through the models, checking the indexes, then how the data is retrieved, the consistency of the code, patterns, the overall structure, and so on.
+
+Today I rely on AI agents for that — of course with the customer's consent. But here is the catch.
+
+Let's say the customer request is: "Our backend is slow. We constantly have performance issues."
+
+#### Option 1: One Agent, Wide Prompt
+
+```
+Backend is slow. Find out the reason. Analyze every endpoint and database query.
+```
+
+This is a very weak prompt and most likely you will get some results out of it, but it is too wide. The agent will try to do everything at once and the result will not be good.
+
+#### Option 2: Swarm with Structured Delegation
+
+Think about it differently:
+
+1. What exactly do you want to check? What would you check manually?
+2. Look into the code structure and think how you would distribute the work if you had 10 assistants
+3. Prompt as you would delegate the work to 10 assistants
+
+First, I manually check the structure — is it a modular monolith, microservices, or something else? Based on that, I decide how to distribute the work.
+
+My prompt for a modular monolith would look like this:
+
+```
+- For each module, run a Haiku agent that analyses the database
+  models and all of the indexes. One agent cannot analyse more
+  than 10 models. Store the report in database-models.md
+
+- For each module, run multiple Sonnet agents that analyse
+  business logic services. List every method that speaks to the
+  database and analyse each query pattern to see if the query
+  uses an index. Use database-models.md to see datamodel and indexes.
+  Store the result in query-performance.md
+
+- For each module, run multiple Sonnet agents to analyse the
+  business logic layer. Check if there are nested loops with
+  remote calls (database, HTTP, etc.) that can signal O(n²)
+  complexity or higher.
+
+- Synthesise the final report based on the previous three reports.
+```
+
+Based on that, I receive multiple documents with detailed information. At the end, I synthesise my answers using those documents.
+
+So instead of using a 1 million token context window to load the entire codebase, I use a swarm of agents to analyse each layer per module to get the full picture.
+
+## Mass Refactoring
+
+I am very aggressive with refactoring. Claude Code gives me possibilities that I never had before — now I have the ability to run multiple agents to refactor my entire codebase.
+
+### Step 1: Build a Reference Example
+
+Before you start refactoring, you want to understand what your final destination looks like. For this reason, you might use your main agent to refactor a single endpoint — or do it by hand. You need to build a first near-perfect example. It will be used as the replication reference.
+
+Claude is really strong at replicating a known pattern. For this reason, you focus on a single endpoint first, and then you use a swarm of agents for the rest.
+
+### Step 2: Create a Migration Plan
+
+When your endpoint is refactored — by you or by Claude — you can then ask Claude to create a migration plan and offload all of the learnings obtained during the process. Save this plan to a file.
+
+### Step 3: Find All Targets
+
+In the next session, you ask Claude to find all of the endpoints using subagents. I would recommend using Haiku because they are fast and they are cheap.
+
+### Step 4: Split and Execute
+
+After getting the list of all endpoints, you ask Claude to split them between multiple agents. You can specify how many endpoints per agent and execute all of them.
+
+After the swarm analysis, I ask the orchestrator to split the work into chunks. I evaluate how big each chunk is to understand how I should delegate the work. Then I use this plan written in a file to actually run batches — one by one or sometimes in parallel.
+
+If the change is simple, you do not need to use Opus. You can simply go with Sonnet, maybe even Haiku. But if the change is complex, then you should go with Opus. When you reach for Opus for such tasks, it indicates that the change is complex enough that you might want to take a more granular approach — refactoring module by module to verify that everything works correctly.
+
+### Step 5: Swarm of Reviewers
+
+When I am swarm-refactoring, I also run a swarm of reviewers alongside the implementers. I ask Haiku or Sonnet agents to review the refactored code as a sanity check. So you end up with a swarm of implementers and a swarm of reviewers working in parallel.
+
+### Verification Strategy
+
+It is very important to mention that refactoring — with or without AI — requires testing. Automated testing gives you confidence that you did not break things. Without automation, you always have a chance of missing some details.
+
+You need to decide when to run tests: after the entire swarm is done, or after each agent is done. Running multiple full test suites in parallel creates CPU load and can cause false positives. Consider the tradeoff between thoroughness and resource usage.
+
+### Avoid File Conflicts
+
+When distributing work across agents, make sure they are working with different files. Agents can create write conflicts, so you should think about how to distribute the work so it does not overlap.
+
+## Takeaways
+
+- Subagents isolate context — each agent gets only what it needs, not everything
+- Match the model to the task: Haiku for discovery, Sonnet for analysis, Opus for complex implementation
+- For large-scale analysis, distribute work per layer per module — then synthesise the results from multiple documents
+- Build a near-perfect reference example before unleashing the swarm
+- Save your migration plan to a file — it becomes the execution guide for batch runs
+- Make sure agents work on different files to avoid write conflicts
+- Run a swarm of reviewers alongside implementers for sanity checks
+- Automated testing is non-negotiable when refactoring at scale
+
+---
+
+<FreeConsultationCTA />

@@ -5,4 +5,129 @@ section: 'orchestration'
 draft: true
 ---
 
-Draft page — content to be written.
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+## The Biased Context Problem
+
+Imagine you are developing a feature for 10 hours straight. What is the chance that you will find a bug in your own code after coding for 10 hours? The same applies to AI. Your main agent has a biased context already — it has been accumulating decisions, trade-offs, and assumptions for the entire session.
+
+A fresh agent with a clean context will catch things that the main agent misses. This is why I use specialized agent teams.
+
+## Context Isolation
+
+The orchestrator creates assignments and gives specific context to each subagent. A subagent should not necessarily know about things that are not related to its task.
+
+If you are implementing both the backend and the frontend, polluting the context of your backend engineer with the frontend context is a waste of efficiency. The same goes for tests — it is important that the test engineer knows the behaviours, but it is not necessary for them to know the actual implementation details. Why would I want my development agent to have 400 lines of tests in its context?
+
+Each agent gets only what is relevant to their role.
+
+## The Four Roles
+
+I use four types of agents in my workflow. You do not need all of them at once — I will explain how to build up to this gradually.
+
+### Orchestrator (Main Agent)
+
+The main agent handles planning and analysis with you. When it comes to execution, it delegates the work to specialised agents. It receives feedback from test results and reviewer reports, and when something fails, it spawns a new subagent to fix the issue.
+
+### Development Agent
+
+The development agent takes detailed instructions from the orchestrator and starts with a clean context. It focuses purely on implementation — no planning, no analysis. A clean context with a detailed brief produces better results than a bloated context that has been through hours of discussion.
+
+### Code Reviewer
+
+The reviewer agent has a fresh context and reviews the code changes. You can set it up informally — just ask Claude to run a subagent to review the code. Or you can create a specialised reviewer, for example a backend code reviewer that looks specifically for database performance issues or security issues.
+
+The key point: the reviewer benefits from a fresh context precisely because it has not been involved in the implementation.
+
+### QA / Test Engineer
+
+The test engineer creates tests based on the plan and the behaviours you described. I strongly recommend creating tests before execution — they serve as a feedback mechanism and a check for the code that the development agent writes.
+
+The workflow looks like this: the development agent creates the feature, the test engineer creates tests based on the described behaviours, and then the main agent runs the tests. When a test does not pass — or when previously passing tests break — it indicates that we just introduced a regression. The main agent receives this feedback right away and can start fixing the issue.
+
+By doing this you are reducing the manual review time and the ping-pong through the chat.
+
+## Error Handling
+
+When an agent fails, the orchestrator sees it — either when it runs the tests or when the reviewer reports potential bugs or bad implementation. The orchestrator then spawns a new subagent to fix the issues. It does not reuse the failed agent's polluted context. A fresh agent with specific instructions about what went wrong produces a better fix.
+
+## Model Selection for Teams
+
+I use Opus exclusively for development. In rare cases I downgrade to Sonnet, but only when I need to develop something simple and straightforward.
+
+I also use Opus for the test engineer and for the orchestrator. I came to the conclusion that orchestration requires a lot of brain capacity to understand the behaviours. I want my tasks to be of very high quality.
+
+For reviewers, I use Haiku or Sonnet — they do sanity checks and do not need the heavy reasoning of Opus.
+
+## Feature Slice Granularity
+
+This is one of the most important things I learned. Splitting work slice by slice works much better for me than splitting layer by layer.
+
+### Slices Over Layers
+
+What I mean is that one agent is better at implementing the data model, business logic, and presentation layer all at once — as a vertical slice. When I split a big feature into layers — one agent for the data model, another for business logic, and a third for the API layer — it does not work as well.
+
+I think it works the same as in real life. I am much more efficient when I see the entire picture. When I go from the bottom up — from the data model to my endpoint — or from the top down — from the API call to the component on the frontend.
+
+### Why Slices Win
+
+When you split too granularly, each agent needs to gather the initial context independently. That is more expensive and slower because everyone is collecting the same context. And with that approach, I often face more bugs and poor output quality. The integration issues between agents become the main problem.
+
+### The Right Size
+
+The right size for a feature slice is not big and not small. I cannot explain exactly how big or how small it should be, but with time you will get this feeling. It also really depends on your codebase.
+
+### Real Example: Community Image Generation
+
+We had to develop a system that generates fallback images for communities that do not have images. It required an admin panel page to test prompts and see results, prompt storage in the database, and a scheduled job to migrate all existing communities.
+
+I split it into two feature slices:
+
+- **Slice 1** — Image generation business logic + admin endpoint for testing and previewing prompts
+- **Slice 2** — Database model and table + scheduled job to convert all existing communities
+
+Each slice was one assignment for one development agent.
+
+### Another Example: File Upload
+
+A feature to upload attachments: S3 upload, database model, use case with business logic, and two HTTP handlers. This is one feature slice — one development agent.
+
+If I tried to break this into four agents — one per layer — I would face integration issues, it would be more expensive, slower, and the output quality would be worse.
+
+## Prompt Example
+
+When I delegate work, I reference a planning document and use named agent roles:
+
+```
+Read docs/feature-plan.md
+
+We need to implement phase 1 using /backend:development
+for backend and separate frontend engineer + reviewers
+for frontend.
+```
+
+This shows the separation: named agent roles, backend and frontend concerns split, and dedicated reviewers per domain.
+
+## Start Simple
+
+It is very important not to overcomplicate your flow. You should start simple.
+
+Start with the main agent. Then add a reviewer — make sure they work together as a combination. Then add a development agent. Then add a test engineer. See what works for you. You will get to the workflow that matches your daily work.
+
+I see engineers creating 10 different agents and trying to orchestrate them without any real need. I am not against using existing frameworks you can find, but I really love the basics. I really love having full flexibility and control over my agents and my workflow.
+
+It is not simple. It is not difficult. And the possibilities are endless.
+
+## Takeaways
+
+- A fresh-context agent catches what a biased main agent misses
+- Each agent should get only the context relevant to its role — do not pollute
+- Split work into vertical feature slices, not horizontal layers
+- One feature slice per development agent produces the best results
+- Use Opus for development, orchestration, and test engineering. Use Haiku/Sonnet for reviewers.
+- When an agent fails, spawn a new one with fresh context to fix the issue
+- Start with one agent, add roles gradually, and find the workflow that works for you
+
+---
+
+<FreeConsultationCTA />

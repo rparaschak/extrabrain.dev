@@ -37,11 +37,17 @@ The problem is not the task itself — it's that investigation and execution com
 
 Claude Code has a feature that lets you clear context after planning mode, before execution starts. You discuss the task, build a plan, and then start fresh with just the plan. I use this for smaller, straightforward features — plan it, clear, execute.
 
+![Clear context option in Claude Code planning mode](~/assets/images/playbook/plan-clear-context.png)
+
 But when the task is bigger or more complex from a product or technical perspective, clearing context is not enough. I need investigation sessions.
 
 ## Investigation vs Execution Sessions
 
 Not every session is the same. I use two types of sessions — investigation sessions and execution sessions.
+
+![Two terminal sessions side by side: investigation and execution](~/assets/images/playbook/investigation-execution-sessions.png)
+
+_Side note: I often use dictation to explain my thoughts to Claude. It handles text with no punctuation and typos surprisingly well — so do not worry about formatting your prompts perfectly._
 
 ### Investigation Sessions
 
@@ -67,6 +73,8 @@ Save the summary to docs/openrouter-migration-analysis.md
 ```
 
 After this session I had a clear picture of what we use and what OpenRouter supports. No code was changed. Just a document I could review, share with my team, and use as input for the execution sessions.
+
+Investigation sessions often go through multiple iterations. As I change technical requirements, discover new constraints, or rethink the approach — the exploration document evolves with me. It is a living document until I'm ready to execute.
 
 ### Execution Sessions
 
