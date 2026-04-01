@@ -16,7 +16,7 @@ export const playbookSidebar: PlaybookSidebarSection[] = [
   {
     slug: 'feedback-loop',
     title: 'Feedback Loop',
-    pages: ['intro', 'static-checks', 'ai-review', 'automated-testing'],
+    pages: ['intro', 'static-checks', 'hooks', 'ai-review', 'automated-testing'],
   },
   {
     slug: 'orchestration',

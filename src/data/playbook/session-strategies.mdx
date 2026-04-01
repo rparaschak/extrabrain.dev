@@ -25,11 +25,14 @@ That way you are going to have more focused context windows and much less chance
 
 When you see the task growing bigger than expected — **stop. Start a new session.**
 
-## The Drifting Challenge
+In many cases 100k context is enough for small feature development. Track your context window usage to better decide when to switch to a new session.
 
-One task per session works well for most cases. But sometimes even a single task is too big for one session.
+## Expensive Planning Problem
 
-Imagine you need to migrate a module from one API to another. You start by exploring the existing code — what does it use, what are the edge cases, what needs to change. By the time you finish the investigation, your context is already at 50–60%. Now you start coding, and the agent drifts. It forgets constraints you discussed earlier. It makes shortcuts.
+What if only planning used ~100K tokens? If I follow 150K rule, then can not continue in that session.
+
+Imagine you need to migrate a module from one API to another. You start in planning mode, agents actively explore, read the code and thinking on plan.
+When you see your plan, your context is already at 100K+. Now you start coding, and the agent drifts. It forgets constraints you discussed earlier. It makes shortcuts.
 
 The problem is not the task itself — it's that investigation and execution compete for the same context window.
 
@@ -39,11 +42,11 @@ Claude Code has a feature that lets you clear context after planning mode, befor
 
 ![Clear context option in Claude Code planning mode](~/assets/images/playbook/plan-clear-context.png)
 
-But when the task is bigger or more complex from a product or technical perspective, clearing context is not enough. I need investigation sessions.
+But when the task is bigger or more complex from a product or technical perspective, clearing context is not enough. I switch to investigation sessions.
 
 ## Investigation vs Execution Sessions
 
-Not every session is the same. I use two types of sessions — investigation sessions and execution sessions.
+I use two types of sessions — investigation sessions and execution sessions.
 
 ![Two terminal sessions side by side: investigation and execution](~/assets/images/playbook/investigation-execution-sessions.png)
 
@@ -74,55 +77,40 @@ Save the summary to docs/openrouter-migration-analysis.md
 
 After this session I had a clear picture of what we use and what OpenRouter supports. No code was changed. Just a document I could review, share with my team, and use as input for the execution sessions.
 
-Investigation sessions often go through multiple iterations. As I change technical requirements, discover new constraints, or rethink the approach — the exploration document evolves with me. It is a living document until I'm ready to execute.
+Investigation sessions often go through multiple iterations.
+As I change technical requirements, discover new constraints, or rethink the approach — the investigation document evolves. It is a living document until I'm ready to execute.
 
 ### Execution Sessions
 
-Execution sessions are about executing the plan or part of the plan. They usually start with planning mode, and then I accept the edits. By splitting investigation and execution, execution sessions have a more focused context. The summary or detailed plan from the investigation session becomes the starting point.
+Execution sessions are about executing the plan or part of the plan. They usually start with planning mode, and then I accept the edits.
+By splitting investigation and execution, execution sessions have a more focused context. The summary or detailed plan from the investigation session becomes the input for execution session.
 
 Context stays low. Results stay consistent. The output of execution sessions is working code.
 
 <SessionTypesDiagram />
 
-## The Workflow
+### The Workflow
 
-When working on a bigger feature, the workflow looks like this.
-
-**Investigation** — asking questions. Can we implement this? Does the API support that? How does it affect existing features? You explore, you analyse, you build understanding.
-
-Then you save your research, ideas, and all of the details into an **exploration document**. This document becomes the bridge.
-
-Then you use this document in the **execution session**, starting with planning mode.
-
-Output from investigation session is input for execution session.
+The output of your investigation session becomes the input for your execution session.
 
 <SessionWorkflowDiagram />
 
-## Exploration Document vs Agent Plan
+## Investigation Document vs Agent Plan
 
 These are two different things.
 
-The **exploration document** is a free-form document that captures your research and your thoughts. It might list every module in the codebase that uses a specific pattern, edge cases you discovered, ideas for how to approach the migration. I often use swarms to generate these — for example, analysing the entire codebase to find all validation points and checking which ones are compatible with a new library. The result is a clear picture in a document, not in an agent's context.
+The **investigation document** is for you. It is a free-form document about your research — edge cases, constraints, thoughts, product description, goals, and technical requirements. You control how much technical detail you want to include. It can be high-level or very specific.
 
-The **agent execution plan** is different — file-by-file changes, execution steps, order of implementation. This is generated by the agent in planning mode and verified by you.
+The **agent plan** is for your agent. It is the output of planning mode — describing what should be implemented and how. You see it once, you approve it, the agent executes, and it is gone.
 
-|                | Exploration Document              | Agent's Execution Plan             |
-| -------------- | --------------------------------- | ---------------------------------- |
-| **Contains**   | Research, findings, your ideas    | Execution steps from your document |
-| **Created by** | You + agents during investigation | Generated by agent in plan mode    |
-| **Purpose**    | Captures the full picture         | Translates it into steps           |
+The important difference is that investigation documents live in your repository. You can revisit them, share them with your team, and use them across multiple sessions. The agent plan is ephemeral — it exists only within the session that created it.
 
-## When to Use Which
-
-If you are just exploring or not sure how or what to build — use read-only mode. Speak with the agent, explore, and build a document.
-
-If you already know what you need but need a detailed implementation plan — you are ready for planning mode.
-
-When your plan is ready and you like the proposal — start the execution.
-
-However, if the task is really small, straightforward, and obvious — I usually skip planning and go straight to execution.
-
-Just remember that planning mode itself can consume a lot of your context window.
+|                | Investigation Document                 | Agent Plan                         |
+| -------------- | -------------------------------------- | ---------------------------------- |
+| **For**        | You                                    | Your agent                         |
+| **Contains**   | Research, edge cases, goals, decisions | Execution steps from your document |
+| **Created by** | You + agents during investigation      | Generated by agent in plan mode    |
+| **Persists**   | Stored in your repository              | Gone after the session             |
 
 ## Real Example: LLM Provider Migration
 

@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import CopyCodeButton from '~/components/ui/CopyCodeButton.astro';
 
 import type { MetaData } from '~/types';
 
@@ -24,5 +25,6 @@ const metadata: MetaData = {
     >
       <slot />
     </div>
+    <CopyCodeButton />
   </section>
 </Layout>

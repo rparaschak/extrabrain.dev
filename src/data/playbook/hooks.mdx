@@ -1,0 +1,49 @@
+---
+title: 'Hooks'
+description: 'Using hooks to deterministically trigger actions after agent events like code changes.'
+section: 'feedback-loop'
+draft: true
+---
+
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+Hooks are a deterministic way of performing an action after specific events.
+My setup is based on `Stop` event. Whenever agent stops responding, the tool automatically calls the script and feeds the output to agent.
+
+My hook looks like this:
+
+```
+"hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR/.claude/hooks/check-backend.sh\"",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+```
+
+`check-backend.sh` calls `git diff` to check if there are changed files in my backend directory.
+
+- If there are no changes it responds with `exit 0` which does not trigger the agent
+- Otherwise, it runs `make check`. If no warning or errors then return again `exit 0`. Otherwise we return `make check` output which wakes agent up and it can start fixing the code.
+
+## How to set it up?
+
+Just ask Claude. Or write manually if you want. But if you are reading this you probably want to start delegating your work to a coding agent.
+
+```
+Hey Claude, I want to create a hook that checks if there are any code changes, and run 'make check'.
+Make a script that checks for changed, staged and untracked files. If no changes or 'make check' pass script exists with 0 status.
+In case of failure script returns the output.
+Hook is triggered on 'Stop'.
+```
+
+---
+
+<FreeConsultationCTA />
