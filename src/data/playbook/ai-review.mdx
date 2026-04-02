@@ -6,12 +6,15 @@ draft: false
 ---
 
 import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+import AIReviewFlowDiagram from '~/components/ui/AIReviewFlowDiagram.astro';
 
 Currently, my agents are catching most of the issues that I would catch during a cold review — and they do it consistently. It has strongly affected the output code quality from AI and reduced my code review time dramatically.
 
 Imagine this real-world scenario: you are developing a feature for 10 hours straight, and now you need to review the code and find potential issues. Your brain is already biased and tired. It already has a lot of context. Your code review for your own work will not be very efficient. However, if you ask your colleague to review your code, they might pay attention to things that you don't. The same works with AI — one agent writes the code, and another one checks it.
 
 Do not get confused with AI review in the pipeline — when we review code after it is pushed. That is a different technique. Here we are speaking about reviewing the code before the commit phase.
+
+<AIReviewFlowDiagram />
 
 ## Level 1: Subagent
 
@@ -217,7 +220,7 @@ argument-hint: [ feature-description ]
 | 2. Test Implementation | Delegate to `backend-test-engineer` | No - DELEGATE   |
 | 3. Verify              | Run `make check`                    | No - DELEGATE   |
 | 4. Review              | Delegate to `backend-code-reviewer` | No - DELEGATE   |
-| 5. Fix                 | Delegate to `backend-engineer`      | No - DELEGATE   |
+| 5. Fix & Verify        | Delegate to `backend-engineer`      | No - DELEGATE   |
 
 # Delegation rules
 Backend engineer should be implementing the entire feature slice.
@@ -238,6 +241,9 @@ If unsure whether a change is trivial, use AskUserQuestion to confirm the workfl
 ```
 
 Now when I need to make a full cycle development with coding, reviews, running tests, and everything, I do that through `/backend:orchestrate`.
+
+Important note: You can see from my workflow that it does not run reviewers again after Fix stage. 
+I prefer avoiding infinite loops and run reviewers again after the fix manually if needed. I run quick manual reviews anyway.
 
 ## Takeaways
 
