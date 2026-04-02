@@ -1,8 +1,251 @@
 ---
-title: '(Draft) AI Review'
+title: 'AI Review'
 description: 'Using AI agents to review AI-generated code with fresh context.'
 section: 'feedback-loop'
-draft: true
+draft: false
 ---
 
-Draft page — content to be written.
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+Currently, my agents are catching most of the issues that I would catch during a cold review — and they do it consistently. It has strongly affected the output code quality from AI and reduced my code review time dramatically.
+
+Imagine this real-world scenario: you are developing a feature for 10 hours straight, and now you need to review the code and find potential issues. Your brain is already biased and tired. It already has a lot of context. Your code review for your own work will not be very efficient. However, if you ask your colleague to review your code, they might pay attention to things that you don't. The same works with AI — one agent writes the code, and another one checks it.
+
+Do not get confused with AI review in the pipeline — when we review code after it is pushed. That is a different technique. Here we are speaking about reviewing the code before the commit phase.
+
+## Level 1: Subagent
+
+This is a simple way to start. When the feature is developed, you simply ask to spawn an agent to review the code. You might want to add instructions — for example, specifically focus on component architecture or performance. You can also set a model for the subagent — for example, use Opus for a more thorough review.
+
+Prompt example: 
+
+```
+Spawn Opus subagent to review the code we just wrote. It should check for potential bugs, code complexity, and potential performance issues.
+```
+
+You are also able to give this instruction before executing the task:
+
+```
+Implement XXX. 
+
+After you are done, spawn an Opus reviewer subagent to check for potential bugs,
+code complexity, and potential performance issues.
+```
+
+This is the easiest way to start, and it already has an impact on the output quality. You get a fresh pair of eyes on the code without any setup.
+
+## Level 2: Reusable Agent
+
+Now let's take it a bit more systematic. Instead of writing a list of what needs to be checked every time, you can create a reusable agent for doing it — so you simply invoke it without repeating the specific instructions.
+
+You can create an agent through `/agents` => `Create new agent`. Claude will ask you to explain the behavior of this agent, and it will create the description and register the agent by itself. This is a very easy way to start.
+Read more about subagents here -> https://code.claude.com/docs/en/sub-agents
+
+You can find the description for your agent in `[project]/.claude/agents/backend-code-reviewer.md`
+
+My `backend-code-reviewer` agent looks like this:
+
+```markdown
+---
+name: backend-code-reviewer
+description: "Final code review after implementation and tests pass. Checks guidelines compliance, query performance, and code simplification opportunities."
+model: opus
+color: red
+---
+
+You are an expert backend code reviewer. You perform final validation against checklist before feature completion.
+
+## Critical Checks
+
+### Architecture
+- [ ] Model behavior is always described in the module it belongs to
+- [ ] Side effects only through Events Bus
+
+### Query Performance
+- [ ] No N+1 queries - use `.Preload()` or batch operations
+- [ ] No queries inside loops
+
+### Code Simplification
+- [ ] No defensive coding (no search before delete/update)
+
+### Tests
+- [ ] Split files: `{feature}_usecase_test.go` + `{feature}_api_test.go`
+- [ ] API tests don't duplicate usecase test behaviors
+- [ ] Access control tests consolidated (one per role)
+...
+```
+
+Now I can invoke it by prompting: `Invoke backend-code-reviewer to review the code we just wrote.`
+
+When you see that some issues regularly appear, you simply go and add rules to your agent md. Over time, the agent learns your standards — not because it remembers, but because you encode what matters into its instructions.
+
+This is a significant step up from Level 1. Instead of a generic reviewer, you now have a reviewer that knows your project's standards.
+
+## Level 3: Specialized Agents
+
+Your rule set is growing. Your review agent is becoming less effective. Let's say you are reviewing security issues, performance issues, and code quality. The thing is, those checks are very different, and if you ask a single agent to check for all of them, it will not do that very efficiently. Instead, you might want to create specialized reviewers — for example, a security reviewer, a performance reviewer, and an architecture reviewer. Each of them is specialized in their own assignments and checks.
+
+For example, we have these three reviewers on our frontend:
+
+**react-code-reviewer**
+```markdown
+...
+### Performance Anti-patterns
+- `onClick={() => handler(id)}` inline in JSX with changing values
+- Large objects/arrays created in render without useMemo
+- `Array.map` without stable `key` prop (using index)
+- Missing React.memo on components receiving object/array props
+
+### Security Issues
+- `dangerouslySetInnerHTML` without sanitization
+- User input rendered without escaping
+- Secrets/API keys in client code
+- Unsanitized URL construction
+...
+```
+
+**react-components-architect**
+```markdown
+...
+## Complexity Thresholds
+
+| Signal            | Threshold                   | Action                         |
+|-------------------|-----------------------------|--------------------------------|
+| UI sections       | 3+ distinct sections        | Extract to sub-components      |
+| State concerns    | 3+ useState/useBooleanState | Extract to custom hook         |
+| Style constants   | 4+ sx/style objects         | Extract to styles.ts           |
+| Event handlers    | 5+ handlers with logic      | Extract to custom hook         |
+| Nested ternaries  | 2+ levels deep              | Extract to sub-components      |
+| Mixed data+render | Fetching + complex UI       | Split container/presentational |
+
+## Single Responsibility Types
+
+| Type               | Responsibility                        |
+|--------------------|---------------------------------------|
+| **Page**           | Orchestrate layout and sub-components |
+| **Container**      | Manage data fetching and state        |
+| **Presentational** | Render UI from props                  |
+| **Hook**           | Encapsulate reusable logic            |
+
+**Flag if**: Component does multiple of these (e.g., fetches data AND renders complex UI)
+...
+```
+
+**frontend-design-system-auditor**
+```markdown
+...
+### Color Palette
+- [ ] No default Tailwind colors (gray-*, blue-*, red-*, etc.)
+- [ ] Uses AGW palette (agw-1 through agw-10)
+- [ ] No hardcoded hex/rgb values
+
+
+### @ui Components
+- [ ] Buttons use @ui/button
+- [ ] Inputs use @ui/input
+- [ ] No custom implementations of standard UI
+
+### Internationalization
+- [ ] All user-facing strings use `t('key')` from useTranslation
+- [ ] No hardcoded text in JSX
+- [ ] No hardcoded text in placeholders/titles/aria-labels
+- [ ] Numbers/dates formatted with i18n utilities
+- [ ] No string concatenation for dynamic text
+...
+```
+
+With multiple dimensions and many rules, several agents catch much more issues than a single one ever could. When we used a single reviewer, it would miss things — especially when the rule set covered too many different concerns. Splitting into specialized agents made each one sharper and more focused.
+
+## Setting Agent Model
+
+You can specify which model an agent should use. For example, my orchestrator — the main agent — is always Opus. My coding agent is also always Opus. However, some of the reviewers are Sonnet.
+
+You specify the model through font-matter:
+```
+---
+name: frontend-design-system-auditor
+description: "Use this agent when you need to audit frontend components for design system compliance, check for consistent usage of UI components, verify Tailwind CSS patterns, check accessibility compliance, validate internationalization, or ensure adherence to the established component library. This includes reviewing new components, refactoring existing UI code, or validating that recent changes follow the design system guidelines.\n\nExamples:\n\n<example>\nContext: User just created a new React component with custom styling.\nuser: \"I created a new card component for displaying community details\"\nassistant: \"I'll use the frontend-design-system-auditor agent to review your new component for design system compliance.\"\n<Task tool call to launch frontend-design-system-auditor>\n</example>\n\n<example>\nContext: User is asking for a review of recently modified UI files.\nuser: \"Can you check if my recent changes to the search filters follow our design patterns?\"\nassistant: \"I'll launch the frontend-design-system-auditor agent to audit your search filter changes against our design system.\"\n<Task tool call to launch frontend-design-system-auditor>\n</example>\n\n<example>\nContext: User completed a feature that includes multiple UI components.\nuser: \"I finished implementing the community comparison feature\"\nassistant: \"Great work on the implementation! Let me use the frontend-design-system-auditor agent to ensure all the new UI components align with our design system.\"\n<Task tool call to launch frontend-design-system-auditor>\n</example>"
+-> model: sonnet <-
+---
+```
+
+Think about what each agent needs. A reviewer that checks for code style violations does not need the most expensive model. A reviewer that evaluates architecture decisions might.
+
+## Cost Warning
+
+Keep in mind that agents have a significant context usage overhead. Now instead of just writing code, you are also using multiple agents to read that code and analyze it. You might expect the token usage to double or even triple.
+
+Think and test which model your agent should use. Not every reviewer needs Opus. Start with Sonnet for your reviewers and only upgrade if the quality is not sufficient.
+
+## Creating a Reusable Workflow
+
+### Through CLAUDE.md
+
+```markdown
+# MANDATORY: Development Workflow
+
+  For any feature or bug fix that involves more than a trivial change, follow this workflow IN ORDER:
+
+  1. **Implement** — Write the code changes
+  2. **Lint** — Run the linter and fix all issues before proceeding
+  3. **Build** — Run the build and ensure it passes
+  4. **Review** — Run the code reviewer and address any findings
+  5. **Done** — Only report completion after all steps pass
+
+  Do NOT skip steps. Do NOT report completion until all steps pass.
+
+  If unsure whether a change is trivial, use AskUserQuestion to confirm the workflow before starting.
+```
+
+### Through Skill
+
+You can define the workflow in a skill. A skill is basically a reusable prompt that can be invoked automatically or manually. How to create a skill: https://code.claude.com/docs/en/skills#getting-started
+
+I created a skill called `backend:orchestrate`. It looks like this:
+
+```markdown
+---
+description: "Creates features with tests and review"
+argument-hint: [ feature-description ]
+---
+
+# WORKFLOW
+
+| Phase                  | Action                              | You Write Code? |
+|------------------------|-------------------------------------|-----------------|
+| 1. Implementation      | Delegate to `backend-engineer`      | No - DELEGATE   |
+| 2. Test Implementation | Delegate to `backend-test-engineer` | No - DELEGATE   |
+| 3. Verify              | Run `make check`                    | No - DELEGATE   |
+| 4. Review              | Delegate to `backend-code-reviewer` | No - DELEGATE   |
+
+# Delegation rules
+Backend engineer should be implementing the entire feature slice.
+If you identify multiple feature slices, then flag that in implementation plan.
+
+## Tests
+Tests should be based on behaviors given in the task. 
+When behaviors are not given, create a list of behaviors so I can verify and approve.
+
+---
+```
+
+My `CLAUDE.md` has the following snippet
+```
+## MANDATORY: Development Workflow
+For any feature or bug fix that involves more than a trivial change MUST USE /backend:orchestrate skill
+If unsure whether a change is trivial, use AskUserQuestion to confirm the workflow before starting.
+```
+
+Now when I need to make a full cycle development with coding, reviews, running tests, and everything, I do that through `/backend:orchestrate`.
+
+## Takeaways
+
+- AI review before the commit phase catches issues your tired brain will miss
+- Start with Level 1 — just spawn a subagent after coding. It already makes a difference
+- Move to Level 2 when you want consistent reviews — create a reusable agent with your project's rules
+- Evolve to Level 3 when your single reviewer covers too many concerns — split into specialized agents
+- Choose models wisely — not every reviewer needs Opus, and review agents will increase your token usage significantly
+
+---
+
+<FreeConsultationCTA />
