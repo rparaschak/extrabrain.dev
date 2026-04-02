@@ -174,6 +174,29 @@ description: "Use this agent when you need to audit frontend components for desi
 
 Think about what each agent needs. A reviewer that checks for code style violations does not need the most expensive model. A reviewer that evaluates architecture decisions might.
 
+## Reviewer Rule vs Linter Rule
+
+When you are about to add a new rule to your reviewer, ask yourself first: can a linter check this instead?
+
+**Everything that can be checked by a linter should be checked by a linter.** Linter rules are checked statically, deterministically, and without consuming any tokens. This is the same principle described in [Why Coding Agents produce inconsistent quality?](/playbook/feedback-loop/intro#why-coding-agents-produce-inconsistent-quality) — more on setting up linters in [Static Checks](/playbook/feedback-loop/static-checks).
+
+For example, it might be tempting to add a rule like "do not write complex functions" to your reviewer. But linters support cyclomatic and cognitive complexity rules that catch this statically — no AI needed.
+
+Here is how I think about it:
+
+| Concern | Preferred Check |
+|---|---|
+| Long functions | Linter: function length limit |
+| Arguments limit | Linter: argument count limit |
+| Nested if/else statements | Linter: max control nesting, cyclomatic complexity |
+| Complex functions | Linter: cyclomatic and cognitive complexity |
+| Cross-module imports | Linter: dependency checker (e.g. depguard) |
+| Weak typing | Linter: strict type checks (e.g. `strict: true`, `go vet`) |
+| Atomic services | Reviewer: service boundaries, side effects |
+| Code reusability | Reviewer: spot duplication, suggest extraction |
+| Defensive coding | Reviewer: flag unnecessary nil checks, search-before-delete |
+| Test strategy | Reviewer: test structure, coverage of behaviors, role-based tests |
+
 ## Cost Warning
 
 Keep in mind that agents have a significant context usage overhead. Now instead of just writing code, you are also using multiple agents to read that code and analyze it. You might expect the token usage to double or even triple.
