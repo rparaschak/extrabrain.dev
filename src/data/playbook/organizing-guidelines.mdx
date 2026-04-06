@@ -1,0 +1,139 @@
+---
+title: 'Organizing Guidelines'
+description: 'From a 500-line CLAUDE.md to a minimalistic one — how I structure project guidelines for AI coding agents.'
+section: 'core-concepts'
+---
+
+import FreeConsultationCTA from '~/components/ui/FreeConsultationCTA.astro';
+
+## The Guidelines Journey
+
+When you start using AI coding agents, one of the first things you do is run `slash init` and get a generated `CLAUDE.md`. It is usually long, full of details the agent scraped from your codebase. And it kind of works — until it does not.
+
+My journey looked like this:
+
+1. **Generated CLAUDE.md** — `slash init` produced a huge file. Felt comprehensive. Worked okay for a while.
+2. **My own CLAUDE.md** — I kept adding rules, examples, and edge cases. The file grew past 500 lines.
+3. **Modular guidelines** — Multiple specialized guideline files. E.g. handlers.md, testing.md, ...
+4. **Minimalistic CLAUDE.md** — today I use one file, under 110 lines. No examples inside guidelines.
+
+## Why Less Is More
+
+- More guidelines = more maintenance
+- More rules = more distractions
+- More tokens for instructions = less tokens for coding
+
+Hint for creator of Claude Code Boris Cherny - from time to time, remove all guidelines and start blank. Add only rules after your agent failed. 
+
+With time, models become smarter and your over explanations might be making things worse, not better.
+I removed ALL my guidelines during Opus 4.5 days and I didn't see the drop of quality.
+
+## What Works and What Does Not
+
+|   | Approach                                | Why                                                                              |
+|---|-----------------------------------------|----------------------------------------------------------------------------------|
+| ❌ | Huge CLAUDE.md (500+ lines)             | Too many rules — agent focus is deluted. High maintenance cost.                  |
+| ❌ | Large specialized files loaded together | Better than huge CLAUDE.md, but also high maintenance cost.                      |
+| ❌ | Examples in guidelines                  | Agent better learns from your codebase, not from synthetic examples in Markdown  |
+| ✅ | Consistent, simple code                 | LLMs are replication machines — consistent patterns get replicated automatically |
+| ✅ | References over explanations            | Point to a good handler instead of explaining how to write one                   |
+| ✅ | Under 100 lines                         | Every line earns its place — only what the agent cannot infer from code          |
+
+The most important guideline is not in any file. If your codebase follows consistent patterns, your agent will pick them up. 
+I removed all my guidelines during Opus 4.5 days and did not see quality degradation — the patterns were already in the code, not in a Markdown file.
+
+Guidelines cannot compensate for a messy codebase. Fix the code first.
+
+## Two Approaches
+
+I recommend two options — modular guidelines or a minimalistic `CLAUDE.md`. The right choice depends on your codebase quality.
+
+If your codebase is not consistent enough — go with modular guidelines. Your agent needs more explicit guidance, and modular files let you provide it without bloating every session.
+
+If your code is consistent and easy to comprehend — a minimalistic `CLAUDE.md` might be enough. The patterns are already in the code. You just need a few rules the agent cannot infer on its own.
+
+## Modular Guidelines
+
+Modular guidelines let you keep references in a master `CLAUDE.md` file and specific details in specialized files. When your agent is working on React components, it reads the components guideline. It does not load guidelines for E2E testing or authentication — only what is relevant to the current task.
+
+This keeps each session focused. Your `CLAUDE.md` stays small — it is an index, not an encyclopedia.
+
+```markdown
+## Guidelines (MUST READ relevant guidelines before coding)
+
+**Start here:** `.guidelines/README.md` - Quick reference with navigation
+
+| Topic | File |
+|-------|------|
+| Data fetching & mutations | `.guidelines/data-layer.md` |
+| Component patterns | `.guidelines/components.md` |
+| Styling & layout | `.guidelines/styling.md` |
+| Authentication & authorization | `.guidelines/auth.md` |
+| E2E testing | `.guidelines/e2e-testing.md` |
+```
+
+The key difference from the "large specialized files" anti-pattern is that here the agent reads only the files relevant to the task at hand. It is not loading everything at once — it picks what it needs from the index.
+
+## Minimalistic CLAUDE.md
+
+Under 100 lines. Every line should earn its place. If a rule is obvious from the code, do not put it in guidelines. Only include things the agent cannot infer from reading your codebase.
+
+Good candidates for guidelines:
+- ✅ Workflow instructions (what skills or processes to follow)
+- ✅ Architecture overview (the flow, not the details)
+- ✅ Naming conventions that are not obvious from code alone
+- ✅ Constraints the agent would not discover by reading files (e.g. "never use JOINs across modules")
+- ✅ References to good examples in the codebase
+
+Bad candidates for guidelines:
+- ❌ Code style rules (your linter handles that)
+- ❌ Obvious patterns the agent can see from existing code
+- ❌ Long examples and explanations
+- ❌ Things that belong in a feature document instead
+
+### My Setup Today
+
+One `CLAUDE.md`, 110 lines. Here is the structure.
+
+**Workflow** — which skills and processes to follow. This is the first thing in my file because it defines how the agent should work before it touches any code. For example:
+
+```
+## MANDATORY: Development Workflow
+For any feature or bug fix that involves more than a trivial change
+MUST USE /backend:orchestrate skill
+If unsure whether a change is trivial, use AskUserQuestion to confirm
+the workflow before starting.
+```
+
+**Architecture** — a one-line diagram showing the request flow, plus a short explanation of each component.
+
+```
+Request <-(DTO)-> Handler|MCP <-(Domain)-> UseCase <-(Domain)-> Persistance
+```
+
+**Component rules** — a few lines per component type. Usecases, handlers, events. Just the rules that the agent cannot infer from code. Naming patterns, composition rules, constraints. For example:
+
+```
+## Events
+- Topics and payload structs defined in `modules/core/events.go`
+- Topic naming: `ModuleName.EventName`
+- Publish: `u.Events.Publish(core.TopicName, PayloadStruct{...})`
+- Subscribe: `events.On(s, core.TopicName, "HandlerName", e.Handler)` in `Register()`
+- Handlers are slim — no business logic, always call usecase
+- Handler errors automatically logged
+```
+
+**References** — pointers to good examples in the codebase that the agent can read when it needs to understand a pattern.
+
+That is it. No examples in the file. No long explanations. Every section is dense and specific.
+
+## Takeaways
+
+- Guidelines are context that competes with your actual task — keep them small
+- Under 100 lines is a good target for your main `CLAUDE.md`
+- Do not put examples in guidelines — reference good code in your codebase instead
+- Consistent code is the best guideline you can have
+
+---
+
+<FreeConsultationCTA />

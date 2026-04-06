@@ -11,7 +11,7 @@ export const playbookSidebar: PlaybookSidebarSection[] = [
   {
     slug: 'core-concepts',
     title: 'Core Concepts',
-    pages: ['context-window-management', 'session-strategies', 'prompting-with-documents'],
+    pages: ['context-window-management', 'session-strategies', 'prompting-with-documents', 'organizing-guidelines'],
   },
   {
     slug: 'feedback-loop',
@@ -21,6 +21,6 @@ export const playbookSidebar: PlaybookSidebarSection[] = [
   {
     slug: 'orchestration',
     title: 'Orchestration',
-    pages: ['swarms', 'teams'],
+    pages: ['subagents', 'swarms', 'teams'],
   },
 ];
